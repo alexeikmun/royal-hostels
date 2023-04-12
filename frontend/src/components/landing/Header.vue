@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineProps, ref } from 'vue'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
-import SideBarDrawerComponent from '../../common/SideBarDrawerComponent.vue';
+import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
 }>();
@@ -42,9 +42,8 @@ const toggle = (shouldOpen: boolean) => {
                 </div>
             </div>
         </nav>
-        <SideBarDrawerComponent :open="open" @closeModal="toggle(false)">
-            <p>HOLAA</p>
-        </SideBarDrawerComponent>
+        <SideBarDrawer :open="open" @closeModal="toggle(false)">
+        </SideBarDrawer>
     </header>
 </template>
 
