@@ -6,6 +6,7 @@ const props = defineProps<{
   slim: boolean;
 }>();
 const open = ref(false)
+const isLoggedIn = ref(false)
 const toggle = (shouldOpen: boolean) => {
     open.value = shouldOpen
 }
@@ -37,8 +38,14 @@ const toggle = (shouldOpen: boolean) => {
                         <li>
                             <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Hostels</a>
                         </li>
+                        <li v-if="!isLoggedIn">
+                            <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Signin</a>
+                        </li>
+                        <li v-if="!isLoggedIn">
+                            <a class="text-orange-600 block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Login</a>
+                        </li>
                     </ul>
-                    <UserCircleIcon class="h-10 w-10 text-[#502A18]"  />
+                    <UserCircleIcon v-if="isLoggedIn" class="h-10 w-10 text-[#502A18]"  />
                 </div>
             </div>
         </nav>
