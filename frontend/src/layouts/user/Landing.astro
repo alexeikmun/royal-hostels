@@ -1,0 +1,15 @@
+---
+import FooterComponent from '../../components/landing/FooterComponent.jsx';
+import HeaderComponent from '../../components/landing/HeaderComponent.vue';
+interface Props {
+    slim: Boolean;
+}
+
+const { slim } = Astro.props
+---
+<section>
+    <HeaderComponent slim={false} client:load client:only="vue"/>
+    <slot />
+    <FooterComponent slim={false}/>
+</section>
+    
