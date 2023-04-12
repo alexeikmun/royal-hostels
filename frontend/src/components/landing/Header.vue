@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineProps, ref } from 'vue'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
-import SideBarDrawerComponent from '../../common/SideBarDrawerComponent.vue';
+import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
 }>();
@@ -16,7 +16,7 @@ const toggle = (shouldOpen: boolean) => {
     <header class="shadow-md">
         <nav class="bg-white border-gray-200">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" class="flex items-center">
+                <a href="/" class="flex items-center">
                     <img src="assets/logo.png" alt="logo" class="w-[180px] ml-10">
                 </a>
 
@@ -42,9 +42,9 @@ const toggle = (shouldOpen: boolean) => {
                 </div>
             </div>
         </nav>
-        <SideBarDrawerComponent :open="open" @closeModal="toggle(false)">
+        <SideBarDrawer :open="open" @closeModal="toggle(false)">
             <p>HOLAA</p>
-        </SideBarDrawerComponent>
+        </SideBarDrawer>
     </header>
 </template>
 
