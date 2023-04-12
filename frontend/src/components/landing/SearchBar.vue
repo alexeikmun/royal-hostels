@@ -54,7 +54,7 @@ const handleAddOrSubtractGuest = (operation: string) => {
                 <p v-if="numberOfGuests > 0" class="text-gray-900 ml-2 group-hover:text-white">+{{ numberOfGuests }}</p>
             </button>
             <button 
-            class="group flex justify-center items-center hover:bg-orange-400 p-2 w-[50px] h-[50px] rounded-full mr-3 h-[60%] bg-orange-600 transition-all"
+            class="group flex justify-center items-center hover:bg-orange-400 p-2 w-[50px] h-[50px] rounded-full mr-3  bg-orange-600 transition-all"
             >
                 <MagnifyingGlassIcon class="h-6 w-6 text-white"/>
             </button>
