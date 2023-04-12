@@ -36,13 +36,13 @@ const toggle = (shouldOpen: boolean) => {
                 <div class="items-center justify-end hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white mr-10">
                         <li>
-                            <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Hostels</a>
+                            <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 cursor-pointer hover:scale-110 transition-all" aria-current="page">Hostels</a>
                         </li>
                         <li v-if="!isLoggedIn">
-                            <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Signin</a>
+                            <a class="text-[#502A18] block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 cursor-pointer hover:scale-110 transition-all" aria-current="page">Signin</a>
                         </li>
                         <li v-if="!isLoggedIn">
-                            <a class="text-orange-600 block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0" aria-current="page">Login</a>
+                            <a class="text-orange-600 block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 cursor-pointer hover:scale-110 transition-all" aria-current="page">Login</a>
                         </li>
                     </ul>
                     <UserCircleIcon v-if="isLoggedIn" class="h-10 w-10 text-[#502A18]"  />
