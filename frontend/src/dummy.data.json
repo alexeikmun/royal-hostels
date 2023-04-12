@@ -1,0 +1,122 @@
+{
+    "properties":[
+        {
+            "id": 1,
+            "name": "Hostal del Mar",
+            "city": "Barcelona",
+            "rate": 4.25,
+            "image": "https://img.freepik.com/free-photo/beautiful-luxury-outdoor-swimming-pool-hotel-resort_74190-7433.jpg?w=2000",
+            "ameneties": [
+                "WiFi gratuito",
+                "Desayuno incluido",
+                "Terraza con vistas al mar"
+            ],
+            "price": "240.000"
+        },
+        {
+            "id": 2,
+            "name": "Hostal de la Montaña",
+            "city": "Madrid",
+            "rate": 3.75,
+            "image": "https://www.nobbot.com/wp-content/uploads/2016/08/hoteles-w-920x515.jpg",
+            "ameneties": [
+                "Aparcamiento gratuito",
+                "Restaurante en el sitio",
+                "Servicio de habitaciones"
+            ],
+            "price": "240.000"
+        },
+        {
+            "id": 3,
+            "name": "Hostal de la Ciudad Vieja",
+            "city": "Santiago de Compostela",
+            "rate": 4.50,
+            "image": "https://media-cdn.tripadvisor.com/media/photo-s/25/fb/8c/46/hotel-exterior.jpg",
+            "ameneties": [
+                "Calefacción",
+                "Recepción 24 horas",
+                "Acceso para discapacitados"
+            ],
+            "price": "240.000"
+        },
+        {
+            "id": 1,
+            "name": "Hostal del Sol",
+            "city": "Málaga",
+            "rate": 3.80,
+            "image": "https://cdn.forbes.co/2020/02/sofitel-legend-santa-clara-outdoor-pool.jpg",
+            "ameneties": [
+              "Piscina al aire libre",
+              "Aparcamiento gratuito",
+              "Servicio de lavandería"
+            ],
+            "price": "240.000"
+          },
+          {
+            "id": 2,
+            "name": "Hostal del Pueblo",
+            "city": "Sevilla",
+            "rate": 4.10,
+            "image": "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/POPEUU7WIJAW5NRWPQASXBBFSE.jpg",
+            "ameneties": [
+              "WiFi gratuito",
+              "Servicio de traslado al aeropuerto",
+              "Servicio de alquiler de bicicletas"
+            ],
+            "price": "240.000"
+          },
+        {
+            "id": 3,
+            "name": "Hostal del Parque",
+            "city": "Granada",
+            "rate": 4.75,
+            "image": "https://imagenes.elpais.com/resizer/1LtHwgTxnLAuPkChqlN9zpZs1to=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PZHPU56HUHMDZPWGNYLY2ZHWLM.jpg",
+            "ameneties": [
+                "Desayuno incluido",
+                "Terraza en la azotea",
+                "Servicio de habitaciones"
+            ],
+            "price": "240.000"
+        },
+        {
+            "id": 4,
+            "name": "Hostal del Lago",
+            "city": "Valencia",
+            "rate": 4.00,
+            "image": "https://www.portafolio.co/files/article_multimedia/uploads/2021/06/07/60bedba57a5ae.jpeg",
+            "ameneties": [
+              "WiFi gratuito",
+              "Servicio de recepción las 24 horas",
+              "Servicio de limpieza diario"
+            ],
+            "price": "240.000"
+        },
+        {
+            "id": 5,
+            "name": "Hostal del Castillo",
+            "city": "Toledo",
+            "rate": 3.50,
+            "image": "https://revistadiners.com.co/wp-content/uploads/2020/10/biohabitat_800x534-1.webp",
+            "ameneties": [
+              "Aparcamiento gratuito",
+              "Restaurante en el sitio",
+              "Servicio de habitaciones"
+            ],
+            "price": "240.000"
+          },
+        {
+            "id": 6,
+            "name": "Hostal de la Costa",
+            "city": "Alicante",
+            "rate": 4.90,
+            "image": "https://media-cdn.tripadvisor.com/media/photo-s/13/60/c0/72/hotel-pacanaima.jpg",
+            "ameneties": [
+              "Desayuno incluido",
+              "Piscina al aire libre",
+              "Terraza con vistas al mar"
+            ],
+            "price": "240.000"
+        }
+    ]
+}
+          
