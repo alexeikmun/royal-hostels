@@ -1,7 +1,7 @@
-import { CreateTypeDto } from '../infrastructure/dto/create-type.dto';
+import { CreatePropertyTypeDto } from '../infrastructure/dto/create-property-type.dto';
 import { PropertyTypeModel } from '../domain/model/property-type.model';
 import { PropertyTypeRepository } from '../infrastructure/repository/property-type.repository';
-import { PropertyTypeMapper } from '../infrastructure/utils/type.mapper';
+import { PropertyTypeMapper } from '../infrastructure/utils/property-type.mapper';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -11,7 +11,9 @@ export class CreateTypeUseCase {
         private readonly propertyTypeMapper: PropertyTypeMapper,
     ) {}
 
-    async execute(createTypeDto: CreateTypeDto): Promise<PropertyTypeModel> {
+    async execute(
+        createTypeDto: CreatePropertyTypeDto,
+    ): Promise<PropertyTypeModel> {
         const newType = await this.propertyTypeRepository.createType(
             createTypeDto,
         );

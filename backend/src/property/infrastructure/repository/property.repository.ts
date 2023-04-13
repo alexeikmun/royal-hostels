@@ -37,6 +37,11 @@ export class PropertyRepository implements PropertyRepositoryInterface {
     }
 
     async findOne(id: number): Promise<Property> {
-        return await this.propertyRepository.findOneBy({ id });
+        return await this.propertyRepository.findOne({
+            where: {
+                id,
+            },
+            relations: ['type'],
+        });
     }
 }

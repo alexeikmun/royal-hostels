@@ -35,6 +35,9 @@ export class Property implements PropertyModel {
     @Column({ type: 'varchar', nullable: false })
     zipcode: string;
 
+    @Column({ type: 'int' })
+    typeId: number;
+
     @CreateDateColumn()
     createdAt: Date;
 

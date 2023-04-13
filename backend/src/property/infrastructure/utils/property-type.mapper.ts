@@ -1,11 +1,11 @@
-import { CreateTypeDto } from 'src/property/infrastructure/dto/create-type.dto';
+import { CreatePropertyTypeDto } from 'src/property/infrastructure/dto/create-property-type.dto';
 import { PropertyTypeModel } from 'src/property/domain/model/property-type.model';
 import { PropertyType } from '../entity/property-type.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PropertyTypeMapper {
-    toEntity(type: CreateTypeDto): PropertyType {
+    toEntity(type: CreatePropertyTypeDto): PropertyType {
         const propertyTypeEntity = new PropertyType();
         propertyTypeEntity.name = type.name;
         return propertyTypeEntity;
@@ -13,7 +13,7 @@ export class PropertyTypeMapper {
 
     toEntityWithContext(
         propertyTypeEntity: PropertyType,
-        propertyTypeDto: CreateTypeDto,
+        propertyTypeDto: CreatePropertyTypeDto,
     ): PropertyType {
         propertyTypeEntity.name = propertyTypeDto.name;
         return propertyTypeEntity;

@@ -29,4 +29,8 @@ export class UpdatePropertyDto {
         type: String,
     })
     readonly zipcode: string;
+    @ApiProperty({
+        type: Number,
+    })
+    readonly typeId: number;
 }

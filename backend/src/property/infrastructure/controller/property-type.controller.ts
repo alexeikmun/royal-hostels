@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateTypeDto } from '../dto/create-type.dto';
+import { CreatePropertyTypeDto } from '../dto/create-property-type.dto';
 import { CreateTypeUseCase } from 'src/property/application';
 import { PropertyTypeModel } from 'src/property/domain/model/property-type.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -14,7 +14,7 @@ export class PropertyTypeController {
     @Post()
     @ApiCreatedResponse({ type: PropertyTypeModel })
     async create(
-        @Body() createTypeDto: CreateTypeDto,
+        @Body() createTypeDto: CreatePropertyTypeDto,
     ): Promise<PropertyTypeModel> {
         return await this.createPropertyTypeUseCase.execute(createTypeDto);
     }

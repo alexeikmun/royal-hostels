@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PropertyTypeMapper } from '../utils/type.mapper';
+import { PropertyTypeMapper } from '../utils/property-type.mapper';
 
 @Module({
     providers: [PropertyTypeMapper],

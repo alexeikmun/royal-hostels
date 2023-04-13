@@ -7,6 +7,7 @@ export class PropertyModel {
     address: string;
     country: string;
     zipcode: string;
+    typeId: number;
     createdAt: Date;
     updatedAt: Date;
 }

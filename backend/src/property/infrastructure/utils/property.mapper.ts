@@ -15,6 +15,7 @@ export class PropertyMapper {
         propertyEntity.address = property.address;
         propertyEntity.country = property.country;
         propertyEntity.zipcode = property.zipcode;
+        propertyEntity.typeId = property.typeId;
         return propertyEntity;
     }
 
@@ -27,6 +28,9 @@ export class PropertyMapper {
         propertyEntity.phone = propertyDto.phone;
         propertyEntity.city = propertyDto.city;
         propertyEntity.address = propertyDto.address;
+        propertyEntity.country = propertyDto.country;
+        propertyEntity.zipcode = propertyDto.zipcode;
+        propertyEntity.typeId = propertyDto.typeId;
         return propertyEntity;
     }
 
@@ -40,6 +44,7 @@ export class PropertyMapper {
         propertyDomain.address = property.address;
         propertyDomain.country = property.country;
         propertyDomain.zipcode = property.zipcode;
+        propertyDomain.typeId = property.typeId;
         return propertyDomain;
     }
 }
