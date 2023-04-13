@@ -5,6 +5,7 @@ import {
     FindOnePropertyUseCase,
     UpdatePropertyUseCase,
     CreateTypeUseCase,
+    FindPropertyUseCase,
 } from '../../application/index';
 import { PropertyMapperModule } from './property.mapper.module';
 import { PropertyTypeMapperModule } from './property-type.mapper.module';
@@ -24,6 +25,7 @@ import { PropertyTypeRepositoryModule } from './property-type.repository.module'
         FindOnePropertyUseCase,
         UpdatePropertyUseCase,
         CreateTypeUseCase,
+        FindPropertyUseCase,
     ],
     exports: [
         CreatePropertyUseCase,
@@ -31,6 +33,7 @@ import { PropertyTypeRepositoryModule } from './property-type.repository.module'
         FindOnePropertyUseCase,
         UpdatePropertyUseCase,
         CreateTypeUseCase,
+        FindPropertyUseCase,
     ],
 })
 export class PropertyUseCasesModule {}

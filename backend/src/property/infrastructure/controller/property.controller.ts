@@ -14,6 +14,7 @@ import {
     UpdatePropertyUseCase,
     DeletePropertyUseCase,
     FindOnePropertyUseCase,
+    FindPropertyUseCase,
 } from 'src/property/application';
 import { PropertyModel } from 'src/property/domain/model/property.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -26,6 +27,7 @@ export class PropertyController {
         private readonly updatePropertyUseCase: UpdatePropertyUseCase,
         private readonly deletePropertyUseCase: DeletePropertyUseCase,
         private readonly findOnePropertyUseCase: FindOnePropertyUseCase,
+        private readonly findPropertyUseCase: FindPropertyUseCase,
     ) {}
 
     @Post()
@@ -52,5 +54,10 @@ export class PropertyController {
     @Delete(':id')
     async remove(@Param('id') id: number) {
         return await this.deletePropertyUseCase.execute(id);
+    }
+
+    @Get()
+    async find() {
+        return await this.findPropertyUseCase.execute();
     }
 }

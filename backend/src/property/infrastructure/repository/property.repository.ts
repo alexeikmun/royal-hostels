@@ -44,4 +44,10 @@ export class PropertyRepository implements PropertyRepositoryInterface {
             relations: ['type'],
         });
     }
+
+    async find(): Promise<Property[]> {
+        return await this.propertyRepository.find({
+            relations: ['type'],
+        });
+    }
 }

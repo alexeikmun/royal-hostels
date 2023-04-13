@@ -5,4 +5,5 @@ export interface PropertyRepositoryInterface {
     update(id: number, property: PropertyModel): Promise<PropertyModel>;
     delete(id: number): Promise<void>;
     findOne(id: number): Promise<PropertyModel>;
+    find(): Promise<PropertyModel[]>;
 }
