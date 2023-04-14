@@ -1,4 +1,6 @@
 import React from "react";
+import { UserCircleIcon } from '@heroicons/vue/24/solid'
+
 interface Property {
     id: number;
     name: string;
@@ -9,6 +11,11 @@ interface Property {
     ameneties: string[];
   }
   
+
+const amenitiesIcons = {
+    Parking: <UserCircleIcon />,
+
+}
 const PropertyCard = ({property}: {property: Property}) => {
     return(
         <a href="#" className="w-[325px] rounded-lg p-4 shadow-sm shadow-indigo-100 hover:shadow-xl transition-all ml-5 mt-3">
