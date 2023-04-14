@@ -13,7 +13,7 @@
 </script>
  
 <template>
-    <DatePicker v-model="range" :columns="2" is-range color="orange">
+    <DatePicker v-model="range" :columns="2" :min-date="new Date()" is-range color="orange">
         <template #default="{ inputEvents, inputValue }">
             <div class="group flex divide-x">
                 <div class="w-[50%] flex">
