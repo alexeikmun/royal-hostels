@@ -21,7 +21,10 @@ module.exports = {
 				  '100%': { transform: 'translateX(0%)' },
 				},
 			  },
-		},
+			screens: {
+				'xs': '200px'
+			},
+			},
 	},
 	plugins: [
         require('@tailwindcss/line-clamp')

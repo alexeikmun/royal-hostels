@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { MagnifyingGlassIcon, UserPlusIcon, GlobeAsiaAustraliaIcon } from '@heroicons/vue/24/outline'
 import { UserCircleIcon, PlusIcon, MinusIcon } from '@heroicons/vue/24/solid'
 import ModalSmall from '../../common/ModalSmall.vue';
+import DatePicker from './DatePicker.vue'
 
 enum AddOrSubtractGuest {
     ADD = 'add',
@@ -43,7 +44,7 @@ const handleAddOrSubtractGuest = (operation: string) => {
             <button 
             class="group flex justify-center items-center bg-white p-2 w-[35%] rounded-full mr-3 h-[70%] transition-all border-2 border-gray-200"
             >
-                <p class="text-gray-400 ml-3">Dates range (TODO)</p>
+                <DatePicker />
             </button>
             <button 
             class="group flex justify-center items-center bg-white p-2 w-[17%] rounded-full mr-3 h-[70%] hover:bg-orange-600 transition-all border-2 border-gray-200 hover:border-0"
@@ -51,7 +52,7 @@ const handleAddOrSubtractGuest = (operation: string) => {
             >
                 <UserPlusIcon class="h-6 w-6 text-orange-600 group-hover:text-white"/>
                 <p class="text-gray-400 ml-3 group-hover:text-white">Guests</p>
-                <p v-if="numberOfGuests > 0" class="text-gray-900 ml-2 group-hover:text-white">+{{ numberOfGuests }}</p>
+                <p v-if="numberOfGuests > 0" class="text-gray-500 ml-2 group-hover:text-white"> {{ numberOfGuests }}</p>
             </button>
             <button 
             class="group flex justify-center items-center hover:bg-orange-400 p-2 w-[50px] h-[50px] rounded-full mr-3  bg-orange-600 transition-all"
