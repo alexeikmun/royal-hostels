@@ -22,7 +22,7 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 @Module({
     imports: [PropertyRepositoryModule, PropertyMapperModule],
 })
-export class PropertyProxyModule {
+export class PropertyUsecaseModule {
     static GET_PROPERTY_USECASES_PROXY = 'getPropertyUsecasesProxy';
     static GET_PROPERTIES_USECASES_PROXY = 'getPropertiesUsecasesProxy';
     static POST_PROPERTY_USECASES_PROXY = 'postPropertyUsecasesProxy';
@@ -32,11 +32,11 @@ export class PropertyProxyModule {
 
     static register(): DynamicModule {
         return {
-            module: PropertyProxyModule,
+            module: PropertyUsecaseModule,
             providers: [
                 {
                     inject: [PropertyRepository],
-                    provide: PropertyProxyModule.GET_PROPERTY_USECASES_PROXY,
+                    provide: PropertyUsecaseModule.GET_PROPERTY_USECASES_PROXY,
                     useFactory: (propertyRepository: PropertyRepository) =>
                         new UseCaseProxy(
                             new FindOnePropertyUseCase(propertyRepository),
@@ -44,7 +44,8 @@ export class PropertyProxyModule {
                 },
                 {
                     inject: [PropertyRepository],
-                    provide: PropertyProxyModule.GET_PROPERTIES_USECASES_PROXY,
+                    provide:
+                        PropertyUsecaseModule.GET_PROPERTIES_USECASES_PROXY,
                     useFactory: (propertyRepository: PropertyRepository) =>
                         new UseCaseProxy(
                             new FindPropertiesUseCase(propertyRepository),
@@ -52,7 +53,7 @@ export class PropertyProxyModule {
                 },
                 {
                     inject: [PropertyRepository, PropertyMapper],
-                    provide: PropertyProxyModule.POST_PROPERTY_USECASES_PROXY,
+                    provide: PropertyUsecaseModule.POST_PROPERTY_USECASES_PROXY,
                     useFactory: (
                         propertyRepository: PropertyRepository,
                         propertyMapper: PropertyMapper,
@@ -66,7 +67,7 @@ export class PropertyProxyModule {
                 },
                 {
                     inject: [PropertyRepository, PropertyMapper],
-                    provide: PropertyProxyModule.PUT_PROPERTY_USECASES_PROXY,
+                    provide: PropertyUsecaseModule.PUT_PROPERTY_USECASES_PROXY,
                     useFactory: (
                         propertyRepository: PropertyRepository,
                         propertyMapper: PropertyMapper,
@@ -80,7 +81,8 @@ export class PropertyProxyModule {
                 },
                 {
                     inject: [PropertyRepository],
-                    provide: PropertyProxyModule.DELETE_PROPERTY_USECASES_PROXY,
+                    provide:
+                        PropertyUsecaseModule.DELETE_PROPERTY_USECASES_PROXY,
                     useFactory: (propertyRepository: PropertyRepository) =>
                         new UseCaseProxy(
                             new DeletePropertyUseCase(propertyRepository),
@@ -88,7 +90,7 @@ export class PropertyProxyModule {
                 },
                 {
                     inject: [PropertyTypeRepository, PropertyTypeMapper],
-                    provide: PropertyProxyModule.POST_TYPE_USECASES_PROXY,
+                    provide: PropertyUsecaseModule.POST_TYPE_USECASES_PROXY,
                     useFactory: (
                         propertyTypeRepository: PropertyTypeRepository,
                         propertyTypeMapper: PropertyTypeMapper,
@@ -102,12 +104,12 @@ export class PropertyProxyModule {
                 },
             ],
             exports: [
-                PropertyProxyModule.GET_PROPERTY_USECASES_PROXY,
-                PropertyProxyModule.GET_PROPERTIES_USECASES_PROXY,
-                PropertyProxyModule.POST_PROPERTY_USECASES_PROXY,
-                PropertyProxyModule.PUT_PROPERTY_USECASES_PROXY,
-                PropertyProxyModule.DELETE_PROPERTY_USECASES_PROXY,
-                PropertyProxyModule.POST_TYPE_USECASES_PROXY,
+                PropertyUsecaseModule.GET_PROPERTY_USECASES_PROXY,
+                PropertyUsecaseModule.GET_PROPERTIES_USECASES_PROXY,
+                PropertyUsecaseModule.POST_PROPERTY_USECASES_PROXY,
+                PropertyUsecaseModule.PUT_PROPERTY_USECASES_PROXY,
+                PropertyUsecaseModule.DELETE_PROPERTY_USECASES_PROXY,
+                PropertyUsecaseModule.POST_TYPE_USECASES_PROXY,
             ],
         };
     }

@@ -18,7 +18,7 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 @Module({
     imports: [GuestRepositoryModule, GuestMapperModule],
 })
-export class GuestProxyModule {
+export class GuestUsecaseModule {
     static GET_GUEST_USECASES_PROXY = 'getGuestUsecasesProxy';
     static POST_GUEST_USECASES_PROXY = 'postGuestUsecasesProxy';
     static DELETE_GUEST_USECASES_PROXY = 'deleteGuestUsecasesProxy';
@@ -26,11 +26,11 @@ export class GuestProxyModule {
 
     static register(): DynamicModule {
         return {
-            module: GuestProxyModule,
+            module: GuestUsecaseModule,
             providers: [
                 {
                     inject: [GuestRepository],
-                    provide: GuestProxyModule.GET_GUEST_USECASES_PROXY,
+                    provide: GuestUsecaseModule.GET_GUEST_USECASES_PROXY,
                     useFactory: (guestRepository: GuestRepository) =>
                         new UseCaseProxy(
                             new FindOneGuestUseCase(guestRepository),
@@ -38,7 +38,7 @@ export class GuestProxyModule {
                 },
                 {
                     inject: [GuestRepository, GuestMapper],
-                    provide: GuestProxyModule.POST_GUEST_USECASES_PROXY,
+                    provide: GuestUsecaseModule.POST_GUEST_USECASES_PROXY,
                     useFactory: (
                         guestRepository: GuestRepository,
                         guestMapper: GuestMapper,
@@ -52,7 +52,7 @@ export class GuestProxyModule {
                 },
                 {
                     inject: [GuestRepository, GuestMapper],
-                    provide: GuestProxyModule.PUT_GUEST_USECASES_PROXY,
+                    provide: GuestUsecaseModule.PUT_GUEST_USECASES_PROXY,
                     useFactory: (
                         guestRepository: GuestRepository,
                         guestMapper: GuestMapper,
@@ -66,7 +66,7 @@ export class GuestProxyModule {
                 },
                 {
                     inject: [GuestRepository],
-                    provide: GuestProxyModule.DELETE_GUEST_USECASES_PROXY,
+                    provide: GuestUsecaseModule.DELETE_GUEST_USECASES_PROXY,
                     useFactory: (guestRepository: GuestRepository) =>
                         new UseCaseProxy(
                             new DeleteGuestUseCase(guestRepository),
@@ -74,10 +74,10 @@ export class GuestProxyModule {
                 },
             ],
             exports: [
-                GuestProxyModule.GET_GUEST_USECASES_PROXY,
-                GuestProxyModule.POST_GUEST_USECASES_PROXY,
-                GuestProxyModule.PUT_GUEST_USECASES_PROXY,
-                GuestProxyModule.DELETE_GUEST_USECASES_PROXY,
+                GuestUsecaseModule.GET_GUEST_USECASES_PROXY,
+                GuestUsecaseModule.POST_GUEST_USECASES_PROXY,
+                GuestUsecaseModule.PUT_GUEST_USECASES_PROXY,
+                GuestUsecaseModule.DELETE_GUEST_USECASES_PROXY,
             ],
         };
     }

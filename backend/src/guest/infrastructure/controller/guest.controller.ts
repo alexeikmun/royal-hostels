@@ -18,20 +18,20 @@ import {
 } from 'src/guest/application';
 import { GuestModel } from 'src/guest/domain/model/guest.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { GuestProxyModule } from '../module/guest.proxy.module';
+import { GuestUsecaseModule } from '../module/guest.usecase.module';
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Controller('guest')
 @ApiTags('Guest')
 export class GuestController {
     constructor(
-        @Inject(GuestProxyModule.DELETE_GUEST_USECASES_PROXY)
+        @Inject(GuestUsecaseModule.DELETE_GUEST_USECASES_PROXY)
         private readonly deleteGuestUseCase: UseCaseProxy<DeleteGuestUseCase>,
-        @Inject(GuestProxyModule.GET_GUEST_USECASES_PROXY)
+        @Inject(GuestUsecaseModule.GET_GUEST_USECASES_PROXY)
         private readonly findOneGuestUseCase: UseCaseProxy<FindOneGuestUseCase>,
-        @Inject(GuestProxyModule.POST_GUEST_USECASES_PROXY)
+        @Inject(GuestUsecaseModule.POST_GUEST_USECASES_PROXY)
         private readonly createGuestUseCase: UseCaseProxy<CreateGuestUseCase>,
-        @Inject(GuestProxyModule.PUT_GUEST_USECASES_PROXY)
+        @Inject(GuestUsecaseModule.PUT_GUEST_USECASES_PROXY)
         private readonly updateGuestUseCase: UseCaseProxy<UpdateGuestUseCase>,
     ) {}
 

@@ -19,22 +19,22 @@ import {
 import { PropertyModel } from 'src/property/domain/model/property.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
-import { PropertyProxyModule } from '../module/property.proxy.module';
+import { PropertyUsecaseModule } from '../module/property.usecase.module';
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Controller('property')
 @ApiTags('Property')
 export class PropertyController {
     constructor(
-        @Inject(PropertyProxyModule.DELETE_PROPERTY_USECASES_PROXY)
+        @Inject(PropertyUsecaseModule.DELETE_PROPERTY_USECASES_PROXY)
         private readonly deletePropertyUseCase: UseCaseProxy<DeletePropertyUseCase>,
-        @Inject(PropertyProxyModule.GET_PROPERTIES_USECASES_PROXY)
+        @Inject(PropertyUsecaseModule.GET_PROPERTIES_USECASES_PROXY)
         private readonly findPropertiesUseCase: UseCaseProxy<FindPropertiesUseCase>,
-        @Inject(PropertyProxyModule.GET_PROPERTY_USECASES_PROXY)
+        @Inject(PropertyUsecaseModule.GET_PROPERTY_USECASES_PROXY)
         private readonly findOnePropertyUseCase: UseCaseProxy<FindOnePropertyUseCase>,
-        @Inject(PropertyProxyModule.POST_PROPERTY_USECASES_PROXY)
+        @Inject(PropertyUsecaseModule.POST_PROPERTY_USECASES_PROXY)
         private readonly createPropertyUseCase: UseCaseProxy<CreatePropertyUseCase>,
-        @Inject(PropertyProxyModule.PUT_PROPERTY_USECASES_PROXY)
+        @Inject(PropertyUsecaseModule.PUT_PROPERTY_USECASES_PROXY)
         private readonly updatePropertyUseCase: UseCaseProxy<UpdatePropertyUseCase>,
     ) {}
 
