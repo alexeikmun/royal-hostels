@@ -15,8 +15,8 @@
         },
         "ameneties": [
             "Free parking",
-            "WiFi gratuito",
-            "Desayuno incluido"
+            "Free WiFi",
+            "Breakfast Included"
         ],
         "bathroms": 3,
         "price": "240.000"
@@ -36,8 +36,8 @@
         },
         "ameneties": [
             "Parking",
-            "WiFi gratuito",
-            "Desayuno incluido"
+            "Free WiFi",
+            "Breakfast Included"
         ],
         "bathroms": 6,
         "price": "450.000"
@@ -57,8 +57,8 @@
         },
         "ameneties": [
             "Estacionamiento",
-            "WiFi gratuito",
-            "Desayuno incluido"
+            "Free WiFi",
+            "Breakfast Included"
         ],
         "bathroms": 4,
         "price": "180.000"
@@ -78,8 +78,8 @@
         },
         "ameneties": [
             "Parqueadero",
-            "WiFi gratuito",
-            "Desayuno incluido"
+            "Free WiFi",
+            "Breakfast Included"
         ],
         "bathroms": 5,
         "price": "360.000"
@@ -89,6 +89,7 @@
         "name": "Hostal Don Pepe",
         "city": "Bogotá",
         "rate": 4.00,
+        "price": "130.000",
         "image": "https://media-cdn.tripadvisor.com/media/photo-s/13/60/c0/72/hotel-pacanaima.jpg",
         "rooms": {
           "number": 4,
