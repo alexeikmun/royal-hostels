@@ -3,7 +3,7 @@ import { DeletePropertyUseCase } from './delete.usecase';
 import { FindOnePropertyUseCase } from './findone.usecase';
 import { UpdatePropertyUseCase } from './update.usecase';
 import { CreateTypeUseCase } from './create-type.usecase';
-import { FindPropertyUseCase } from './find.usecase';
+import { FindPropertiesUseCase } from './find.usecase';
 
 //TODO: create proxy to isolate useCases logic
 export {
@@ -12,5 +12,5 @@ export {
     FindOnePropertyUseCase,
     UpdatePropertyUseCase,
     CreateTypeUseCase,
-    FindPropertyUseCase,
+    FindPropertiesUseCase,
 };

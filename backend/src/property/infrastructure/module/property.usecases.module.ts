@@ -5,27 +5,20 @@ import {
     FindOnePropertyUseCase,
     UpdatePropertyUseCase,
     CreateTypeUseCase,
-    FindPropertyUseCase,
+    FindPropertiesUseCase,
 } from '../../application/index';
 import { PropertyMapperModule } from './property.mapper.module';
-import { PropertyTypeMapperModule } from './property-type.mapper.module';
 import { PropertyRepositoryModule } from './property.repository.module';
-import { PropertyTypeRepositoryModule } from './property-type.repository.module';
 
 @Module({
-    imports: [
-        PropertyRepositoryModule,
-        PropertyTypeRepositoryModule,
-        PropertyMapperModule,
-        PropertyTypeMapperModule,
-    ],
+    imports: [PropertyRepositoryModule, PropertyMapperModule],
     providers: [
         CreatePropertyUseCase,
         DeletePropertyUseCase,
         FindOnePropertyUseCase,
         UpdatePropertyUseCase,
         CreateTypeUseCase,
-        FindPropertyUseCase,
+        FindPropertiesUseCase,
     ],
     exports: [
         CreatePropertyUseCase,
@@ -33,7 +26,7 @@ import { PropertyTypeRepositoryModule } from './property-type.repository.module'
         FindOnePropertyUseCase,
         UpdatePropertyUseCase,
         CreateTypeUseCase,
-        FindPropertyUseCase,
+        FindPropertiesUseCase,
     ],
 })
 export class PropertyUseCasesModule {}

@@ -5,9 +5,9 @@ import { GuestController } from './guest/infrastructure/controller/guest.control
 import { GuestUseCasesModule } from './guest/infrastructure/module/guest.usecases.module';
 import { PropertyController } from './property/infrastructure/controller/property.controller';
 import { PropertyTypeController } from './property/infrastructure/controller/property-type.controller';
-import { PropertyUseCasesModule } from './property/infrastructure/module/property.usecases.module';
 import { getEnvPath } from './shared/config/helpers';
 import { TypeOrmConfigService } from './shared/infrastructure/typeorm/typeorm.service';
+import { PropertyProxyModule } from './property/infrastructure/property-proxy/property-proxy.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -16,7 +16,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
         GuestUseCasesModule,
-        PropertyUseCasesModule,
+        PropertyProxyModule.register(),
     ],
     controllers: [GuestController, PropertyController, PropertyTypeController],
     providers: [],

@@ -2,9 +2,6 @@ import { CreatePropertyTypeDto } from '../infrastructure/dto/create-property-typ
 import { PropertyTypeModel } from '../domain/model/property-type.model';
 import { PropertyTypeRepository } from '../infrastructure/repository/property-type.repository';
 import { PropertyTypeMapper } from '../infrastructure/utils/property-type.mapper';
-import { Injectable } from '@nestjs/common';
-
-@Injectable()
 export class CreateTypeUseCase {
     constructor(
         private readonly propertyTypeRepository: PropertyTypeRepository,
