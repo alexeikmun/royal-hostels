@@ -20,8 +20,8 @@ import {
 import { PropertyModel } from 'src/property/domain/model/property.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
-import { PropertyProxyModule } from '../property-proxy/property-proxy.module';
-import { UseCaseProxy } from '../property-proxy/usecases-proxy';
+import { PropertyProxyModule } from '../module/property-proxy.module';
+import { UseCaseProxy } from '../../../shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Controller('property')
 @ApiTags('Property')

@@ -9,15 +9,15 @@ import {
     UpdatePropertyUseCase,
 } from 'src/property/application';
 
-import { PropertyRepositoryModule } from '../module/property.repository.module';
+import { PropertyRepositoryModule } from './property.repository.module';
 import { PropertyRepository } from '../repository/property.repository';
 import { PropertyTypeRepository } from '../repository/property-type.repository';
 
-import { PropertyMapperModule } from '../module/property.mapper.module';
+import { PropertyMapperModule } from './property.mapper.module';
 import { PropertyMapper } from '../utils/property.mapper';
 import { PropertyTypeMapper } from '../utils/property-type.mapper';
 
-import { UseCaseProxy } from './usecases-proxy';
+import { UseCaseProxy } from '../../../shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Module({
     imports: [PropertyRepositoryModule, PropertyMapperModule],

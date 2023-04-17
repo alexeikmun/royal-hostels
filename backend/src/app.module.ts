@@ -7,7 +7,7 @@ import { PropertyController } from './property/infrastructure/controller/propert
 import { PropertyTypeController } from './property/infrastructure/controller/property-type.controller';
 import { getEnvPath } from './shared/config/helpers';
 import { TypeOrmConfigService } from './shared/infrastructure/typeorm/typeorm.service';
-import { PropertyProxyModule } from './property/infrastructure/property-proxy/property-proxy.module';
+import { PropertyProxyModule } from './property/infrastructure/module/property-proxy.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
