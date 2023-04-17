@@ -17,7 +17,7 @@ import { PropertyMapperModule } from './property.mapper.module';
 import { PropertyMapper } from '../utils/property.mapper';
 import { PropertyTypeMapper } from '../utils/property-type.mapper';
 
-import { UseCaseProxy } from '../../../shared/infrastructure/usecases-proxy/usecases-proxy';
+import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Module({
     imports: [PropertyRepositoryModule, PropertyMapperModule],

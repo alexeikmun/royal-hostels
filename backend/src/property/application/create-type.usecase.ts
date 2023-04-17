@@ -1,4 +1,4 @@
-import { CreatePropertyTypeDto } from '../infrastructure/dto/create-property-type.dto';
+import { CreatePropertyTypeDto } from '../infrastructure/dto/property-type.dto';
 import { PropertyTypeModel } from '../domain/model/property-type.model';
 import { PropertyTypeRepository } from '../infrastructure/repository/property-type.repository';
 import { PropertyTypeMapper } from '../infrastructure/utils/property-type.mapper';

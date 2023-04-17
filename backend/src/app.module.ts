@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GuestController } from './guest/infrastructure/controller/guest.controller';
-import { GuestUseCasesModule } from './guest/infrastructure/module/guest.usecases.module';
 import { PropertyController } from './property/infrastructure/controller/property.controller';
 import { PropertyTypeController } from './property/infrastructure/controller/property-type.controller';
 import { getEnvPath } from './shared/config/helpers';
 import { TypeOrmConfigService } from './shared/infrastructure/typeorm/typeorm.service';
-import { PropertyProxyModule } from './property/infrastructure/module/property-proxy.module';
+import { PropertyProxyModule } from './property/infrastructure/module/property.proxy.module';
+import { GuestProxyModule } from './guest/infrastructure/module/guest.proxy.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -15,8 +15,8 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
     imports: [
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
-        GuestUseCasesModule,
         PropertyProxyModule.register(),
+        GuestProxyModule.register(),
     ],
     controllers: [GuestController, PropertyController, PropertyTypeController],
     providers: [],

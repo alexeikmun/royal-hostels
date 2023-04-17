@@ -2,9 +2,7 @@ import { UpdateGuestDto } from '../infrastructure/dto/update-guest.dto';
 import { GuestModel } from '../domain/model/guest.model';
 import { GuestRepository } from '../infrastructure/repository/guest.repository';
 import { GuestMapper } from '../infrastructure/utils/guest.mapper';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class UpdateGuestUseCase {
     constructor(
         private readonly guestRepository: GuestRepository,

@@ -1,5 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common';
-import { CreatePropertyTypeDto } from '../dto/create-property-type.dto';
+import { CreatePropertyTypeDto } from '../dto/property-type.dto';
 import { PropertyTypeRepositoryInterface } from '../../domain/repository/property-type.repository.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

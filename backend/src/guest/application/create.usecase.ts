@@ -2,9 +2,7 @@ import { CreateGuestDto } from '../infrastructure/dto/create-guest.dto';
 import { GuestModel } from '../domain/model/guest.model';
 import { GuestRepository } from '../infrastructure/repository/guest.repository';
 import { GuestMapper } from '../infrastructure/utils/guest.mapper';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class CreateGuestUseCase {
     constructor(
         private readonly guestRepository: GuestRepository,

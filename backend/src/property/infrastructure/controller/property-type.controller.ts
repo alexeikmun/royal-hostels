@@ -1,11 +1,11 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { CreatePropertyTypeDto } from '../dto/create-property-type.dto';
+import { CreatePropertyTypeDto } from '../dto/property-type.dto';
 import { CreateTypeUseCase } from 'src/property/application';
 import { PropertyTypeModel } from 'src/property/domain/model/property-type.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
-import { PropertyProxyModule } from '../module/property-proxy.module';
-import { UseCaseProxy } from '../../../shared/infrastructure/usecases-proxy/usecases-proxy';
+import { PropertyProxyModule } from '../module/property.proxy.module';
+import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
 
 @Controller('property-type')
 @ApiTags('PropertyType')

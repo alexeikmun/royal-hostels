@@ -1,6 +1,8 @@
 import { Injectable, Scope } from '@nestjs/common';
-import { CreatePropertyDto } from 'src/property/infrastructure/dto/create-property.dto';
-import { UpdatePropertyDto } from 'src/property/infrastructure/dto/update-property.dto';
+import {
+    CreatePropertyDto,
+    UpdatePropertyDto,
+} from 'src/property/infrastructure/dto/property.dto';
 import { PropertyRepositoryInterface } from 'src/property/domain/repository/property.repository.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
