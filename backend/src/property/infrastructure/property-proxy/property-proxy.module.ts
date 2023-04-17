@@ -10,13 +10,12 @@ import {
 } from 'src/property/application';
 
 import { PropertyRepositoryModule } from '../module/property.repository.module';
-
 import { PropertyRepository } from '../repository/property.repository';
 import { PropertyTypeRepository } from '../repository/property-type.repository';
 
+import { PropertyMapperModule } from '../module/property.mapper.module';
 import { PropertyMapper } from '../utils/property.mapper';
 import { PropertyTypeMapper } from '../utils/property-type.mapper';
-import { PropertyMapperModule } from '../module/property.mapper.module';
 
 import { UseCaseProxy } from './usecases-proxy';
 
@@ -55,8 +54,8 @@ export class PropertyProxyModule {
                     inject: [PropertyRepository, PropertyMapper],
                     provide: PropertyProxyModule.POST_PROPERTY_USECASES_PROXY,
                     useFactory: (
-                        propertyMapper: PropertyMapper,
                         propertyRepository: PropertyRepository,
+                        propertyMapper: PropertyMapper,
                     ) =>
                         new UseCaseProxy(
                             new CreatePropertyUseCase(
@@ -69,8 +68,8 @@ export class PropertyProxyModule {
                     inject: [PropertyRepository, PropertyMapper],
                     provide: PropertyProxyModule.PUT_PROPERTY_USECASES_PROXY,
                     useFactory: (
-                        propertyMapper: PropertyMapper,
                         propertyRepository: PropertyRepository,
+                        propertyMapper: PropertyMapper,
                     ) =>
                         new UseCaseProxy(
                             new UpdatePropertyUseCase(
@@ -91,8 +90,8 @@ export class PropertyProxyModule {
                     inject: [PropertyTypeRepository, PropertyTypeMapper],
                     provide: PropertyProxyModule.POST_TYPE_USECASES_PROXY,
                     useFactory: (
-                        propertyTypeMapper: PropertyTypeMapper,
                         propertyTypeRepository: PropertyTypeRepository,
+                        propertyTypeMapper: PropertyTypeMapper,
                     ) =>
                         new UseCaseProxy(
                             new CreateTypeUseCase(
