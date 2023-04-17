@@ -1,4 +1,4 @@
-import { CreatePropertyTypeDto } from 'src/property/infrastructure/dto/create-property-type.dto';
+import { CreatePropertyTypeDto } from 'src/property/infrastructure/dto/property-type.dto';
 import { PropertyTypeModel } from 'src/property/domain/model/property-type.model';
 import { PropertyType } from '../entity/property-type.entity';
 import { Injectable } from '@nestjs/common';

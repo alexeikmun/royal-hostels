@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { PropertyRepository } from '../infrastructure/repository/property.repository';
 
-@Injectable()
 export class DeletePropertyUseCase {
     constructor(private readonly propertyRepository: PropertyRepository) {}
 

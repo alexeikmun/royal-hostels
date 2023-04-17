@@ -1,5 +1,7 @@
-import { CreatePropertyDto } from 'src/property/infrastructure/dto/create-property.dto';
-import { UpdatePropertyDto } from 'src/property/infrastructure/dto/update-property.dto';
+import {
+    CreatePropertyDto,
+    UpdatePropertyDto,
+} from 'src/property/infrastructure/dto/property.dto';
 import { PropertyModel } from 'src/property/domain/model/property.model';
 import { Property } from '../entity/property.entity';
 import { Injectable } from '@nestjs/common';

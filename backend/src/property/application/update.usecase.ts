@@ -1,10 +1,8 @@
-import { UpdatePropertyDto } from '../infrastructure/dto/update-property.dto';
+import { UpdatePropertyDto } from '../infrastructure/dto/property.dto';
 import { PropertyModel } from '../domain/model/property.model';
 import { PropertyRepository } from '../infrastructure/repository/property.repository';
 import { PropertyMapper } from '../infrastructure/utils/property.mapper';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class UpdatePropertyUseCase {
     constructor(
         private readonly propertyRepository: PropertyRepository,

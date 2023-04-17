@@ -34,3 +34,5 @@ export class CreatePropertyDto {
     })
     readonly typeId: number;
 }
+
+export class UpdatePropertyDto extends CreatePropertyDto {}
