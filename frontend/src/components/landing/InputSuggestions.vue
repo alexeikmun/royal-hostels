@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, defineProps, defineEmits } from 'vue'
 import dataDummy from '../../dummy.data.json'
-const inputValue = ref('')
 const openSuggestion = ref(false)
 
-const dataSuggestions = computed(() => inputValue.value !== '' ? dataDummy.places.filter(place => place.toLowerCase().includes(inputValue.value.toLowerCase())) : dataDummy.places )
+const props = defineProps<{
+    modelValue: string;
+}>();
+
+const emits = defineEmits(['update:modelValue'])
+
+const dataSuggestions = computed(() => props.modelValue !== '' ? dataDummy.places.filter(place => place.toLowerCase().includes(props.modelValue.toLowerCase())) : dataDummy.places )
 
 const hancleSelectSuggestion = (placeSelected: string) => {
     openSuggestion.value = true
-    inputValue.value = placeSelected
+    emits('update:modelValue', placeSelected)
     openSuggestion.value = false
 }
 
 watchEffect(() => {
-    if(inputValue.value !== '') {
+    if(props.modelValue !== '') {
         openSuggestion.value = true
     }
 })
@@ -32,11 +37,13 @@ const focusInput = () => {
 <template>
         <div class="inline-flex flex-col justify-center relative text-gray-500 self-start w-[80%] pt-[2px]">
             <div class="relative">
-                <input v-model="inputValue"
+                <input
                 type="text"
                 class="p-2 pl-1 border-gray-200 bg-white w-full focus-visible:outline-none" placeholder="Where to?" 
                 @focus="focusInput"
                 @blur="blurInput"
+                :value="modelValue"
+                @input="$emit('update:modelValue', $event.target.value)"
                 />
             </div>
             <ul
