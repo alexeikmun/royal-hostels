@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { MagnifyingGlassIcon, UserPlusIcon, GlobeAsiaAustraliaIcon } from '@heroicons/vue/24/outline'
 import { UserCircleIcon, PlusIcon, MinusIcon } from '@heroicons/vue/24/solid'
 import ModalSmall from '../../common/ModalSmall.vue';
+import InputSuggestions from './InputSuggestions.vue';
 
 enum AddOrSubtractGuest {
     ADD = 'add',
@@ -33,11 +34,7 @@ const handleAddOrSubtractGuest = (operation: string) => {
         <div class="w-[85%] flex justify-center items-center h-[80%] bg-transparent rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl transition-all">
             <div class="flex justify-around items-center bg-white p-2 w-[35%] rounded-full mr-3 h-[70%] border-2 border-gray-200">
                 <GlobeAsiaAustraliaIcon class="h-8 w-8 text-orange-600"/>
-                <input 
-                type="text" 
-                placeholder="Where to?" 
-                class="bg-transparent w-[80%] ml-3 focus-visible:outline-none h-full text-md"
-                >
+                <InputSuggestions />
             </div>
             <!-- TICKET #11 -->
             <button 
