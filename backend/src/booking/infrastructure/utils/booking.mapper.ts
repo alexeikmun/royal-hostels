@@ -14,6 +14,7 @@ export class BookingMapper {
         bookingEntity.endDate = booking.endDate;
         bookingEntity.guests = booking.guests;
         bookingEntity.statusId = booking.statusId;
+        bookingEntity.rooms = booking.rooms;
         return bookingEntity;
     }
 
@@ -25,6 +26,7 @@ export class BookingMapper {
         bookingEntity.endDate = bookingDto.endDate;
         bookingEntity.guests = bookingDto.guests;
         bookingEntity.statusId = bookingDto.statusId;
+        bookingEntity.rooms = bookingDto.rooms;
         return bookingEntity;
     }
 
@@ -35,6 +37,7 @@ export class BookingMapper {
         bookingDomain.endDate = booking.endDate;
         bookingDomain.guests = booking.guests;
         bookingDomain.statusId = booking.statusId;
+        bookingDomain.rooms = booking.rooms;
         return bookingDomain;
     }
 }

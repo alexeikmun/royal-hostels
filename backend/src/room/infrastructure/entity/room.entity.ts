@@ -1,5 +1,6 @@
 import { RoomModel } from 'src/room/domain/model/room.model';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Booking } from '../../../booking/infrastructure/entity/booking.entity';
 
 @Entity()
 export class Room implements RoomModel {
@@ -17,4 +18,7 @@ export class Room implements RoomModel {
 
     @Column({ type: 'int', nullable: false })
     maxGuests: number;
+
+    @ManyToMany(() => Booking, (booking) => booking.rooms)
+    bookings: Booking[];
 }
