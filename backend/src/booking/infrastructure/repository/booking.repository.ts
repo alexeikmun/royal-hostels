@@ -43,13 +43,13 @@ export class BookingRepository implements BookingRepositoryInterface {
             where: {
                 id,
             },
-            relations: ['status'],
+            relations: ['status', 'rooms'],
         });
     }
 
     async find(): Promise<Booking[]> {
         return await this.bookingRepository.find({
-            relations: ['status'],
+            relations: ['status', 'rooms'],
         });
     }
 }

@@ -6,8 +6,11 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
+    ManyToMany,
+    JoinTable,
 } from 'typeorm';
 import { BookingStatus } from './booking-status.entity';
+import { Room } from '../../../room/infrastructure/entity/room.entity';
 
 @Entity()
 export class Booking implements BookingModel {
@@ -28,4 +31,8 @@ export class Booking implements BookingModel {
 
     @Column({ type: 'int', nullable: false })
     guests: number;
+
+    @ManyToMany(() => Room, (room) => room.bookings)
+    @JoinTable()
+    rooms: Room[];
 }
