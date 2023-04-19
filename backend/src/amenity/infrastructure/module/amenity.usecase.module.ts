@@ -33,54 +33,42 @@ export class AmenityUsecaseModule {
                 {
                     inject: [AmenityRepository],
                     provide: AmenityUsecaseModule.GET_AMENITY_USECASES_PROXY,
-                    useFactory: (amenityRepository: AmenityRepository) =>
-                        new UseCaseProxy(
-                            new FindOneAmenityUseCase(amenityRepository),
-                        ),
+                    useFactory: (repository: AmenityRepository) =>
+                        new UseCaseProxy(new FindOneAmenityUseCase(repository)),
                 },
                 {
                     inject: [AmenityRepository],
                     provide: AmenityUsecaseModule.GET_AMENITIES_USECASES_PROXY,
-                    useFactory: (amenityRepository: AmenityRepository) =>
-                        new UseCaseProxy(
-                            new FindAmenitiesUseCase(amenityRepository),
-                        ),
+                    useFactory: (repository: AmenityRepository) =>
+                        new UseCaseProxy(new FindAmenitiesUseCase(repository)),
                 },
                 {
                     inject: [AmenityRepository, AmenityMapper],
                     provide: AmenityUsecaseModule.POST_AMENITY_USECASES_PROXY,
                     useFactory: (
-                        amenityRepository: AmenityRepository,
+                        repository: AmenityRepository,
                         amenityMapper: AmenityMapper,
                     ) =>
                         new UseCaseProxy(
-                            new CreateAmenityUseCase(
-                                amenityRepository,
-                                amenityMapper,
-                            ),
+                            new CreateAmenityUseCase(repository, amenityMapper),
                         ),
                 },
                 {
                     inject: [AmenityRepository, AmenityMapper],
                     provide: AmenityUsecaseModule.PUT_AMENITY_USECASES_PROXY,
                     useFactory: (
-                        amenityRepository: AmenityRepository,
+                        repository: AmenityRepository,
                         amenityMapper: AmenityMapper,
                     ) =>
                         new UseCaseProxy(
-                            new UpdateAmenityUseCase(
-                                amenityRepository,
-                                amenityMapper,
-                            ),
+                            new UpdateAmenityUseCase(repository, amenityMapper),
                         ),
                 },
                 {
                     inject: [AmenityRepository],
                     provide: AmenityUsecaseModule.DELETE_AMENITY_USECASES_PROXY,
-                    useFactory: (amenityRepository: AmenityRepository) =>
-                        new UseCaseProxy(
-                            new DeleteAmenityUseCase(amenityRepository),
-                        ),
+                    useFactory: (repository: AmenityRepository) =>
+                        new UseCaseProxy(new DeleteAmenityUseCase(repository)),
                 },
             ],
             exports: [

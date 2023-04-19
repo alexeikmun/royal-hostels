@@ -11,35 +11,35 @@ import { AmenityMapper } from '../utils/amenity.mapper';
 
 @Injectable({ scope: Scope.REQUEST })
 export class AmenityRepository implements AmenityRepositoryInterface {
-    private readonly amenityMapper: AmenityMapper;
+    private readonly mapper: AmenityMapper;
 
     constructor(
         @InjectRepository(Amenity)
-        private readonly amenityRepository: Repository<Amenity>,
+        private readonly repository: Repository<Amenity>,
     ) {
-        this.amenityMapper = new AmenityMapper();
+        this.mapper = new AmenityMapper();
     }
 
     async create(amenity: CreateAmenityDto): Promise<Amenity> {
-        const newAmenity = this.amenityMapper.toEntity(amenity);
-        return await this.amenityRepository.save(newAmenity);
+        const newEntity = this.mapper.toEntity(amenity);
+        return await this.repository.save(newEntity);
     }
 
     async update(id: number, amenity: UpdateAmenityDto): Promise<Amenity> {
-        const currentAmenity = await this.amenityRepository.findOneBy({ id });
-        const updatedAmenity = this.amenityMapper.toEntityWithContext(
-            currentAmenity,
+        const currentEntity = await this.repository.findOneBy({ id });
+        const updatedEntity = this.mapper.toEntityWithContext(
+            currentEntity,
             amenity,
         );
-        return await this.amenityRepository.save(updatedAmenity);
+        return await this.repository.save(updatedEntity);
     }
 
     async delete(id: number): Promise<void> {
-        await this.amenityRepository.delete(id);
+        await this.repository.delete(id);
     }
 
     async findOne(id: number): Promise<Amenity> {
-        return await this.amenityRepository.findOne({
+        return await this.repository.findOne({
             where: {
                 id,
             },
@@ -47,6 +47,6 @@ export class AmenityRepository implements AmenityRepositoryInterface {
     }
 
     async find(): Promise<Amenity[]> {
-        return await this.amenityRepository.find();
+        return await this.repository.find();
     }
 }

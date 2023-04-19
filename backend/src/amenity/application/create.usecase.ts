@@ -5,14 +5,12 @@ import { AmenityMapper } from '../infrastructure/utils/amenity.mapper';
 
 export class CreateAmenityUseCase {
     constructor(
-        private readonly amenityRepository: AmenityRepository,
-        private readonly amenityMapper: AmenityMapper,
+        private readonly repository: AmenityRepository,
+        private readonly mapper: AmenityMapper,
     ) {}
 
-    async execute(createAmenityDto: CreateAmenityDto): Promise<AmenityModel> {
-        const newAmenity = await this.amenityRepository.create(
-            createAmenityDto,
-        );
-        return this.amenityMapper.toDomain(newAmenity);
+    async execute(createDto: CreateAmenityDto): Promise<AmenityModel> {
+        const newEntity = await this.repository.create(createDto);
+        return this.mapper.toDomain(newEntity);
     }
 }
