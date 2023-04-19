@@ -1,4 +1,5 @@
 ---
+import SearchBar from "../components/landing/SearchBar.vue";
 import LandingLayout from "../layouts/user/Landing.astro";
 ---
 
@@ -12,8 +13,8 @@ import LandingLayout from "../layouts/user/Landing.astro";
 	</head>
 	<body>
 		<LandingLayout slim={false}>
+			<SearchBar  client:load client:only="vue"/>
 			<div class="body">
-
 			</div>
 		</LandingLayout>
 	</body>
