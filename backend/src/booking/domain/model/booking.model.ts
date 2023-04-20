@@ -1,5 +1,4 @@
 import { RoomModel } from '../../../room/domain/model/room.model';
-import { Room } from '../../../room/infrastructure/entity/room.entity';
 
 export class BookingModel {
     id: number;
@@ -8,5 +7,5 @@ export class BookingModel {
     endDate: Date;
     guests: number;
 
-    rooms: Room[];
+    rooms: RoomModel[];
 }

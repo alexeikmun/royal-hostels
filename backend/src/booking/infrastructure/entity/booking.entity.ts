@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { BookingStatus } from './booking-status.entity';
 import { Room } from '../../../room/infrastructure/entity/room.entity';
+import { RoomModel } from '../../../room/domain/model/room.model';
 
 @Entity()
 export class Booking implements BookingModel {
@@ -34,5 +35,5 @@ export class Booking implements BookingModel {
 
     @ManyToMany(() => Room, (room) => room.bookings)
     @JoinTable()
-    rooms: Room[];
+    rooms: RoomModel[];
 }
