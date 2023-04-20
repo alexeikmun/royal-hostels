@@ -8,6 +8,7 @@ import { AmenityController } from './amenity/infrastructure/controller/amenity.c
 import { RoomController } from './room/infrastructure/controller/room.controller';
 import { BookingController } from './booking/infrastructure/controller/booking.controller';
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
+import { AdminController } from './admin/infrastructure/controller/admin.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -17,6 +18,7 @@ import { GuestUsecaseModule } from './guest/infrastructure/module/guest.usecase.
 import { AmenityUsecaseModule } from './amenity/infrastructure/module/amenity.usecase.module';
 import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModule';
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
+import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -29,6 +31,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         AmenityUsecaseModule.register(),
         RoomUseCaseModule.register(),
         BookingUsecaseModule.register(),
+        AdminUsecaseModule.register(),
     ],
     controllers: [
         GuestController,
@@ -38,6 +41,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         RoomController,
         BookingController,
         BookingStatusController,
+        AdminController,
     ],
     providers: [],
 })
