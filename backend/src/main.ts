@@ -10,7 +10,7 @@ async function bootstrap() {
 
     const openApiConfig = new DocumentBuilder()
         .setTitle('Backend test')
-        .setDescription('This is an API to simulate a ride-hailing service')
+        .setDescription('This is an API to simulate a hostel booking service')
         .setVersion('1.0')
         .build();
     const document = SwaggerModule.createDocument(app, openApiConfig);
