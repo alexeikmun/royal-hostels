@@ -1,6 +1,8 @@
 ---
+import PropertyCard from "../components/landing/PropertyCard";
 import SearchBar from "../components/landing/SearchBar.vue";
 import LandingLayout from "../layouts/user/Landing.astro";
+import dataDummy from '../dummy.data.json'
 ---
 
 <html lang="en">
@@ -14,7 +16,14 @@ import LandingLayout from "../layouts/user/Landing.astro";
 	<body>
 		<LandingLayout>
 			<SearchBar  client:load client:only="vue"/>
-			<div class="body">
+			<div class="flex flex-wrap px-[3%] w-auto justify-center pb-[7%]">
+				<div class="flex justify-start items-center flex-wrap w-auto">
+					{
+						dataDummy.properties.map((property) => 
+							<PropertyCard property={property} />
+						)
+					}
+				</div>
 			</div>
 		</LandingLayout>
 	</body>

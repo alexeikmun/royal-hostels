@@ -11,7 +11,7 @@ const toggle = (shouldOpen: boolean) => {
 </script>
 
 <template>
-  <!--
+<!--
   This component uses @tailwindcss/forms
 
   yarn add @tailwindcss/forms
