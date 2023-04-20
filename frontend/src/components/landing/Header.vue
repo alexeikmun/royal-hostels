@@ -2,15 +2,12 @@
 import { defineProps, ref } from 'vue'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import SideBarDrawer from '../../common/SideBarDrawer.vue';
-const props = defineProps<{
-  slim: boolean;
-}>();
+
 const open = ref(false)
 const isLoggedIn = ref(false)
 const toggle = (shouldOpen: boolean) => {
     open.value = shouldOpen
 }
-
 </script>
 
 <template>
@@ -23,7 +20,7 @@ const toggle = (shouldOpen: boolean) => {
   plugins: [require('@tailwindcss/forms')]
 -->
 
-<header aria-label="Site Header" class="shadow-md h-[80px]">
+<header aria-label="Site Header" class="shadow-md h-[80px] sticky top-0 z-10 bg-white">
   <div
     class="mx-auto flex max-w-screen-xl items-center justify-between px-4 h-full"
   >
@@ -55,7 +52,7 @@ const toggle = (shouldOpen: boolean) => {
 
       <form class="mb-0 hidden lg:flex">
         <div class="relative">
-          <img src="assets/logo.png" class="w-[200px]">
+          <img src="https://i.ibb.co/HFJktPT/Captura-de-Pantalla-2023-04-04-a-la-s-10-50-56-a-m.png" class="w-[200px]">
         </div>
       </form>
     </div>

@@ -39,7 +39,7 @@ const focusInput = () => {
             <div class="relative">
                 <input
                 type="text"
-                class="p-2 pl-1 border-gray-200 bg-white w-full focus-visible:outline-none" placeholder="Where to?" 
+                class="border-none p-2 pl-1 border-gray-200 bg-white w-full focus-visible:outline-none" placeholder="Where to?" 
                 @focus="focusInput"
                 @blur="blurInput"
                 :value="modelValue"
