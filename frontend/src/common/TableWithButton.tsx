@@ -1,6 +1,6 @@
 interface Props {
     headers: string[];
-    body: string[][];
+    body: Array<string[]>;
 }
 
 const Table = ({ headers, body }: Props) => {
@@ -32,11 +32,10 @@ const Table = ({ headers, body }: Props) => {
                                 <td className="flex justify-center items-center w-full">
                                     <a
                                         href="#"
-                                        className="inline-block rounded bg-orange-600 px-4 py-2 text-xs font-medium text-white hover:bg-orange-700"
+                                        className="rounded-lg bg-orange-600 hover:bg-orange-400 px-5 py-2 text-sm font-medium text-white transition-all"
                                     >
                                         Select
                                     </a>
-
                                 </td>
                             </tr>
                         )

@@ -27,7 +27,7 @@ const PropertyCard = (props: Props) => {
     const { property } = props
 
     return(
-        <a href="#" className="w-[325px] rounded-lg p-4 shadow-sm shadow-indigo-100 hover:shadow-xl transition-all ml-5 mt-3">
+        <a href={`/property/${property.id}`} className="w-[325px] rounded-lg p-4 shadow-sm shadow-indigo-100 hover:shadow-xl transition-all ml-5 mt-3">
             <img
                 alt="Home"
                 src={property.image}

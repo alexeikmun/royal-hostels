@@ -1,5 +1,6 @@
 ---
-import Table from "../../../common/Table";
+import ArrowLongLeftIcon from '../../../custom-icons/ArrowLongLeftIcon.tsx'
+import TableWithButton from "../../../common/TableWithButton.jsx";
 import StarFilled from "../../../custom-icons/StarFilled.vue";
 import StarNotFilled from "../../../custom-icons/StarNotFilled.vue";
 import LandingLayout from "../../../layouts/user/Landing.astro";
@@ -113,12 +114,12 @@ export async function getStaticPaths() {
   }
   const props = Astro.props
   const stars = ['1', '2', '3', '4', '5']
-  const tableHeaders = [ 'Room type', 'Sleeps', 'Price/night']
-  const tableBody = [
-    ['Standard', 2, '240.000'],
-    ['Double', 2, '270.000'],
-    ['King', 2, '300.000'],
-    ['Double, Bath', 2, '450.000']
+  const tableHeaders: Array<string> = [ 'Room type', 'Sleeps', 'Price/night']
+  const tableBody: Array<string[]> = [
+    ['Standard', '2', '240.000'],
+    ['Double', '2', '270.000'],
+    ['King', '2', '300.000'],
+    ['Double, Bath', '2', '450.000']
   ]
 
 ---
@@ -129,12 +130,12 @@ export async function getStaticPaths() {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{props.name}</title>
 	</head>
 	<body>
 		<LandingLayout>
       <section class="overflow-y-auto mb-[5%] h-[100vh]">
-        <div class="relative mx-auto max-w-screen-xl">
+        <div class="relative">
           <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-1 overflow-hidden pt-10 pr-10">
             <div class="flex justify-center items-center w-[50%] h-auto fixed left-0">
               <img
@@ -144,10 +145,17 @@ export async function getStaticPaths() {
               />
             </div>
 
-            <div class="top-0 overflow-y-auto absolute h-auto right-0 w-[50%] pt-5">
-      
+            <div class="top-0 overflow-y-auto absolute h-auto right-0 w-[50%] pt-5 pr-28">
               <div class="mt-8 flex justify-between">
                 <div class="max-w-[35ch] space-y-2">
+                  <div class="flex justify-between pb-3">
+                    <a href="/" class="flex text-gray-500 justify-center items-center">
+                      <ArrowLongLeftIcon />
+                      <p class="ml-3 text-gray-400 group-hover:text-gray-600">
+                        Back
+                      </p>
+                    </a>
+                  </div>
                   <h1 class="text-xl font-bold sm:text-2xl">
                     {props.name}
                   </h1>
@@ -167,7 +175,7 @@ export async function getStaticPaths() {
                   </div>
                 </div>
       
-                <p class="text-lg font-bold">${props.price}</p>
+                <p class="text-lg font-bold mt-14">${props.price}</p>
               </div>
       
               <div class="mt-4">
@@ -185,7 +193,7 @@ export async function getStaticPaths() {
                 <fieldset class="w-full">
                   <legend class="mt-5 mb-1 text-lg font-medium">Rooms options</legend>
       
-                  <Table headers={tableHeaders} body={tableBody} />
+                  <TableWithButton headers={tableHeaders} body={tableBody} />
                 </fieldset>
       
                 <fieldset class="mt-8">
