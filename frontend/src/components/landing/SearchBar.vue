@@ -6,6 +6,7 @@ import { PlusIcon, MinusIcon } from '@heroicons/vue/24/solid'
 import ModalSmall from '../../common/ModalSmall.vue';
 import InputSuggestions from './InputSuggestions.vue';
 import DatePicker from './DatePicker.vue'
+import DummyData from '../../dummy.data.json'
 
 interface DatesRange {
     start: string;
@@ -69,6 +70,7 @@ const performSearch = () => {
                 <InputSuggestions 
                     v-model="payload.location" 
                     :modelValue="payload.location"
+                    :options="DummyData.places"
                     @update:modelValue="value => payload.location = value" />
             </div>
             <!-- TICKET #11 -->

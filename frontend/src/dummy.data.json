@@ -4,7 +4,7 @@
             "id": 1,
             "name": "Hostal del Mar",
             "city": "Barcelona",
-            "rate": 4.25,
+            "rate": 2.32,
             "image": "https://img.freepik.com/free-photo/beautiful-luxury-outdoor-swimming-pool-hotel-resort_74190-7433.jpg?w=2000",
             "rooms": {
                 "number": 2,

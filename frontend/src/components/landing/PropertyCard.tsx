@@ -1,6 +1,4 @@
-import { WifiIcon } from '@heroicons/vue/24/solid'
 import ParkingIcon from '../../icons/ParkingIcon'
-import ForkIcon from '../../icons/ForkIcon'
 import BatchroomIcon from '../../icons/BathroomIcon';
 import BedIcon from '../../icons/BedIcon';
 
@@ -47,11 +45,11 @@ const PropertyCard = (props: Props) => {
                     <dd className="font-medium">{property.name}, {property.city}</dd>
                 </div>
                 </dl>
-                <p className="text-xs text-gray-400">4.6 califications </p>
+                <p className="text-xs text-gray-400">{property.rate.toFixed(1)} califications </p>
 
                 <div className="mt-6 flex items-center justify-between text-xs">
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                        <ParkingIcon />
+                        <ParkingIcon color='#C1410B' width='17px' height='17px' />
                         <div className="mt-1.5 sm:mt-0">
                         <p className="text-orange-500">Parking</p>
 
@@ -60,7 +58,7 @@ const PropertyCard = (props: Props) => {
                 </div>
 
                 <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                    <BatchroomIcon />
+                    <BatchroomIcon color='#C1410B' width='17px' height='17px' />
 
                     <div className="mt-1.5 sm:mt-0">
                     <p className="text-orange-500">Bathroom</p>
@@ -70,7 +68,7 @@ const PropertyCard = (props: Props) => {
                 </div>
 
                 <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                    <BedIcon />
+                    <BedIcon color='#C1410B' width='17px' height='17px' />
 
                     <div className="mt-1.5 sm:mt-0">
                     <p className="text-orange-500">Bedroom</p>

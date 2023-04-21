@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { ref, watchEffect, defineEmits } from 'vue'
     import { DatePicker }  from 'v-calendar'
-    import VerticalIcon from '../../custom-icons/VerticalDiv.vue'
+    import VerticalIcon from '../../icons/VerticalDiv.vue'
     import { CalendarDaysIcon,ArrowUpIcon, ArrowDownIcon } from '@heroicons/vue/24/solid'
     import 'v-calendar/dist/style.css'
 

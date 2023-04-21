@@ -1,6 +1,18 @@
-export default function BedIcon () {
+interface Props {
+    color: string;
+    width: string;
+    height: string;
+}
+
+export default function BedIcon (props: Props) {
+    const { color, width, height } = props
     return(
-        <svg fill="#C1410B" height="17px" width="17px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999">
+        <svg 
+        fill={color} 
+        height={height} 
+        width={width}
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 511.999 511.999">
             <g>
                 <g>
                     <path d="M494.565,208.205c-6.121,0-11.251,3.141-14.387,7.894l-24.288-36.256v-50.833c0-29.541-24.435-53.028-53.974-53.028
