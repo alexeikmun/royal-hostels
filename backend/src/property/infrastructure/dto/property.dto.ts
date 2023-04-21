@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
+import { Amenity } from 'src/amenity/infrastructure/entity/amenity.entity';
 
 export class CreatePropertyDto {
     @ApiProperty({
@@ -33,6 +35,11 @@ export class CreatePropertyDto {
         type: Number,
     })
     readonly typeId: number;
+    @ApiProperty({
+        type: Amenity,
+        isArray: true,
+    })
+    readonly amenities: AmenityModel[];
 }
 
 export class UpdatePropertyDto extends CreatePropertyDto {}

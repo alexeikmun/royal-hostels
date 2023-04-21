@@ -6,8 +6,12 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     ManyToOne,
+    ManyToMany,
+    JoinTable,
 } from 'typeorm';
 import { PropertyType } from './property-type.entity';
+import { Amenity } from 'src/amenity/infrastructure/entity/amenity.entity';
+import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
 
 @Entity()
 export class Property implements PropertyModel {
@@ -46,4 +50,8 @@ export class Property implements PropertyModel {
 
     @ManyToOne(() => PropertyType, (type) => type.properties)
     type: PropertyType;
+
+    @ManyToMany(() => Amenity, (amenity) => amenity.properties)
+    @JoinTable()
+    amenities: AmenityModel[];
 }
