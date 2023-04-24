@@ -5,7 +5,9 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToMany,
 } from 'typeorm';
+import { Property } from 'src/property/infrastructure/entity/property.entity';
 
 @Entity()
 export class Amenity implements AmenityModel {
@@ -20,4 +22,7 @@ export class Amenity implements AmenityModel {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToMany(() => Property, (property) => property.amenities)
+    properties: Property[];
 }

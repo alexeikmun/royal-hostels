@@ -1,3 +1,4 @@
+import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
 export class PropertyModel {
     id: number;
     name: string;
@@ -10,4 +11,5 @@ export class PropertyModel {
     typeId: number;
     createdAt: Date;
     updatedAt: Date;
+    amenities: AmenityModel[];
 }
