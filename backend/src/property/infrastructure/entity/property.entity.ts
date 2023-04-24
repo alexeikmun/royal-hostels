@@ -39,8 +39,17 @@ export class Property implements PropertyModel {
     @Column({ type: 'varchar', nullable: false })
     zipcode: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int', nullable: false })
     typeId: number;
+
+    @Column({ type: 'varchar', nullable: false })
+    image: string;
+
+    @Column({ type: 'varchar' })
+    description: string;
+
+    @Column({ type: 'decimal', precision: 6, scale: 2 })
+    rate: number;
 
     @CreateDateColumn()
     createdAt: Date;
