@@ -7,8 +7,8 @@ import {
     JoinTable,
 } from 'typeorm';
 import { Booking } from '../../../booking/infrastructure/entity/booking.entity';
-import { RoomAmenity } from '../../../roomAmenity/infrastructure/entity/roomAmenity.entity';
-import { RoomAmenityModel } from '../../../roomAmenity/domain/model/roomAmenity.model';
+import { Amenity } from '../../../amenity/infrastructure/entity/amenity.entity';
+import { AmenityModel } from '../../../amenity/domain/model/amenity.model';
 
 @Entity()
 export class Room implements RoomModel {
@@ -30,7 +30,7 @@ export class Room implements RoomModel {
     @ManyToMany(() => Booking, (booking) => booking.rooms)
     bookings: Booking[];
 
-    @ManyToMany(() => RoomAmenity, (roomAmenity) => roomAmenity.rooms)
+    @ManyToMany(() => Amenity, (amenity) => amenity.rooms)
     @JoinTable()
-    amenities: RoomAmenityModel[];
+    amenities: AmenityModel[];
 }

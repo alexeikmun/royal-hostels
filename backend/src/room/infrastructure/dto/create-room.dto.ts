@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { RoomAmenity } from '../../../roomAmenity/infrastructure/entity/roomAmenity.entity';
-import { RoomAmenityModel } from '../../../roomAmenity/domain/model/roomAmenity.model';
+import { Amenity } from '../../../amenity/infrastructure/entity/amenity.entity';
+import { AmenityModel } from '../../../amenity/domain/model/amenity.model';
 
 export class CreateRoomDto {
     @ApiProperty({
@@ -24,8 +24,8 @@ export class CreateRoomDto {
     readonly maxGuests: number;
 
     @ApiProperty({
-        type: RoomAmenity,
+        type: Amenity,
         isArray: true,
     })
-    readonly amenities: RoomAmenityModel[];
+    readonly amenities: AmenityModel[];
 }

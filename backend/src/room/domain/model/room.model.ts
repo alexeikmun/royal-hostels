@@ -1,4 +1,4 @@
-import { RoomAmenityModel } from '../../../roomAmenity/domain/model/roomAmenity.model';
+import { AmenityModel } from '../../../amenity/domain/model/amenity.model';
 
 export class RoomModel {
     id: number;
@@ -6,5 +6,5 @@ export class RoomModel {
     description: string;
     name: string;
     maxGuests: number;
-    amenities: RoomAmenityModel[];
+    amenities: AmenityModel[];
 }
