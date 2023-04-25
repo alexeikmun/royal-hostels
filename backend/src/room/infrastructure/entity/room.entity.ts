@@ -1,6 +1,14 @@
 import { RoomModel } from 'src/room/domain/model/room.model';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    ManyToMany,
+    JoinTable,
+} from 'typeorm';
 import { Booking } from '../../../booking/infrastructure/entity/booking.entity';
+import { RoomAmenity } from '../../../roomAmenity/infrastructure/entity/roomAmenity.entity';
+import { RoomAmenityModel } from '../../../roomAmenity/domain/model/roomAmenity.model';
 
 @Entity()
 export class Room implements RoomModel {
@@ -21,4 +29,8 @@ export class Room implements RoomModel {
 
     @ManyToMany(() => Booking, (booking) => booking.rooms)
     bookings: Booking[];
+
+    @ManyToMany(() => RoomAmenity, (roomAmenity) => roomAmenity.rooms)
+    @JoinTable()
+    amenities: RoomAmenityModel[];
 }
