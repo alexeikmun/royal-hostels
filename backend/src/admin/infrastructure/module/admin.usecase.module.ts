@@ -47,10 +47,10 @@ export class AdminUsecaseModule {
                     provide: AdminUsecaseModule.POST_ADMIN_USECASES_PROXY,
                     useFactory: (
                         repository: AdminRepository,
-                        amenityMapper: AdminMapper,
+                        adminMapper: AdminMapper,
                     ) =>
                         new UseCaseProxy(
-                            new CreateAdminUseCase(repository, amenityMapper),
+                            new CreateAdminUseCase(repository, adminMapper),
                         ),
                 },
                 {
@@ -58,10 +58,10 @@ export class AdminUsecaseModule {
                     provide: AdminUsecaseModule.PUT_ADMIN_USECASES_PROXY,
                     useFactory: (
                         repository: AdminRepository,
-                        amenityMapper: AdminMapper,
+                        adminMapper: AdminMapper,
                     ) =>
                         new UseCaseProxy(
-                            new UpdateAdminUseCase(repository, amenityMapper),
+                            new UpdateAdminUseCase(repository, adminMapper),
                         ),
                 },
                 {
