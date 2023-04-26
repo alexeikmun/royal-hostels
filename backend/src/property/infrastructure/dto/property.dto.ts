@@ -35,6 +35,21 @@ export class CreatePropertyDto {
         type: Number,
     })
     readonly typeId: number;
+
+    @ApiProperty({
+        type: String,
+    })
+    image: string;
+    @ApiProperty({
+        type: String,
+    })
+    description: string;
+    @ApiProperty({
+        type: Number,
+        default: 3,
+    })
+    rate: number;
+
     @ApiProperty({
         type: Amenity,
         isArray: true,

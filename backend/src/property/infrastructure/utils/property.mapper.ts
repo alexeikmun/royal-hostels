@@ -19,6 +19,9 @@ export class PropertyMapper {
         propertyEntity.zipcode = property.zipcode;
         propertyEntity.typeId = property.typeId;
         propertyEntity.amenities = property.amenities;
+        propertyEntity.image = property.image;
+        propertyEntity.description = property.description;
+        propertyEntity.rate = property.rate;
         return propertyEntity;
     }
 
@@ -35,6 +38,9 @@ export class PropertyMapper {
         propertyEntity.zipcode = propertyDto.zipcode;
         propertyEntity.typeId = propertyDto.typeId;
         propertyEntity.amenities = propertyDto.amenities;
+        propertyEntity.image = propertyDto.image;
+        propertyEntity.description = propertyDto.description;
+        propertyEntity.rate = propertyDto.rate;
         return propertyEntity;
     }
 
@@ -50,6 +56,9 @@ export class PropertyMapper {
         propertyDomain.zipcode = property.zipcode;
         propertyDomain.typeId = property.typeId;
         propertyDomain.amenities = property.amenities;
+        propertyDomain.image = property.image;
+        propertyDomain.description = property.description;
+        propertyDomain.rate = property.rate;
         return propertyDomain;
     }
 }
