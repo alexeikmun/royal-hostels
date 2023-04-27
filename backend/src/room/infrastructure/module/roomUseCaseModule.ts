@@ -4,6 +4,7 @@ import {
     CreateRoomUseCase,
     DeleteRoomUseCase,
     FindOneRoomUseCase,
+    FindRoomsUseCase,
     UpdateRoomUseCase,
 } from 'src/room/application';
 
@@ -20,9 +21,11 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 })
 export class RoomUseCaseModule {
     static GET_ROOM_USECASES_PROXY = 'getRoomUsecasesProxy';
+    static PUT_ROOM_USECASES_PROXY = 'putRoomUsecasesProxy';
+
     static POST_ROOM_USECASES_PROXY = 'postRoomUsecasesProxy';
     static DELETE_ROOM_USECASES_PROXY = 'deleteRoomUsecasesProxy';
-    static PUT_ROOM_USECASES_PROXY = 'putRoomUsecasesProxy';
+    static GET_ROOMS_USECASES_PROXY = 'getRoomsUsecasesProxy';
 
     static register(): DynamicModule {
         return {
@@ -35,6 +38,12 @@ export class RoomUseCaseModule {
                         new UseCaseProxy(
                             new FindOneRoomUseCase(roomRepository),
                         ),
+                },
+                {
+                    inject: [RoomRepository],
+                    provide: RoomUseCaseModule.GET_ROOMS_USECASES_PROXY,
+                    useFactory: (roomRepository: RoomRepository) =>
+                        new UseCaseProxy(new FindRoomsUseCase(roomRepository)),
                 },
                 {
                     inject: [RoomRepository, RoomMapper],
@@ -67,6 +76,7 @@ export class RoomUseCaseModule {
             ],
             exports: [
                 RoomUseCaseModule.GET_ROOM_USECASES_PROXY,
+                RoomUseCaseModule.GET_ROOMS_USECASES_PROXY,
                 RoomUseCaseModule.POST_ROOM_USECASES_PROXY,
                 RoomUseCaseModule.PUT_ROOM_USECASES_PROXY,
                 RoomUseCaseModule.DELETE_ROOM_USECASES_PROXY,
