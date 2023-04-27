@@ -8,10 +8,14 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
 import { BookingStatus } from './booking-status.entity';
 import { Room } from '../../../room/infrastructure/entity/room.entity';
 import { RoomModel } from '../../../room/domain/model/room.model';
+import { Comment } from '../../../comment/infraestructure/entity/comment.entity';
+import { CommentModel } from '../../../comment/domain/model/comment.model';
 
 @Entity()
 export class Booking implements BookingModel {
@@ -36,4 +40,8 @@ export class Booking implements BookingModel {
     @ManyToMany(() => Room, (room) => room.bookings)
     @JoinTable()
     rooms: RoomModel[];
+
+    @OneToOne(() => Comment)
+    @JoinColumn()
+    comment: CommentModel;
 }

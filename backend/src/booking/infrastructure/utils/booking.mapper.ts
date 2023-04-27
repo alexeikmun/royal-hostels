@@ -15,6 +15,7 @@ export class BookingMapper {
         bookingEntity.guests = booking.guests;
         bookingEntity.statusId = booking.statusId;
         bookingEntity.rooms = booking.rooms;
+        bookingEntity.comment = booking.comment;
         return bookingEntity;
     }
 
@@ -27,6 +28,7 @@ export class BookingMapper {
         bookingEntity.guests = bookingDto.guests;
         bookingEntity.statusId = bookingDto.statusId;
         bookingEntity.rooms = bookingDto.rooms;
+        bookingEntity.comment = bookingDto.comment;
         return bookingEntity;
     }
 
@@ -38,6 +40,7 @@ export class BookingMapper {
         bookingDomain.guests = booking.guests;
         bookingDomain.statusId = booking.statusId;
         bookingDomain.rooms = booking.rooms;
+        bookingDomain.comment = booking.comment;
         return bookingDomain;
     }
 }
