@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Room } from '../../../room/infrastructure/entity/room.entity';
 import { RoomModel } from '../../../room/domain/model/room.model';
+import { Comment } from '../../../comment/infraestructure/entity/comment.entity';
+import { CommentModel } from '../../../comment/domain/model/comment.model';
 
 export class CreateBookingDto {
     @ApiProperty({
@@ -28,6 +30,11 @@ export class CreateBookingDto {
         isArray: true,
     })
     readonly rooms: RoomModel[];
+
+    @ApiProperty({
+        type: Comment,
+    })
+    readonly comment: CommentModel;
 }
 
 export class UpdateBookingDto extends CreateBookingDto {}
