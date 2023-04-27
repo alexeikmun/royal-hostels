@@ -41,7 +41,7 @@ export class Booking implements BookingModel {
     @JoinTable()
     rooms: RoomModel[];
 
-    @OneToOne(() => Comment)
+    @OneToOne(() => Comment, { cascade: true })
     @JoinColumn()
     comment: CommentModel;
 }
