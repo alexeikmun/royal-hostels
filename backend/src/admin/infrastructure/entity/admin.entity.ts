@@ -12,9 +12,6 @@ export class Admin implements AdminModel {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', nullable: false })
-    name: string;
-
     @Column({ type: 'boolean', nullable: false })
     isSuper: boolean;
 

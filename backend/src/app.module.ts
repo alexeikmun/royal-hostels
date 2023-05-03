@@ -9,8 +9,6 @@ import { RoomController } from './room/infrastructure/controller/room.controller
 import { BookingController } from './booking/infrastructure/controller/booking.controller';
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
-import { ProfileController } from './profile/infrastructure/controller/profile.controller';
-import { AdminController } from './admin/infrastructure/controller/admin.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -21,8 +19,9 @@ import { AmenityUsecaseModule } from './amenity/infrastructure/module/amenity.us
 import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModule';
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
 import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
-import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
-import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
+import { UserController } from './user/infrastructure/controller/user.controller';
+import { UserUsecaseModule } from './user/infrastructure/module/user.usecase.module';
+import { ExceptionsModule } from '@shared/infrastructure/module/exceptions.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -30,13 +29,14 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
     imports: [
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+        ExceptionsModule,
         PropertyUsecaseModule.register(),
         GuestUsecaseModule.register(),
         AmenityUsecaseModule.register(),
         RoomUseCaseModule.register(),
         BookingUsecaseModule.register(),
         AdminUsecaseModule.register(),
-        ProfileUsecaseModule.register(),
+        UserUsecaseModule.register(),
         AdminUsecaseModule.register(),
     ],
     controllers: [
@@ -48,7 +48,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingController,
         BookingStatusController,
         AdminController,
-        ProfileController,
+        UserController,
         AdminController,
     ],
     providers: [],
