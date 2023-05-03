@@ -10,7 +10,6 @@ import { BookingController } from './booking/infrastructure/controller/booking.c
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
 import { ProfileController } from './profile/infrastructure/controller/profile.controller';
-import { AdminController } from './admin/infrastructure/controller/admin.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -20,7 +19,6 @@ import { GuestUsecaseModule } from './guest/infrastructure/module/guest.usecase.
 import { AmenityUsecaseModule } from './amenity/infrastructure/module/amenity.usecase.module';
 import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModule';
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
-import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
 import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
 import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
 
@@ -37,7 +35,6 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingUsecaseModule.register(),
         AdminUsecaseModule.register(),
         ProfileUsecaseModule.register(),
-        AdminUsecaseModule.register(),
     ],
     controllers: [
         GuestController,
@@ -49,7 +46,6 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingStatusController,
         AdminController,
         ProfileController,
-        AdminController,
     ],
     providers: [],
 })
