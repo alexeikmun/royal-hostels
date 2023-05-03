@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateProfileDto {
+export class CreateUserDto {
     @ApiProperty({
         type: String,
     })
@@ -41,4 +41,4 @@ export class CreateProfileDto {
     readonly email: string;
 }
 
-export class UpdateProfileDto extends CreateProfileDto {}
+export class UpdateUserDto extends CreateUserDto {}

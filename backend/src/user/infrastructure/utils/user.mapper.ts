@@ -1,15 +1,15 @@
 import {
-    CreateProfileDto,
-    UpdateProfileDto,
-} from 'src/profile/infrastructure/dto/profile.dto';
-import { ProfileModel } from 'src/profile/domain/model/profile.model';
-import { Profile } from '../entity/profile.entity';
+    CreateUserDto,
+    UpdateUserDto,
+} from 'src/user/infrastructure/dto/user.dto';
+import { UserModel } from 'src/user/domain/model/user.model';
+import { User } from '../entity/user.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class ProfileMapper {
-    toEntity(entityDto: CreateProfileDto | UpdateProfileDto): Profile {
-        const entity = new Profile();
+export class UserMapper {
+    toEntity(entityDto: CreateUserDto | UpdateUserDto): User {
+        const entity = new User();
         entity.first_name = entityDto.first_name;
         entity.last_name = entityDto.last_name;
         entity.address = entityDto.address;
@@ -23,9 +23,9 @@ export class ProfileMapper {
     }
 
     toEntityWithContext(
-        entity: Profile,
-        entityDto: CreateProfileDto | UpdateProfileDto,
-    ): Profile {
+        entity: User,
+        entityDto: CreateUserDto | UpdateUserDto,
+    ): User {
         entity.first_name = entityDto.first_name;
         entity.last_name = entityDto.last_name;
         entity.address = entityDto.address;
@@ -38,8 +38,8 @@ export class ProfileMapper {
         return entity;
     }
 
-    toDomain(entity: Profile): ProfileModel {
-        const domain = new ProfileModel();
+    toDomain(entity: User): UserModel {
+        const domain = new UserModel();
         domain.id = entity.id;
         domain.first_name = entity.first_name;
         domain.last_name = entity.last_name;

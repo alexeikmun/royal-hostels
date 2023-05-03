@@ -5,18 +5,19 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { ProfileModel } from 'src/profile/domain/model/profile.model';
+import { Role } from 'src/auth/domain/enum/role.enum';
+import { FullUserModel } from 'src/user/domain/model/full.user.model';
 
 @Entity()
-export class Profile implements ProfileModel {
+export class User implements FullUserModel {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ type: 'varchar', nullable: false })
-    first_name: string;
+    name: string;
 
-    @Column({ type: 'varchar', nullable: true })
-    last_name: string;
+    @Column({ type: 'varchar', nullable: false })
+    password: string;
 
     @Column({ type: 'varchar', nullable: true })
     address: string;
@@ -34,10 +35,16 @@ export class Profile implements ProfileModel {
     birthday: Date;
 
     @Column({ type: 'varchar', nullable: true })
-    contact_number: string;
+    contactNumber: string;
 
     @Column({ type: 'varchar', nullable: true })
     email: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    role: Role;
+
+    @Column({ nullable: true })
+    lastLogin?: Date;
 
     @CreateDateColumn()
     createdAt: Date;
