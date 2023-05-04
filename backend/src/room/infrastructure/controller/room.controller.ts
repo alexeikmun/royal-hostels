@@ -15,6 +15,7 @@ import {
     UpdateRoomUseCase,
     DeleteRoomUseCase,
     FindOneRoomUseCase,
+    FindRoomsUseCase,
 } from 'src/room/application';
 import { RoomModel } from 'src/room/domain/model/room.model';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -27,6 +28,8 @@ export class RoomController {
     constructor(
         @Inject(RoomUseCaseModule.DELETE_ROOM_USECASES_PROXY)
         private readonly deleteRoomUseCase: UseCaseProxy<DeleteRoomUseCase>,
+        @Inject(RoomUseCaseModule.GET_ROOMS_USECASES_PROXY)
+        private readonly findRoomsUseCase: UseCaseProxy<FindRoomsUseCase>,
         @Inject(RoomUseCaseModule.GET_ROOM_USECASES_PROXY)
         private readonly findOneRoomUseCase: UseCaseProxy<FindOneRoomUseCase>,
         @Inject(RoomUseCaseModule.POST_ROOM_USECASES_PROXY)
@@ -61,5 +64,9 @@ export class RoomController {
     @Delete(':id')
     async remove(@Param('id') id: number) {
         return await this.deleteRoomUseCase.getInstance().execute(id);
+    }
+    @Get()
+    async find() {
+        return await this.findRoomsUseCase.getInstance().execute();
     }
 }
