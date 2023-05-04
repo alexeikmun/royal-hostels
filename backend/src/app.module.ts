@@ -10,7 +10,6 @@ import { BookingController } from './booking/infrastructure/controller/booking.c
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
 import { ProfileController } from './profile/infrastructure/controller/profile.controller';
-import { AdminController } from './admin/infrastructure/controller/admin.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -22,7 +21,6 @@ import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModul
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
 import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
 import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
-import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 

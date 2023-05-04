@@ -9,7 +9,7 @@ interface Props {
 const { slim } = Astro.props
 ---
 <section>
-    <Header slim={false} client:load client:only="vue"/>
+    <Header slim={false} isLoggedIn={false} client:load client:only="vue"/>
     <SearchBar  client:load client:only="vue"/>
     <slot />
     <Footer slim={false}/>
