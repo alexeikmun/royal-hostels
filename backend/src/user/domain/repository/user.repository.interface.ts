@@ -7,6 +7,6 @@ export interface UserRepositoryInterface {
     delete(id: number): Promise<void>;
     findOne(id: number): Promise<UserModel>;
     find(): Promise<UserModel[]>;
-    updateLastLogin(id: number): Promise<void>;
-    updateRefreshToken(id: number, refreshToken: string): Promise<void>;
+    updateLastLogin(email: string): Promise<void>;
+    updateRefreshToken(email: string, refreshToken: string): Promise<void>;
 }

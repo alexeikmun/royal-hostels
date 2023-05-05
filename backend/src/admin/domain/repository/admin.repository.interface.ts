@@ -1,9 +1,13 @@
-import { AdminModel } from '../model/admin.model';
+import { Admin } from 'src/admin/infrastructure/entity/admin.entity';
+import {
+    CreateAdminDto,
+    UpdateAdminDto,
+} from 'src/admin/infrastructure/dto/admin.dto';
 
 export interface AdminRepositoryInterface {
-    create(model: AdminModel): Promise<AdminModel>;
-    update(id: number, model: AdminModel): Promise<AdminModel>;
+    create(model: CreateAdminDto, password: string): Promise<Admin>;
+    update(id: number, model: UpdateAdminDto): Promise<Admin>;
     delete(id: number): Promise<void>;
-    findOne(id: number): Promise<AdminModel>;
-    find(): Promise<AdminModel[]>;
+    findOne(id: number): Promise<Admin>;
+    find(): Promise<Admin[]>;
 }

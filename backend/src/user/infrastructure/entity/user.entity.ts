@@ -35,16 +35,19 @@ export class User implements FullUserModel {
     birthday: Date;
 
     @Column({ type: 'varchar', nullable: true })
-    contactNumber: string;
+    phone: string;
 
-    @Column({ type: 'varchar', nullable: true })
+    @Column({ type: 'varchar', nullable: false })
     email: string;
 
-    @Column({ type: 'varchar', nullable: true })
+    @Column({ type: 'varchar', nullable: false })
     role: Role;
 
     @Column({ nullable: true })
     lastLogin?: Date;
+
+    @Column('varchar', { nullable: true })
+    hashRefreshToken: string;
 
     @CreateDateColumn()
     createdAt: Date;

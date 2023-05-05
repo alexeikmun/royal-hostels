@@ -46,16 +46,25 @@ export class UserRepository implements UserRepositoryInterface {
         });
     }
 
+    async findOneByEmail(email: string): Promise<User> {
+        return await this.repository.findOne({
+            where: {
+                email,
+            },
+        });
+    }
+
     async find(): Promise<User[]> {
         return await this.repository.find();
     }
 
-    async updateLastLogin(id: number): Promise<void> {
-        await this.userEntityRepository.update(
-          {
-            username: username,
-          },
-          { last_login: () => 'CURRENT_TIMESTAMP' },
-        );
-      }
+    async updateLastLogin(email: string): Promise<void> {
+        const user = await this.repository.findOneBy({ email });
+        user.lastLogin = new Date();
+    }
+
+    async updateRefreshToken(email: string, refreshToken): Promise<void> {
+        const user = await this.repository.findOneBy({ email });
+        user.hashRefreshToken = refreshToken;
+    }
 }

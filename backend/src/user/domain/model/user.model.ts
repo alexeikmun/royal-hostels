@@ -8,10 +8,11 @@ export class UserModel {
     city: string;
     zipcode: string;
     birthday: Date;
-    contactNumber: string;
+    phone: string;
     email: string;
     role: Role;
     lastLogin?: Date;
+    hashRefreshToken?: string;
     createdAt: Date;
     updatedAt: Date;
 }

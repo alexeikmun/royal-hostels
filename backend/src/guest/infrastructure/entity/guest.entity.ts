@@ -1,13 +1,16 @@
 import { GuestModel } from 'src/guest/domain/model/guest.model';
+import { User } from 'src/user/infrastructure/entity/user.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
 
 @Entity()
-export class Guest implements GuestModel {
+export class Guest {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -16,4 +19,8 @@ export class Guest implements GuestModel {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToOne(() => User, { cascade: true })
+    @JoinColumn({ name: 'id' })
+    user: User;
 }

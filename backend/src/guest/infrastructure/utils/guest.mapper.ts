@@ -3,17 +3,21 @@ import { UpdateGuestDto } from 'src/guest/infrastructure/dto/update-guest.dto';
 import { GuestModel } from 'src/guest/domain/model/guest.model';
 import { Guest } from '../entity/guest.entity';
 import { Injectable } from '@nestjs/common';
+import { User } from 'src/user/infrastructure/entity/user.entity';
 
 @Injectable()
 export class GuestMapper {
     toEntity(guest: CreateGuestDto | UpdateGuestDto): Guest {
         const guestEntity = new Guest();
-        guestEntity.name = guest.name;
-        guestEntity.age = guest.age;
-        guestEntity.email = guest.email;
-        guestEntity.phone = guest.phone;
-        guestEntity.city = guest.city;
-        guestEntity.address = guest.address;
+        guestEntity.user = new User();
+        guestEntity.user.name = guest.name;
+        guestEntity.user.phone = guest.phone;
+        guestEntity.user.city = guest.city;
+        guestEntity.user.address = guest.address;
+        guestEntity.user.email = guest.email;
+        guestEntity.user.country = guest.country;
+        guestEntity.user.zipcode = guest.zipcode;
+        guestEntity.user.role = guest.role;
         return guestEntity;
     }
 
@@ -21,24 +25,27 @@ export class GuestMapper {
         guestEntity: Guest,
         guestDto: CreateGuestDto | UpdateGuestDto,
     ): Guest {
-        guestEntity.name = guestDto.name;
-        guestEntity.age = guestDto.age;
-        guestEntity.email = guestDto.email;
-        guestEntity.phone = guestDto.phone;
-        guestEntity.city = guestDto.city;
-        guestEntity.address = guestDto.address;
+        guestEntity.user.name = guestDto.name;
+        guestEntity.user.phone = guestDto.phone;
+        guestEntity.user.city = guestDto.city;
+        guestEntity.user.address = guestDto.address;
+        guestEntity.user.email = guestDto.email;
+        guestEntity.user.country = guestDto.country;
+        guestEntity.user.zipcode = guestDto.zipcode;
+        guestEntity.user.role = guestDto.role;
         return guestEntity;
     }
 
     toDomain(guest: Guest): GuestModel {
         const guestDomain = new GuestModel();
-        guestDomain.id = guest.id;
-        guestDomain.name = guest.name;
-        guestDomain.age = guest.age;
-        guestDomain.email = guest.email;
-        guestDomain.phone = guest.phone;
-        guestDomain.city = guest.city;
-        guestDomain.address = guest.address;
+        guestDomain.name = guest.user.name;
+        guestDomain.phone = guest.user.phone;
+        guestDomain.city = guest.user.city;
+        guestDomain.address = guest.user.address;
+        guestDomain.email = guest.user.email;
+        guestDomain.country = guest.user.country;
+        guestDomain.zipcode = guest.user.zipcode;
+        guestDomain.role = guest.user.role;
         return guestDomain;
     }
 }

@@ -15,6 +15,7 @@ import { UserMapperModule } from './user.mapper.module';
 import { UserMapper } from '../utils/user.mapper';
 
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
+import { AuthUsecasesModule } from 'src/auth/infrastructure/module/auth.usecase.module';
 
 @Module({
     imports: [UserRepositoryModule, UserMapperModule],
