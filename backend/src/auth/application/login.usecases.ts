@@ -14,8 +14,8 @@ export class LoginUseCases {
         private readonly bcryptService: IBcryptService,
     ) {}
 
-    async getCookieWithJwtToken(username: string) {
-        const payload: IJwtServicePayload = { username: username };
+    async getCookieWithJwtToken(email: string) {
+        const payload: IJwtServicePayload = { email };
         const secret = this.config.get<string>('JWT_SECRET');
         const expiresIn = this.config.get<number>('JWT_EXPIRATION_TIME') + 's';
         const token = this.jwtTokenService.createToken(
@@ -28,8 +28,8 @@ export class LoginUseCases {
         )}`;
     }
 
-    async getCookieWithJwtRefreshToken(username: string) {
-        const payload: IJwtServicePayload = { username: username };
+    async getCookieWithJwtRefreshToken(email: string) {
+        const payload: IJwtServicePayload = { email };
         const secret = this.config.get<string>('JWT_REFRESH_TOKEN_SECRET');
         const expiresIn =
             this.config.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME') + 's';
@@ -38,51 +38,51 @@ export class LoginUseCases {
             secret,
             expiresIn,
         );
-        await this.setCurrentRefreshToken(token, username);
+        await this.setCurrentRefreshToken(email, token);
         const cookie = `Refresh=${token}; HttpOnly; Path=/; Max-Age=${this.config.get<string>(
             'JWT_REFRESH_TOKEN_EXPIRATION_TIME',
         )}`;
         return cookie;
     }
 
-    async validateUserForLocalStragtegy(id: number, pass: string) {
-        const user = await this.userRepository.findOne(id);
+    async validateUserForLocalStragtegy(email: string, pass: string) {
+        const user = await this.userRepository.findOneByEmail(email);
         if (!user) {
             return null;
         }
         const match = await this.bcryptService.compare(pass, user.password);
         if (user && match) {
-            await this.updateLoginTime(user.username);
-            const { password, ...result } = user;
+            await this.updateLoginTime(user.email);
+            const { password: _, ...result } = user;
             return result;
         }
         return null;
     }
 
-    async validateUserForJWTStragtegy(username: string) {
-        const user = await this.userRepository.getUserByUsername(username);
+    async validateUserForJWTStragtegy(email: string) {
+        const user = await this.userRepository.findOneByEmail(email);
         if (!user) {
             return null;
         }
         return user;
     }
 
-    async updateLoginTime(username: string) {
-        await this.userRepository.updateLastLogin(username);
+    async updateLoginTime(email: string) {
+        await this.userRepository.updateLastLogin(email);
     }
 
-    async setCurrentRefreshToken(refreshToken: string, username: string) {
+    async setCurrentRefreshToken(email: string, refreshToken: string) {
         const currentHashedRefreshToken = await this.bcryptService.hash(
             refreshToken,
         );
         await this.userRepository.updateRefreshToken(
-            username,
+            email,
             currentHashedRefreshToken,
         );
     }
 
-    async getUserIfRefreshTokenMatches(refreshToken: string, username: string) {
-        const user = await this.userRepository.getUserByUsername(username);
+    async getUserIfRefreshTokenMatches(id: number, refreshToken: string) {
+        const user = await this.userRepository.findOne(id);
         if (!user) {
             return null;
         }

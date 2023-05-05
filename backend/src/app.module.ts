@@ -22,14 +22,29 @@ import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.
 import { UserController } from './user/infrastructure/controller/user.controller';
 import { UserUsecaseModule } from './user/infrastructure/module/user.usecase.module';
 import { ExceptionsModule } from '@shared/infrastructure/module/exceptions.module';
+import { AuthUsecasesModule } from './auth/infrastructure/module/auth.usecase.module';
+import { BcryptModule } from './auth/infrastructure/module/bcrypt.module';
+import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from './auth/infrastructure/strategies/local.strategy';
+import { JwtStrategy } from './auth/infrastructure/strategies/jwt.strategy';
+import { JwtRefreshTokenStrategy } from './auth/infrastructure/strategies/jwtRefresh.strategy';
+import { AuthController } from './auth/infrastructure/controller/auth.controller';
+import { PassportModule } from '@nestjs/passport';
+import { JwtServiceModule } from './auth/infrastructure/module/jwt.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
 @Module({
     imports: [
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
+        PassportModule.register({ defaultStrategy: 'jwt' }),
+        JwtModule.register({
+            secret: process.env.secret,
+        }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
         ExceptionsModule,
+        JwtServiceModule,
+        BcryptModule,
         PropertyUsecaseModule.register(),
         GuestUsecaseModule.register(),
         AmenityUsecaseModule.register(),
@@ -38,6 +53,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         AdminUsecaseModule.register(),
         UserUsecaseModule.register(),
         AdminUsecaseModule.register(),
+        AuthUsecasesModule.register(),
     ],
     controllers: [
         GuestController,
@@ -49,8 +65,8 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingStatusController,
         AdminController,
         UserController,
-        AdminController,
+        AuthController,
     ],
-    providers: [],
+    providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })
 export class AppModule {}
