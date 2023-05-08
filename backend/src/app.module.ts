@@ -9,6 +9,7 @@ import { RoomController } from './room/infrastructure/controller/room.controller
 import { BookingController } from './booking/infrastructure/controller/booking.controller';
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
+import { CommentController } from './comment/infraestructure/controller/comment.controller';
 import { ProfileController } from './profile/infrastructure/controller/profile.controller';
 
 import { getEnvPath } from './shared/config/helpers';
@@ -19,8 +20,9 @@ import { GuestUsecaseModule } from './guest/infrastructure/module/guest.usecase.
 import { AmenityUsecaseModule } from './amenity/infrastructure/module/amenity.usecase.module';
 import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModule';
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
-import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
 import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
+import { CommentUsecaseModule } from './comment/infraestructure/module/comment.usecase.module';
+import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -33,8 +35,9 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         AmenityUsecaseModule.register(),
         RoomUseCaseModule.register(),
         BookingUsecaseModule.register(),
-        AdminUsecaseModule.register(),
         ProfileUsecaseModule.register(),
+        AdminUsecaseModule.register(),
+        CommentUsecaseModule.register(),
     ],
     controllers: [
         GuestController,
@@ -46,6 +49,8 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingStatusController,
         AdminController,
         ProfileController,
+        AdminController,
+        CommentController,
     ],
     providers: [],
 })
