@@ -83,7 +83,7 @@ const showSignupModal = ref(false);
           <h2 class="text-[#502A18] scale-110 transition-all">Login</h2>
         </template>
         <template v-slot:body>
-          <LoginForm on-submit="this.console.log($event.target.name)"> </LoginForm>
+          <LoginForm />
         </template>
       </Modal>
       <button

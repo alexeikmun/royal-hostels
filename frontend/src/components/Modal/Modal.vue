@@ -1,9 +1,11 @@
 <template>
   <div class="modal" :class="{ active: showModal }">
     <div class="modal-container">
+      <div>
+        <button class="modal-close " @click="closeModal">×</button>
+      </div>
       <div class="modal-header">
         <slot name="header"></slot>
-        <button class="modal-close " @click="closeModal">×</button>
       </div>
       <div class="modal-body">
         <slot name="body"></slot>
@@ -67,6 +69,8 @@ export default {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
+  width: 25%;
+  height: max-content;
   max-width: 500px;
   max-height: 500px;
   overflow-y: auto;
@@ -81,6 +85,8 @@ export default {
 }
 
 .modal-header h2 {
+  width: 100%;
+  text-align: center;
   margin: 0;
 }
 
