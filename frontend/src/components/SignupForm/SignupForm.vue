@@ -1,64 +1,76 @@
 
 <template>
   <form class="p-6" @submit.prevent="handleSubmit">
-    <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="name">
-        First Name
-      </label>
-      <input
-          v-model="firstName"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="firstName"
-          type="text"
-          placeholder="First Name"
-          required
-      >
+
+    <div>
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 p-1">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="name">
+            First Name
+          </label>
+          <input
+              v-model="firstName"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="firstName"
+              type="text"
+              placeholder="First Name"
+              required
+          >
+        </div>
+        <div class="w-full md:w-1/2 p-1">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="name">
+            Last Name
+          </label>
+          <input
+              v-model="lastName"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="lastName"
+              type="text"
+              placeholder="Last Name"
+              required
+          >
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 p-1">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="address">
+            Address
+          </label>
+          <input
+              v-model="address"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="address"
+              type="text"
+              placeholder="Address"
+              required
+          >
+        </div>
+        <div class="w-full md:w-1/2 p-1">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="phone">
+            Phone Number
+          </label>
+          <input
+              v-model="phone"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="phone"
+              type="tel"
+              placeholder="Phone Number"
+              required
+          >
+        </div>
+      </div>
     </div>
 
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="name">
-        Last Name
-      </label>
-      <input
-          v-model="lastName"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="lastName"
-          type="text"
-          placeholder="Last Name"
-          required
-      >
+
     </div>
 
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="address">
-        Address
-      </label>
-      <input
-          v-model="address"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="address"
-          type="text"
-          placeholder="Address"
-          required
-      >
-    </div>
-
-    <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="phone">
-        Phone Number
-      </label>
-      <input
-          v-model="address"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phone"
-          type="tel"
-          placeholder="Phone Number"
-          required
-      >
-    </div>
-
-    <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="email">
+      <label class="block text-gray-400 text-xs font-medium  mb-2" for="email">
         Email
       </label>
       <input
@@ -71,7 +83,7 @@
       >
     </div>
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="password">
+      <label class="block text-gray-400 text-xs font-medium  mb-2" for="password">
         Password
       </label>
       <input
@@ -85,7 +97,7 @@
     </div>
 
     <div class="mb-4">
-      <label class="block text-gray-700 font-bold mb-2" for="confirmPassword">
+      <label class="block text-gray-400 text-xs font-medium  mb-2" for="confirmPassword">
         Confirm Password
       </label>
       <input

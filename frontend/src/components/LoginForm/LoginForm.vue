@@ -1,7 +1,7 @@
 <template>
       <form class="p-6" @submit.prevent="handleSubmit">
         <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2" for="email">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="email">
             Email
           </label>
           <input
@@ -14,7 +14,7 @@
           >
         </div>
         <div class="mb-6">
-          <label class="block text-gray-700 font-bold mb-2" for="password">
+          <label class="block text-gray-400 text-xs font-medium  mb-2" for="password">
             Password
           </label>
           <input

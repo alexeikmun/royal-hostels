@@ -1,108 +1,54 @@
 <template>
-  <div class="modal" :class="{ active: showModal }">
-    <div class="modal-container">
-      <div>
-        <button class="modal-close " @click="closeModal">×</button>
-      </div>
-      <div class="modal-header">
-        <slot name="header"></slot>
-      </div>
-      <div class="modal-body">
-        <slot name="body"></slot>
-      </div>
-      <div class="modal-footer">
-        <slot name="footer"></slot>
+  <transition name="modal">
+    <div v-if="show" class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50" @click.self="$emit('close')">
+      <div class="relative bg-white rounded-lg shadow-lg p-4 max-w-4xl  overflow-auto w-1/2 h-9/10" @click.stop>
+        <div class="inline-flex flex-row-reverse w-full">
+          <button @click="$emit('close')">&times;</button>
+        </div>
+        <div class="flex justify-between items-center p-2 border-b border-gray-300 text-lg font-bold">
+          <slot name="header"></slot>
+        </div>
+        <div class="p-4 max-h-96 overflow-y-auto">
+          <slot name="body"></slot>
+        </div>
+        <div class="flex justify-end items-center w-full p-2 border-t border-gray-300">
+          <slot name="footer">
+          </slot>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   props: {
     show: {
       type: Boolean,
-      default: false
-    }
+      required: true,
+    },
   },
-  data() {
-    return {
-      showModal: false
+  setup(props, { emit }) {
+    // Close the modal when the Escape key is pressed
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        emit('close');
+      }
     };
+
+    // Add a listener for the Escape key
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Remove the listener when the component is unmounted
+    const beforeUnmount = () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+
+    return { beforeUnmount };
   },
-  mounted() {
-    this.showModal = this.show;
-  },
-  watch: {
-    show(newValue) {
-      this.showModal = newValue;
-    }
-  },
-  methods: {
-    closeModal() {
-      this.showModal = false;
-      this.$emit('close');
-    }
-  }
 };
 </script>
 
-<style>
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 
-.modal.active {
-  display: flex;
-}
-
-.modal-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  width: 25%;
-  height: max-content;
-  max-width: 500px;
-  max-height: 500px;
-  overflow-y: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.modal-header h2 {
-  width: 100%;
-  text-align: center;
-  margin: 0;
-}
-
-.modal-close {
-  font-size: 20px;
-  background-color: White;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.modal-body {
-  margin-bottom: 20px;
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-</style>
