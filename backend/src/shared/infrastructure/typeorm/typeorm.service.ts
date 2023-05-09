@@ -17,7 +17,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             password: this.config.get<string>('DATABASE_PASSWORD'),
             autoLoadEntities: true,
             logger: 'file',
-            synchronize: true, // never use TRUE in production!
+            synchronize: false, // never use TRUE in production!
         };
     }
 }
