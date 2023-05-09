@@ -40,9 +40,7 @@ export class UserController {
 
     @Post()
     @ApiCreatedResponse({ type: UserModel })
-    async create(
-        @Body() createUserDto: CreateUserDto,
-    ): Promise<UserModel> {
+    async create(@Body() createUserDto: CreateUserDto): Promise<UserModel> {
         return await this.createUserUseCase
             .getInstance()
             .execute(createUserDto);

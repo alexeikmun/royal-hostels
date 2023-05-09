@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     async validate(payload: any) {
         const user = this.loginUsecaseProxy
             .getInstance()
-            .validateUserForJWTStragtegy(payload.username);
+            .validateUserForJWTStragtegy(payload.email);
         if (!user) {
             this.exceptionService.UnauthorizedException({
                 message: 'User not found',

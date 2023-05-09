@@ -6,25 +6,28 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 import { LoginUseCases } from 'src/auth/application';
 import { ExceptionsService } from '@shared/infrastructure/service/exceptions.service';
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class LocalStrategy extends PassportStrategy(Strategy, 'locals') {
     constructor(
         @Inject(AuthUsecasesModule.LOGIN_USECASES_PROXY)
         private readonly loginUsecaseProxy: UseCaseProxy<LoginUseCases>,
         private readonly exceptionService: ExceptionsService,
     ) {
-        super();
+        super({ usernameField: 'email' });
     }
 
-    async validate(username: string, password: string) {
-        if (!username || !password) {
+    async validate(email: string, password: string) {
+        console.log('PASOOOO POR AQUIII');
+
+        if (!email || !password) {
             this.exceptionService.UnauthorizedException();
         }
+        console.log('PASOOOO POR AQUIII');
         const user = await this.loginUsecaseProxy
             .getInstance()
-            .validateUserForLocalStragtegy(username, password);
+            .validateUserForLocalStragtegy(email, password);
         if (!user) {
             this.exceptionService.UnauthorizedException({
-                message: 'Invalid username or password.',
+                message: 'Invalid email or password.',
             });
         }
         return user;

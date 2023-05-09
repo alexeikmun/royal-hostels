@@ -37,11 +37,16 @@ export class AuthUsecasesModule {
             module: AuthUsecasesModule,
             providers: [
                 {
-                    inject: [JwtTokenService, UserRepository, BcryptService],
+                    inject: [
+                        ConfigService,
+                        JwtTokenService,
+                        UserRepository,
+                        BcryptService,
+                    ],
                     provide: AuthUsecasesModule.LOGIN_USECASES_PROXY,
                     useFactory: (
-                        jwtTokenService: JwtTokenService,
                         config: ConfigService,
+                        jwtTokenService: JwtTokenService,
                         userRepo: UserRepository,
                         bcryptService: BcryptService,
                     ) =>

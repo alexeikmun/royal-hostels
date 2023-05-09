@@ -37,14 +37,12 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 @Module({
     imports: [
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
-        PassportModule.register({ defaultStrategy: 'jwt' }),
+        PassportModule,
         JwtModule.register({
             secret: process.env.secret,
         }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
         ExceptionsModule,
-        JwtServiceModule,
-        BcryptModule,
         PropertyUsecaseModule.register(),
         GuestUsecaseModule.register(),
         AmenityUsecaseModule.register(),
@@ -54,6 +52,8 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         UserUsecaseModule.register(),
         AdminUsecaseModule.register(),
         AuthUsecasesModule.register(),
+        JwtServiceModule,
+        BcryptModule,
     ],
     controllers: [
         GuestController,

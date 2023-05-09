@@ -26,7 +26,7 @@ import {
 } from 'src/auth/application';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import JwtRefreshGuard from '../guard/jwtRefresh.guard';
-import { LoginGuard } from '../guard/login.guard';
+import { LocalGuard } from '../guard/login.guard';
 import { AuthUsecasesModule } from '../module/auth.usecase.module';
 import { AuthLoginDto } from '../dto/auth.dto';
 
@@ -48,8 +48,10 @@ export class AuthController {
     ) {}
 
     @Post('login')
-    @UseGuards(LoginGuard)
     @ApiBearerAuth()
+    // LocalGuard is not working properly
+    // TODO: conect LocalGuard with LocalStrategy
+    @UseGuards(LocalGuard)
     @ApiBody({ type: AuthLoginDto })
     @ApiOperation({ description: 'login' })
     async login(@Body() auth: AuthLoginDto, @Request() request: any) {
