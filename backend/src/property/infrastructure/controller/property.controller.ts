@@ -7,6 +7,7 @@ import {
     Param,
     Post,
     Put,
+    Query,
 } from '@nestjs/common';
 import { CreatePropertyDto, UpdatePropertyDto } from '../dto/property.dto';
 import {
@@ -21,6 +22,10 @@ import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import { PropertyUsecaseModule } from '../module/property.usecase.module';
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
+import {
+    SearchProperties,
+    PayloadInterface,
+} from 'src/property/application/search-properties-usecase';
 
 @Controller('property')
 @ApiTags('Property')
@@ -30,6 +35,8 @@ export class PropertyController {
         private readonly deletePropertyUseCase: UseCaseProxy<DeletePropertyUseCase>,
         @Inject(PropertyUsecaseModule.GET_PROPERTIES_USECASES_PROXY)
         private readonly findPropertiesUseCase: UseCaseProxy<FindPropertiesUseCase>,
+        @Inject(PropertyUsecaseModule.GET_PROPERTY_USECASES_PROXY)
+        private readonly findPropertiesWithFilterUseCase: UseCaseProxy<SearchProperties>,
         @Inject(PropertyUsecaseModule.GET_PROPERTY_USECASES_PROXY)
         private readonly findOnePropertyUseCase: UseCaseProxy<FindOnePropertyUseCase>,
         @Inject(PropertyUsecaseModule.POST_PROPERTY_USECASES_PROXY)
@@ -71,5 +78,33 @@ export class PropertyController {
     @Get()
     async find() {
         return await this.findPropertiesUseCase.getInstance().execute();
+    }
+
+    @Get('/search')
+    async search(
+        @Query('place') place: string,
+        @Query('startDate') startDate: string,
+        @Query('endDate') endDate: string,
+        @Query('adults') adults: number,
+    ) {
+        const payload: PayloadInterface = {
+            place,
+            dates: {
+                start: new Date(startDate),
+                end: new Date(endDate),
+            },
+            adults,
+        };
+        return await this.findPropertiesWithFilterUseCase
+            .getInstance()
+            .execute(payload);
+    }
+
+    @Get('/filter')
+    async filter(@Query('filter1') filter1: string) {
+        const payload = {};
+        return await this.findPropertiesWithFilterUseCase
+            .getInstance()
+            .execute(payload);
     }
 }

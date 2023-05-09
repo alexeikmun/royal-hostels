@@ -52,4 +52,10 @@ export class PropertyRepository implements PropertyRepositoryInterface {
             relations: ['type', 'amenities'],
         });
     }
+    async findWithFilter(where): Promise<Property[]> {
+        return await this.propertyRepository.find({
+            relations: ['type', 'amenities'],
+            where,
+        });
+    }
 }
