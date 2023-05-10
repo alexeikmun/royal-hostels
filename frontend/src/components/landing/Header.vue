@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 import { defineProps, ref } from 'vue'
-import Modal from "../Modal/Modal.vue";
-import LoginForm from "../LoginForm/LoginForm.vue";
-import SignupForm from "../SignupForm/SignupForm.vue";
+import navData from '../../data/navData';
 
 const props = defineProps<{
   slim: boolean;
 }>();
+
 const open = ref(false)
-const isLoggedIn = ref(false)
 const toggle = (shouldOpen: boolean) => {
     open.value = shouldOpen
 }
@@ -28,7 +26,7 @@ const showSignupModal = ref(false);
   plugins: [require('@tailwindcss/forms')]
 -->
 
-<header aria-label="Site Header" class="shadow-md h-[80px]">
+<header aria-label="Site Header" class="sticky top-0 shadow-md h-[80px]">
   <div
     class="mx-auto flex max-w-screen-xl items-center justify-between px-4 h-full"
   >
@@ -60,7 +58,7 @@ const showSignupModal = ref(false);
 
       <form class="mb-0 hidden lg:flex">
         <div class="relative">
-          <img src="assets/logo.png" class="w-[200px]">
+          <img src="/./assets/logo.png" class="w-[200px]">
         </div>
       </form>
     </div>
@@ -69,9 +67,7 @@ const showSignupModal = ref(false);
       aria-label="Site Nav"
       class="hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1"
     >
-      <a class="text-[#502A18] scale-110 transition-all" href="">Hostels</a>
-      <a class="text-[#502A18] scale-110 transition-all" href="">About</a>
-      <a class="text-[#502A18] scale-110 transition-all" href="">Contact</a>
+      <a v-for="nav in navData" class="text-[#502A18] scale-110 transition-all" :href="nav.path" :key="nav.name">{{nav.name}}</a>
     </nav>
 
     <div class="hidden items-center gap-4 lg:flex">
