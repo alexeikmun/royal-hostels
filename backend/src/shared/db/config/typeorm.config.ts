@@ -18,7 +18,7 @@ ConfigModule.forRoot({
 });
 
 const options = {
-    type: 'mysql',
+    type: 'postgres',
     host: process.env.DATABASE_HOST || 'localhost',
     port: parseInt(String(process.env.DATABASE_PORT), 10) || 3306,
     username: process.env.DATABASE_USERNAME,
