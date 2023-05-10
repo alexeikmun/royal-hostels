@@ -80,7 +80,7 @@ const showSignupModal = ref(false);
       </button>
       <Modal :show="showModal" @close="showModal = false">
         <template v-slot:header>
-          <h2 class="text-[#502A18] scale-110 transition-all">Login</h2>
+          <h2 class="text-[#502A18] scale-110 transition-all">Log In</h2>
         </template>
         <template v-slot:body>
           <LoginForm />
@@ -95,7 +95,7 @@ const showSignupModal = ref(false);
 
       <Modal :show="showSignupModal" @close="showSignupModal = false">
         <template v-slot:header>
-          <h2 class="text-[#502A18] scale-110 transition-all">SignUp</h2>
+          <h2 class="text-[#502A18] scale-110 transition-all">Sign Up</h2>
         </template>
         <template v-slot:body>
           <SignupForm on-submit="this.console.log($event.target.name)"> </SignupForm>

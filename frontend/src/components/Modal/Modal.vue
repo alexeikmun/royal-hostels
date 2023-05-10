@@ -8,7 +8,7 @@
         <div class="flex justify-between items-center p-2 border-b border-gray-300 text-lg font-bold">
           <slot name="header"></slot>
         </div>
-        <div class="p-4 max-h-96 overflow-y-auto">
+        <div class="p-4 max-h-96 overflow-y-auto scrollbar-hide">
           <slot name="body"></slot>
         </div>
         <div class="flex justify-end items-center w-full p-2 border-t border-gray-300">

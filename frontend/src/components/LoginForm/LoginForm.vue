@@ -6,10 +6,10 @@
           </label>
           <input
               v-model="email"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="example@exsmple.com"
               required
           >
         </div>
@@ -19,10 +19,10 @@
           </label>
           <input
               v-model="password"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="***********"
               required
           >
         </div>

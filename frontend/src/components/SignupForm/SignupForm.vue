@@ -10,10 +10,10 @@
           </label>
           <input
               v-model="firstName"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="firstName"
               type="text"
-              placeholder="First Name"
+              placeholder="Dory"
               required
           >
         </div>
@@ -23,10 +23,10 @@
           </label>
           <input
               v-model="lastName"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="lastName"
               type="text"
-              placeholder="Last Name"
+              placeholder="DeGenerees"
               required
           >
         </div>
@@ -42,10 +42,10 @@
           </label>
           <input
               v-model="address"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="address"
               type="text"
-              placeholder="Address"
+              placeholder="p sherman wallaby 42 sidney"
               required
           >
         </div>
@@ -55,10 +55,10 @@
           </label>
           <input
               v-model="phone"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
               id="phone"
               type="tel"
-              placeholder="Phone Number"
+              placeholder="+57 310000000"
               required
           >
         </div>
@@ -75,10 +75,10 @@
       </label>
       <input
           v-model="email"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
           id="email"
           type="email"
-          placeholder="Enter your email"
+          placeholder="example@example.com"
           required
       >
     </div>
@@ -88,10 +88,10 @@
       </label>
       <input
           v-model="password"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
           id="password"
           type="password"
-          placeholder="Enter your password"
+          placeholder="Use a high security password"
           required
       >
     </div>
@@ -102,10 +102,10 @@
       </label>
       <input
           v-model="confirmPassword"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
           id="confirmPassword"
           type="password"
-          placeholder="Re - Enter your password"
+          placeholder="*******"
           required
       >
     </div>
