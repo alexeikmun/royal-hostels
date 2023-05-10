@@ -12,6 +12,7 @@ export class RoomMapper {
         roomEntity.description = room.description;
         roomEntity.name = room.name;
         roomEntity.maxGuests = room.maxGuests;
+        roomEntity.amenities = room.amenities;
         return roomEntity;
     }
 
@@ -23,6 +24,7 @@ export class RoomMapper {
         roomEntity.description = roomDto.description;
         roomEntity.name = roomDto.name;
         roomEntity.maxGuests = roomDto.maxGuests;
+        roomEntity.amenities = roomDto.amenities;
         return roomEntity;
     }
 
@@ -32,6 +34,7 @@ export class RoomMapper {
         roomDomain.description = room.description;
         roomDomain.name = room.name;
         roomDomain.maxGuests = room.maxGuests;
+        roomDomain.amenities = room.amenities;
         return roomDomain;
     }
 }

@@ -33,7 +33,7 @@ export class AdminController {
         @Inject(AdminUsecaseModule.DELETE_ADMIN_USECASES_PROXY)
         private readonly deleteAdminUseCase: UseCaseProxy<DeleteAdminUseCase>,
         @Inject(AdminUsecaseModule.GET_ADMINS_USECASES_PROXY)
-        private readonly findAmenitiesUseCase: UseCaseProxy<FindAdminsUseCase>,
+        private readonly findAdminsUseCase: UseCaseProxy<FindAdminsUseCase>,
         @Inject(AdminUsecaseModule.GET_ADMIN_USECASES_PROXY)
         private readonly findOneAdminUseCase: UseCaseProxy<FindOneAdminUseCase>,
         @Inject(AdminUsecaseModule.POST_ADMIN_USECASES_PROXY)
@@ -72,6 +72,6 @@ export class AdminController {
 
     @Get()
     async find() {
-        return await this.findAmenitiesUseCase.getInstance().execute();
+        return await this.findAdminsUseCase.getInstance().execute();
     }
 }

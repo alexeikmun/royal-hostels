@@ -1,16 +1,18 @@
 <script lang="ts" setup>
 import { defineProps, ref } from 'vue'
-import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import navData from '../../data/navData';
 
 const props = defineProps<{
   slim: boolean;
 }>();
+
 const open = ref(false)
-const isLoggedIn = ref(false)
 const toggle = (shouldOpen: boolean) => {
     open.value = shouldOpen
 }
+const showModal = ref(false);
+const showSignupModal = ref(false);
+
 
 </script>
 
@@ -69,19 +71,32 @@ const toggle = (shouldOpen: boolean) => {
     </nav>
 
     <div class="hidden items-center gap-4 lg:flex">
-      <a
-        href="#"
-        class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
-      >
-        Log in
-      </a>
-
-      <a
-        href="#"
+      <button class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600" @click="showModal = true">
+        Login
+      </button>
+      <Modal :show="showModal" @close="showModal = false">
+        <template v-slot:header>
+          <h2 class="text-[#502A18] scale-110 transition-all">Log In</h2>
+        </template>
+        <template v-slot:body>
+          <LoginForm />
+        </template>
+      </Modal>
+      <button
+          @click="showSignupModal = true"
         class="rounded-lg bg-orange-600 hover:bg-orange-400 px-5 py-2 text-sm font-medium text-white transition-all"
       >
         Sign up
-      </a>
+      </button>
+
+      <Modal :show="showSignupModal" @close="showSignupModal = false">
+        <template v-slot:header>
+          <h2 class="text-[#502A18] scale-110 transition-all">Sign Up</h2>
+        </template>
+        <template v-slot:body>
+          <SignupForm on-submit="this.console.log($event.target.name)"> </SignupForm>
+        </template>
+      </Modal>
     </div>
   </div>
 

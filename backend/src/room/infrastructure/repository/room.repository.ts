@@ -35,8 +35,24 @@ export class RoomRepository implements RoomRepositoryInterface {
     async delete(id: number): Promise<void> {
         await this.roomRepository.delete(id);
     }
-
+    /*
     async findOne(id: number): Promise<Room> {
         return await this.roomRepository.findOneBy({ id });
+    }
+
+ */
+
+    async findOne(id: number): Promise<Room> {
+        return await this.roomRepository.findOne({
+            where: {
+                id,
+            },
+            relations: ['amenities'],
+        });
+    }
+    async find(): Promise<Room[]> {
+        return await this.roomRepository.find({
+            relations: ['amenities'],
+        });
     }
 }
