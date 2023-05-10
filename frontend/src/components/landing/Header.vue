@@ -14,11 +14,6 @@ const props = defineProps<{
   slim: boolean;
   isLoggedIn: boolean;
 }>();
-// const open = ref(false)
-// const isLoggedIn = ref(false)
-// const toggle = (shouldOpen: boolean) => {
-//     open.value = shouldOpen
-// }
 
 const showDropdown = ref(false);
 
@@ -35,15 +30,6 @@ const showSignupModal = ref(false);
 </script>
 
 <template>
-  <!--
-  This component uses @tailwindcss/forms
-
-  yarn add @tailwindcss/forms
-  npm install @tailwindcss/forms
-
-  plugins: [require('@tailwindcss/forms')]
--->
-
   <header aria-label="Site Header" class="shadow-md h-[80px]">
     <div
       class="mx-auto flex max-w-screen-xl items-center justify-between px-4 h-full"
@@ -135,7 +121,7 @@ const showSignupModal = ref(false);
                     role="menuitem"
                   >
                     <ArrowLeftOnRectangleIcon class="h-4 w-4 text-orange-800" />
-                    Log out
+                    Logout
                   </button>
                 </form>
               </div>
@@ -150,9 +136,13 @@ const showSignupModal = ref(false);
           >
             Login
           </button>
-          <Modal :show="showModal" @close="showModal = false">
+          <Modal
+            :show="showModal"
+            @close="showModal = false"
+            customClass="w-[27%]"
+          >
             <template v-slot:header>
-              <h2 class="text-[#502A18] scale-110 transition-all">Log In</h2>
+              <h2 class="text-[#502A18] scale-110 transition-all">Login</h2>
             </template>
             <template v-slot:body>
               <LoginForm />
@@ -165,7 +155,11 @@ const showSignupModal = ref(false);
             Sign up
           </button>
 
-          <Modal :show="showSignupModal" @close="showSignupModal = false">
+          <Modal
+            :show="showSignupModal"
+            @close="showSignupModal = false"
+            customClass="w-[45%]"
+          >
             <template v-slot:header>
               <h2 class="text-[#502A18] scale-110 transition-all">Sign Up</h2>
             </template>
