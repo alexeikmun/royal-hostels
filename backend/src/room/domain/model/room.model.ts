@@ -7,4 +7,5 @@ export class RoomModel {
     name: string;
     maxGuests: number;
     amenities: AmenityModel[];
+    propertyId: number;
 }

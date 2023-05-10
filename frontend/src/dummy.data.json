@@ -1,8 +1,78 @@
 {
-    "places": [
-        "Bogotá - Colombia",
-        "Cali - Colombia",
-        "Medellín - Colombia",
-        "Quindío - Colombia"
-    ]
+  "properties": [
+    {
+      "id": 1,
+      "name": "Hostal del Mar",
+      "city": "Barcelona",
+      "rate": 2.32,
+      "image": "https://img.freepik.com/free-photo/beautiful-luxury-outdoor-swimming-pool-hotel-resort_74190-7433.jpg?w=2000",
+      "rooms": {
+        "number": 2,
+        "ameneties": ["Terraza con vistas al mar", "Jacuzzi"]
+      },
+      "ameneties": ["Free parking", "Free WiFi", "Breakfast Included"],
+      "bathroms": 3,
+      "price": "240.000"
+    },
+    {
+      "id": 2,
+      "name": "Hotel El Descanso",
+      "city": "Madrid",
+      "rate": 4.75,
+      "image": "https://www.nobbot.com/wp-content/uploads/2016/08/hoteles-w-920x515.jpg",
+      "rooms": {
+        "number": 5,
+        "ameneties": ["Spa", "Gimnasio"]
+      },
+      "ameneties": ["Parking", "Free WiFi", "Breakfast Included"],
+      "bathroms": 6,
+      "price": "450.000"
+    },
+    {
+      "id": 3,
+      "name": "Hostería El Paraíso",
+      "city": "Cali",
+      "rate": 4.0,
+      "image": "https://media-cdn.tripadvisor.com/media/photo-s/25/fb/8c/46/hotel-exterior.jpg",
+      "rooms": {
+        "number": 3,
+        "ameneties": ["Jardín", "Zona de barbacoa"]
+      },
+      "ameneties": ["Estacionamiento", "Free WiFi", "Breakfast Included"],
+      "bathroms": 4,
+      "price": "180.000"
+    },
+    {
+      "id": 4,
+      "name": "Hotel San Rafael",
+      "city": "Cartagena",
+      "rate": 4.5,
+      "image": "https://cdn.forbes.co/2020/02/sofitel-legend-santa-clara-outdoor-pool.jpg",
+      "rooms": {
+        "number": 4,
+        "ameneties": ["Balcón con vista al mar", "Aire acondicionado"]
+      },
+      "ameneties": ["Parqueadero", "Free WiFi", "Breakfast Included"],
+      "bathroms": 5,
+      "price": "360.000"
+    },
+    {
+      "id": 5,
+      "name": "Hostal Don Pepe",
+      "city": "Bogotá",
+      "rate": 4.0,
+      "price": "130.000",
+      "image": "https://media-cdn.tripadvisor.com/media/photo-s/13/60/c0/72/hotel-pacanaima.jpg",
+      "rooms": {
+        "number": 4,
+        "ameneties": ["Balcón con vista al mar", "Aire acondicionado"]
+      }
+    }
+  ],
+  "places": [
+    "Bogotá - Colombia",
+    "Cali - Colombia",
+    "Medellín - Colombia",
+    "Quindío - Colombia"
+  ]
 }
