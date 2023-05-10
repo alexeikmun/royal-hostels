@@ -43,13 +43,13 @@ export class PropertyRepository implements PropertyRepositoryInterface {
             where: {
                 id,
             },
-            relations: ['type', 'amenities'],
+            relations: ['type', 'amenities', 'rooms'],
         });
     }
 
     async find(): Promise<Property[]> {
         return await this.propertyRepository.find({
-            relations: ['type', 'amenities'],
+            relations: ['type', 'amenities', 'rooms'],
         });
     }
 }

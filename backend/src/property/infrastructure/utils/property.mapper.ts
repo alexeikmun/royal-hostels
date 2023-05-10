@@ -22,6 +22,8 @@ export class PropertyMapper {
         propertyEntity.image = property.image;
         propertyEntity.description = property.description;
         propertyEntity.rate = property.rate;
+        propertyEntity.availableRooms = property.availableRooms;
+        propertyEntity.price = property.price;
         return propertyEntity;
     }
 
@@ -41,6 +43,8 @@ export class PropertyMapper {
         propertyEntity.image = propertyDto.image;
         propertyEntity.description = propertyDto.description;
         propertyEntity.rate = propertyDto.rate;
+        propertyEntity.availableRooms = propertyDto.availableRooms;
+        propertyEntity.price = propertyDto.price;
         return propertyEntity;
     }
 
@@ -59,6 +63,8 @@ export class PropertyMapper {
         propertyDomain.image = property.image;
         propertyDomain.description = property.description;
         propertyDomain.rate = property.rate;
+        propertyDomain.availableRooms = property.availableRooms;
+        propertyDomain.price = property.price;
         return propertyDomain;
     }
 }
