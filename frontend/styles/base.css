@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body, h1, h2, h3, h4, h5, h6, p, label, strong, input {
-    font-family: Quicksand;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+strong,
+input {
+  font-family: Quicksand;
 }

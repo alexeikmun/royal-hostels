@@ -1,4 +1,5 @@
 import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
+import { RoomModel } from 'src/room/domain/model/room.model';
 export class PropertyModel {
     id: number;
     name: string;
@@ -15,4 +16,7 @@ export class PropertyModel {
     createdAt: Date;
     updatedAt: Date;
     amenities: AmenityModel[];
+    rooms: RoomModel[];
+    availableRooms: number;
+    price: number;
 }
