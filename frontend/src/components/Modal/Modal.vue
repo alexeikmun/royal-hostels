@@ -6,22 +6,22 @@
       @click.self="$emit('close')"
     >
       <div
-        :class="`relative bg-white rounded-lg shadow-lg p-4 max-w-4xl overflow-auto h-9/10 ${customClass}`"
+        :class="`relative bg-white rounded-lg shadow-lg max-w-4xl overflow-auto h-9/10 p-10 ${customClass}`"
         @click.stop
       >
         <div class="inline-flex flex-row-reverse w-full">
           <button @click="$emit('close')">&times;</button>
         </div>
         <div
-          class="flex justify-between items-center p-2 border-b border-gray-300 text-lg font-bold"
+          class="flex justify-between items-center border-b border-gray-300 text-lg font-bold"
         >
           <slot name="header"></slot>
         </div>
-        <div class="py-4 max-h-full overflow-y-auto scrollbar-hide">
+        <div class="py-2 max-h-full overflow-y-auto scrollbar-hide">
           <slot name="body"></slot>
         </div>
         <div
-          class="flex justify-end items-center w-full p-2 border-t border-gray-300"
+          class="flex justify-end items-center w-full border-t border-gray-300"
         >
           <slot name="footer"> </slot>
         </div>

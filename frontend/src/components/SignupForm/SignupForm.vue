@@ -1,5 +1,5 @@
 <template>
-  <form class="p-6" @submit.prevent="handleSubmit">
+  <form class="py-3" @submit.prevent="handleSubmit">
     <div>
       <div class="flex flex-wrap">
         <div class="w-full md:w-1/2 py-2 p-1">
@@ -124,7 +124,7 @@
     </div>
     <button
       type="submit"
-      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-600 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+      class="group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-600 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[45px] transition-all"
     >
       Sign Up
     </button>

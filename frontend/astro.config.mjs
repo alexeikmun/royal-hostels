@@ -6,7 +6,7 @@ import vue from '@astrojs/vue';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react(), vue()],
-  server: {
-    port: 3002,
-  },
+  // server: {
+  //   port: 3002,
+  // },
 });

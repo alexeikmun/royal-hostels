@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <div class="mb-4">
+    <div class="my-4">
       <label class="block text-gray-400 text-xs font-medium mb-2" for="email">
         Email
       </label>
@@ -31,7 +31,7 @@
     </div>
     <button
       type="submit"
-      class="group relative w-full flex justify-center items-center py-2 px-4 border border-none text-sm font-medium rounded-lg text-white bg-orange-600 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[50px]"
+      class="group relative w-full flex justify-center items-center py-2 px-4 border border-none text-sm font-medium rounded-lg text-white bg-orange-600 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[45px] transition-all"
     >
       Login
     </button>

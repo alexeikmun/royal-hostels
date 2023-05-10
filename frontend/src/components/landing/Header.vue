@@ -136,40 +136,37 @@ const showSignupModal = ref(false);
           >
             Login
           </button>
-          <Modal
-            :show="showModal"
-            @close="showModal = false"
-            customClass="w-[27%]"
-          >
-            <template v-slot:header>
-              <h2 class="text-[#502A18] scale-110 transition-all">Login</h2>
-            </template>
-            <template v-slot:body>
-              <LoginForm />
-            </template>
-          </Modal>
           <button
             @click="showSignupModal = true"
             class="rounded-lg bg-orange-600 hover:bg-orange-400 px-5 py-2 text-sm font-medium text-white transition-all"
           >
             Sign up
           </button>
-
-          <Modal
-            :show="showSignupModal"
-            @close="showSignupModal = false"
-            customClass="w-[45%]"
-          >
-            <template v-slot:header>
-              <h2 class="text-[#502A18] scale-110 transition-all">Sign Up</h2>
-            </template>
-            <template v-slot:body>
-              <SignupForm on-submit="this.console.log($event.target.name)">
-              </SignupForm>
-            </template>
-          </Modal>
         </div>
       </div>
     </div>
+
+    <Modal :show="showModal" @close="showModal = false" customClass="w-[27%]">
+      <template v-slot:header>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Login</h2>
+      </template>
+      <template v-slot:body>
+        <LoginForm />
+      </template>
+    </Modal>
+
+    <Modal
+      :show="showSignupModal"
+      @close="showSignupModal = false"
+      customClass="w-[45%]"
+    >
+      <template v-slot:header>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Sign Up</h2>
+      </template>
+      <template v-slot:body>
+        <SignupForm on-submit="this.console.log($event.target.name)">
+        </SignupForm>
+      </template>
+    </Modal>
   </header>
 </template>
