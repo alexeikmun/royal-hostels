@@ -1,17 +1,10 @@
 ---
 import Footer from '../../components/landing/Footer.jsx';
 import Header from '../../components/landing/Header.vue';
-import SearchBar from '../../components/landing/SearchBar.vue';
-interface Props {
-    slim: Boolean;
-}
-
-const { slim } = Astro.props
 ---
+
 <section>
-    <Header slim={false} isLoggedIn={false} client:load client:only="vue"/>
-    <SearchBar  client:load client:only="vue"/>
-    <slot />
-    <Footer slim={false}/>
+  <Header slim={false} isLoggedIn={false} client:load client:only='vue' />
+  <slot />
+  <Footer slim={false} />
 </section>
-    

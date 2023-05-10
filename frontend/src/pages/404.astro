@@ -1,0 +1,30 @@
+---
+import StaticLayout from "../layouts/user/Static.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<StaticLayout slim={false}>
+			<section class="body">
+				<div class="grid h-full px-4 bg-white place-content-center">
+					<h1 class="tracking-widest text-gray-500 uppercase">404 | Not Found</h1>
+				  </div>
+			</section>		   
+		</StaticLayout>
+
+	</body>
+</html>
+
+<style>
+	.body {
+		height: calc(100vh - 172px);
+	}
+</style>
+
