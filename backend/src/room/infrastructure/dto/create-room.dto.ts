@@ -28,4 +28,8 @@ export class CreateRoomDto {
         isArray: true,
     })
     readonly amenities: AmenityModel[];
+    @ApiProperty({
+        type: Number,
+    })
+    readonly propertyId: number;
 }

@@ -8,10 +8,12 @@ import {
     ManyToOne,
     ManyToMany,
     JoinTable,
+    OneToMany,
 } from 'typeorm';
 import { PropertyType } from './property-type.entity';
 import { Amenity } from 'src/amenity/infrastructure/entity/amenity.entity';
 import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
+import { Room } from 'src/room/infrastructure/entity/room.entity';
 
 @Entity()
 export class Property implements PropertyModel {
@@ -51,6 +53,12 @@ export class Property implements PropertyModel {
     @Column({ type: 'decimal', precision: 6, scale: 2 })
     rate: number;
 
+    @Column({ type: 'int' })
+    availableRooms: number;
+
+    @Column({ type: 'decimal' })
+    price: number;
+
     @CreateDateColumn()
     createdAt: Date;
 
@@ -63,4 +71,7 @@ export class Property implements PropertyModel {
     @ManyToMany(() => Amenity, (amenity) => amenity.properties)
     @JoinTable()
     amenities: AmenityModel[];
+
+    @OneToMany(() => Room, (room) => room.property)
+    rooms: Room[];
 }

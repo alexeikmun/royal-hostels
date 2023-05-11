@@ -1,4 +1,5 @@
 import { RoomModel } from '../../../room/domain/model/room.model';
+import { CommentModel } from '../../../comment/domain/model/comment.model';
 
 export class BookingModel {
     id: number;
@@ -8,4 +9,6 @@ export class BookingModel {
     guests: number;
 
     rooms: RoomModel[];
+
+    comment: CommentModel;
 }

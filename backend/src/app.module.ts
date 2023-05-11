@@ -9,6 +9,7 @@ import { RoomController } from './room/infrastructure/controller/room.controller
 import { BookingController } from './booking/infrastructure/controller/booking.controller';
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
+import { CommentController } from './comment/infraestructure/controller/comment.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -31,6 +32,7 @@ import { JwtRefreshTokenStrategy } from './auth/infrastructure/strategies/jwtRef
 import { AuthController } from './auth/infrastructure/controller/auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtServiceModule } from './auth/infrastructure/module/jwt.module';
+import { CommentUsecaseModule } from './comment/infraestructure/module/comment.usecase.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -50,8 +52,8 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingUsecaseModule.register(),
         AdminUsecaseModule.register(),
         UserUsecaseModule.register(),
-        AdminUsecaseModule.register(),
         AuthUsecasesModule.register(),
+        CommentUsecaseModule.register(),
         JwtServiceModule,
         BcryptModule,
     ],
@@ -66,6 +68,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         AdminController,
         UserController,
         AuthController,
+        CommentController,
     ],
     providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })

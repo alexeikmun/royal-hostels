@@ -1,0 +1,40 @@
+version: '3'
+services:
+    postgres:
+        image: postgres:latest
+        restart: always
+        env_file:
+            - ./src/shared/config/envs/development.env
+        environment:
+            - POSTGRES_USER=${DATABASE_USERNAME}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+            - POSTGRES_DB=${DATABASE_NAME}
+        ports:
+            - '5433:5432'
+        expose:
+            - 5432
+        volumes:
+            - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+        networks:
+            - rh-internal
+    api:
+        build: .
+        volumes:
+            - .:/usr/src/app
+            - .:/usr/src/app/node_modules
+        env_file:
+            - ./src/shared/config/envs/development.env
+        ports:
+            - 3001:3001
+        expose:
+            - 3000
+        depends_on:
+            - postgres
+        networks:
+            - rh-internal
+volumes:
+    postgresDB:
+        driver: local
+networks:
+    rh-internal:
+        driver: bridge

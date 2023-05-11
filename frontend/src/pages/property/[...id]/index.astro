@@ -1,0 +1,142 @@
+---
+import ArrowLongLeftIcon from '../../../icons/ArrowLongLeftIcon.jsx';
+import TableWithButton from '../../../common/TableWithButton.jsx';
+import StarFilled from '../../../icons/StarFilledIcon.vue';
+import StarNotFilled from '../../../icons/StarNotFilledIcon.vue';
+import LandingLayout from '../../../layouts/user/Landing.astro';
+import ForkIcon from '../../../icons/ForkIcon.vue';
+import DummyData from '../../../dummy.data.json';
+import type PropertyModel from '../../../types/property';
+import { propertyApi } from '../../../api/ApiBuilder';
+
+export async function getStaticPaths() {
+  // const properties = DummyData.properties
+  const properties = await propertyApi.getAll();
+
+  return properties.map(el => {
+    return { params: { id: el.id }, props: el };
+  });
+}
+
+const props = Astro.props;
+const stars = ['1', '2', '3', '4', '5'];
+const tableHeaders: Array<string> = ['Room type', 'Sleeps', 'Price/night'];
+const tableBody: Array<string[]> = [
+  ['Standard', '2', '240.000'],
+  ['Double', '2', '270.000'],
+  ['King', '2', '300.000'],
+  ['Double, Bath', '2', '450.000'],
+];
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{props.name}</title>
+  </head>
+  <body>
+    <LandingLayout>
+      <section class='overflow-y-auto mb-[5%] h-[100vh]'>
+        <div class='relative'>
+          <div
+            class='grid grid-cols-1 items-start gap-8 md:grid-cols-1 overflow-hidden pt-10 pr-10'
+          >
+            <div
+              class='flex justify-center items-center w-[50%] h-auto fixed left-0'
+            >
+              <img
+                alt='Les Paul'
+                src={props.image}
+                class='aspect-square rounded-xl object-cover w-[70%]'
+              />
+            </div>
+
+            <div
+              class='top-0 overflow-y-auto absolute h-auto right-0 w-[50%] pt-5 pr-28'
+            >
+              <div class='mt-8 flex justify-between'>
+                <div class='max-w-[35ch] space-y-2'>
+                  <div class='flex justify-between pb-3'>
+                    <a
+                      href='/'
+                      class='flex text-gray-500 justify-center items-center'
+                    >
+                      <ArrowLongLeftIcon />
+                      <p class='ml-3 text-gray-400 group-hover:text-gray-600'>
+                        Back
+                      </p>
+                    </a>
+                  </div>
+                  <h1 class='text-xl font-bold sm:text-2xl'>
+                    {props.name}
+                  </h1>
+
+                  <p class='text-sm'>Highest Rated Product</p>
+
+                  <div class='-ml-0.5 flex items-center'>
+                    {
+                      stars.map((_star, starIndex) =>
+                        starIndex < parseInt(props.rate) ? (
+                          <StarFilled />
+                        ) : (
+                          <StarNotFilled />
+                        ),
+                      )
+                    }
+
+                    <p class='ml-3 text-sm text-gray-500'>{props.rate}</p>
+                  </div>
+                </div>
+
+                <p class='text-lg font-bold mt-14 text-[#C1410B]'>
+                  ${props.price}
+                </p>
+              </div>
+
+              <div class='mt-4'>
+                <div class='prose max-w-none'>
+                  <p class='text-gray-500'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ipsa veniam dicta beatae eos ex error culpa delectus rem
+                    tenetur, architecto quam nesciunt, dolor veritatis nisi
+                    minus inventore, rerum at recusandae?
+                  </p>
+                </div>
+              </div>
+
+              <form class='mt-8 w-full'>
+                <fieldset class='w-full'>
+                  <legend class='mt-5 mb-1 text-lg font-medium'
+                    >Rooms options</legend
+                  >
+
+                  <TableWithButton headers={tableHeaders} body={tableBody} />
+                </fieldset>
+
+                <fieldset class='mt-8'>
+                  <legend class='mb-1 text-lg font-medium'
+                    >What this place offers</legend
+                  >
+                  <div></div>
+                  {
+                    props.amenities.map((amenity: any) => (
+                      <div>{amenity.name}</div>
+                    ))
+                  }
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </LandingLayout>
+  </body>
+</html>
+
+<style>
+  .body {
+  }
+</style>
