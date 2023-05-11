@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -9,7 +9,7 @@ import { UserRepositoryInterface } from 'src/user/domain/repository/user.reposit
 import { User } from '../entity/user.entity';
 import { UserMapper } from '../utils/user.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class UserRepository implements UserRepositoryInterface {
     private readonly mapper: UserMapper;
 
