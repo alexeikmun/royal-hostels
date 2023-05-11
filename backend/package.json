@@ -20,6 +20,7 @@
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "typeorm": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js -d src/shared/db/config/typeorm.config.ts",
         "mig-gen": "npm run typeorm migration:generate -- ",
+        "mig-gen:init": "npm run mig-gen -- src/shared/db/migrations/init",
         "mig-run": "npm run typeorm migration:run",
         "mig-rev": "npm run typeorm migration:revert",
         "seed": "ts-node -r tsconfig-paths/register node_modules/typeorm-extension/dist/cli/index.js seed -d src/shared/db/config/typeorm.config.ts"
@@ -34,8 +35,6 @@
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.0",
         "mysql2": "^3.2.0",
-        "nodemon": "^2.0.22",
-        "pg": "^8.9.0",
         "nodemon": "^2.0.22",
         "pg": "^8.9.0",
         "reflect-metadata": "^0.1.13",

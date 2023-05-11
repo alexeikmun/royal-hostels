@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
 import { DataSourceOptions } from 'typeorm/data-source';
 import { getEnvPath } from '../../config/helpers';
-import InitSeeder from '../seeds/init.seeder';
+import InitSeeder from './init.seeder';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
