@@ -10,8 +10,7 @@ export class UpdateAdminUseCase {
     ) {}
 
     async execute(id: number, updateDto: UpdateAdminDto): Promise<AdminModel> {
-        const entity = this.mapper.toEntity(updateDto);
-        const updatedEntity = await this.repository.update(id, entity);
+        const updatedEntity = await this.repository.update(id, updateDto);
         return this.mapper.toDomain(updatedEntity);
     }
 }

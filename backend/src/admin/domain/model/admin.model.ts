@@ -1,6 +1,7 @@
-export class AdminModel {
+import { UserModel } from 'src/user/domain/model/user.model';
+
+export class AdminModel extends UserModel {
     id: number;
-    name: string;
     isSuper: boolean;
     createdAt: Date;
     updatedAt: Date;

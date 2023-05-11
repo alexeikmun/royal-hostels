@@ -10,8 +10,7 @@ export class UpdateGuestUseCase {
     ) {}
 
     async execute(id: number, guest: UpdateGuestDto): Promise<GuestModel> {
-        const guestEntity = this.guestMapper.toEntity(guest);
-        const updatedGuest = await this.guestRepository.update(id, guestEntity);
+        const updatedGuest = await this.guestRepository.update(id, guest);
         return this.guestMapper.toDomain(updatedGuest);
     }
 }

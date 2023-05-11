@@ -1,15 +1,16 @@
-import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
     const app: NestExpressApplication = await NestFactory.create(AppModule);
 
     const openApiConfig = new DocumentBuilder()
-        .setTitle('Backend test')
+        .addBearerAuth()
+        .setTitle('Royal Hostels API')
         .setDescription('This is an API to simulate a hostel booking service')
         .setVersion('1.0')
         .build();
@@ -18,6 +19,8 @@ async function bootstrap() {
 
     const config: ConfigService = app.get(ConfigService);
     const port: number = config.get<number>('APP_PORT');
+
+    app.use(cookieParser());
 
     await app.listen(port, () => {
         console.info(

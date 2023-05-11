@@ -1,19 +1,19 @@
 import { AdminModel } from 'src/admin/domain/model/admin.model';
+import { User } from 'src/user/infrastructure/entity/user.entity';
 import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
 
 @Entity()
-export class Admin implements AdminModel {
+export class Admin extends AdminModel {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column({ type: 'varchar', nullable: false })
-    name: string;
 
     @Column({ type: 'boolean', nullable: false })
     isSuper: boolean;
@@ -23,4 +23,8 @@ export class Admin implements AdminModel {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToOne(() => User, { cascade: true })
+    @JoinColumn({ name: 'id' })
+    user: User;
 }
