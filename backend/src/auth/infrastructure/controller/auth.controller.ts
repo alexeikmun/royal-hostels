@@ -1,5 +1,6 @@
 import {
     Body,
+    Headers,
     Controller,
     Get,
     Inject,
@@ -49,8 +50,6 @@ export class AuthController {
 
     @Post('login')
     @ApiBearerAuth()
-    // LocalGuard is not working properly
-    // TODO: conect LocalGuard with LocalStrategy
     @UseGuards(LocalGuard)
     @ApiBody({ type: AuthLoginDto })
     @ApiOperation({ description: 'login' })
@@ -81,10 +80,10 @@ export class AuthController {
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiOperation({ description: 'is_authenticated' })
-    async isAuthenticated(@Req() request: any) {
+    async isAuthenticated(@Headers() headers) {
         const user = await this.isAuthUsecaseProxy
             .getInstance()
-            .execute(request.user.email);
+            .execute(headers.email);
         return { user };
     }
 

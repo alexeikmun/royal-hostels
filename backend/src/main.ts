@@ -4,6 +4,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
+import * as session from 'express-session';
+import * as passport from 'passport';
 
 async function bootstrap() {
     const app: NestExpressApplication = await NestFactory.create(AppModule);
@@ -20,7 +22,20 @@ async function bootstrap() {
     const config: ConfigService = app.get(ConfigService);
     const port: number = config.get<number>('APP_PORT');
 
+    // app.use(
+    //     session({
+    //         secret: config.get<string>('JWT_SECRET'),
+    //         resave: false,
+    //         saveUninitialized: false,
+    //         cookie: {
+    //             maxAge: 3600000,
+    //         },
+    //     }),
+    // );
+
     app.use(cookieParser());
+    // app.use(passport.initialize());
+    // app.use(passport.session());
 
     await app.listen(port, () => {
         console.info(

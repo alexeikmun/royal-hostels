@@ -3,8 +3,11 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class LocalGuard extends AuthGuard('local') {
-    canActivate(context) {
-        // TODO: create a logic for checking if data comes from request is valid
-        return true;
+    async canActivate(context) {
+        const result = (await super.canActivate(context)) as boolean;
+        const request = context.switchToHttp().getRequest();
+
+        await super.logIn(request);
+        return result;
     }
 }

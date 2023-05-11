@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
     CreateBookingDto,
     UpdateBookingDto,
@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { Booking } from '../entity/booking.entity';
 import { BookingMapper } from '../utils/booking.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class BookingRepository implements BookingRepositoryInterface {
     private readonly bookingMapper: BookingMapper;
 
