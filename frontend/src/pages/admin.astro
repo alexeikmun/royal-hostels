@@ -7,7 +7,7 @@ const token = () => {
   // This should be set from the API Login/Signup call
   Astro.cookies.set(
     'rh-token',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTIzMzQ1IiwibmFtZSI6IlNhbnRpYWdvIFJpdmEiLCJlbWFpbCI6InNhbnRpcml2YTE5QGdtYWlsLmNvbSIsInBob25lIjoiMzAwMzgwNTE4MyJ9._qafqGOBRsH_Jrdwh8-IX4fJbElICN8J2RDWCtODzxQ',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTIzMzQ1IiwibmFtZSI6IlNhbnRpYWdvIFJpdmEiLCJlbWFpbCI6InNhbnRpcml2YTE5QGdtYWlsLmNvbSIsInBob25lIjoiMzAwMzgwNTE4MyIsImlzQWRtaW4iOnRydWV9.Oc2zTwaKsd9q3fLZoes8XbxXp3T0233rMUyNC2d1ce4',
   );
   const encodedToken = Astro.cookies.get('rh-token');
   console.log('🚀 ~ file: admin.astro:8 ~ token ~ encodedToken:', encodedToken);
@@ -17,6 +17,9 @@ const token = () => {
       '🚀 ~ file: admin.astro:15 ~ token ~ decodedToken:',
       decodedToken,
     );
+    if (!decodedToken.isAdmin) {
+      Astro.redirect('/');
+    }
     return JSON.stringify(decodedToken);
   }
 };
@@ -28,7 +31,7 @@ const token = () => {
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>Admin</title>
+    <title>Royal Hostels - Admin</title>
   </head>
   <body>
     <LandingLayout>

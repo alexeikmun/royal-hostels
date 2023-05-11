@@ -1,6 +1,7 @@
 ---
 import '@fontsource/quicksand';
 import StaticLayout from '../layouts/user/Static.astro';
+import Landing from '../layouts/user/Landing.astro';
 ---
 
 <html lang='en'>
@@ -9,10 +10,10 @@ import StaticLayout from '../layouts/user/Static.astro';
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>Astro</title>
+    <title>Royal Hostels - About</title>
   </head>
   <body>
-    <StaticLayout slim={false}>
+    <Landing slim={false}>
       <section class='bg-white mt-5'>
         <div
           class='gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6'
@@ -49,7 +50,7 @@ import StaticLayout from '../layouts/user/Static.astro';
           </div>
         </div>
       </section>
-    </StaticLayout>
+    </Landing>
   </body>
 </html>
 

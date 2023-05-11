@@ -10,7 +10,12 @@
         @click.stop
       >
         <div class="inline-flex flex-row-reverse w-full">
-          <button @click="$emit('close')">&times;</button>
+          <button
+            class="text-orange-600 text-xl font-bold"
+            @click="$emit('close')"
+          >
+            x
+          </button>
         </div>
         <div
           class="flex justify-between items-center border-b border-gray-300 text-lg font-bold"

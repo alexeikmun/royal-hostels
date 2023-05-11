@@ -16,6 +16,7 @@ const props = defineProps<{
 }>();
 
 const showDropdown = ref(false);
+const isAdmin = ref(true);
 
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value;
@@ -80,6 +81,7 @@ const showSignupModal = ref(false);
           :key="nav.name"
           >{{ nav.name }}</a
         >
+        <a v-if="isLoggedIn && isAdmin" href="/admin"> Admin </a>
       </nav>
 
       <div class="hidden items-center gap-4 lg:flex">

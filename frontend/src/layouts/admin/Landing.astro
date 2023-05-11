@@ -4,7 +4,7 @@ import Header from '../../components/landing/Header.vue';
 ---
 
 <section>
-  <Header slim={false} isLoggedIn={false} client:load client:only='vue' />
+  <Header slim={false} isLoggedIn={true} client:load client:only='vue' />
   <div class='p-10'>
     <slot />
   </div>
