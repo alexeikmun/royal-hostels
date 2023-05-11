@@ -20,7 +20,7 @@ export class GuestRepository implements GuestRepositoryInterface {
 
     async create(guest: CreateGuestDto): Promise<Guest> {
         const newGuest = this.guestMapper.toEntity(guest);
-        return await this.guestRepository.save(newGuest);
+        return this.guestRepository.save(newGuest);
     }
 
     async update(id: number, guest: UpdateGuestDto): Promise<Guest> {
@@ -29,7 +29,7 @@ export class GuestRepository implements GuestRepositoryInterface {
             currentGuest,
             guest,
         );
-        return await this.guestRepository.save(updatedGuest);
+        return this.guestRepository.save(updatedGuest);
     }
 
     async delete(id: number): Promise<void> {

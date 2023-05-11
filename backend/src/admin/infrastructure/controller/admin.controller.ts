@@ -7,6 +7,7 @@ import {
     Param,
     Post,
     Put,
+    UseGuards,
 } from '@nestjs/common';
 import {
     CreateAdminDto,
@@ -25,6 +26,9 @@ import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import { AdminUsecaseModule } from '../module/admin.usecase.module';
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
+import { JwtAuthGuard } from 'src/auth/infrastructure/guard/jwtAuth.guard';
+import { Roles } from 'src/auth/infrastructure/decorator/roles.decorator';
+import { Role } from 'src/auth/domain/enum/role.enum';
 
 @Controller('admin')
 @ApiTags('Admin')
@@ -41,7 +45,7 @@ export class AdminController {
         @Inject(AdminUsecaseModule.PUT_ADMIN_USECASES_PROXY)
         private readonly updateAdminUseCase: UseCaseProxy<UpdateAdminUseCase>,
     ) {}
-
+    @UseGuards(JwtAuthGuard)
     @Post()
     @ApiCreatedResponse({ type: AdminModel })
     async create(@Body() createAdminDto: CreateAdminDto): Promise<AdminModel> {
@@ -50,11 +54,15 @@ export class AdminController {
             .execute(createAdminDto);
     }
 
+    @Roles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async findOne(@Param('id') id: number) {
         return await this.findOneAdminUseCase.getInstance().execute(id);
     }
 
+    @Roles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard)
     @Put(':id')
     async update(
         @Param('id') id: number,
@@ -65,11 +73,15 @@ export class AdminController {
             .execute(id, updateAdminDto);
     }
 
+    @Roles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     async remove(@Param('id') id: number) {
         return await this.deleteAdminUseCase.getInstance().execute(id);
     }
 
+    @Roles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard)
     @Get()
     async find() {
         return await this.findAdminsUseCase.getInstance().execute();

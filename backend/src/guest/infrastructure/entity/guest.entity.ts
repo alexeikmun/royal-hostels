@@ -1,38 +1,26 @@
 import { GuestModel } from 'src/guest/domain/model/guest.model';
+import { User } from 'src/user/infrastructure/entity/user.entity';
 import {
     Entity,
-    Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm';
 
 @Entity()
-export class Guest implements GuestModel {
+export class Guest {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column({ type: 'varchar', nullable: false })
-    name: string;
-
-    @Column({ type: 'int', nullable: false })
-    age: number;
-
-    @Column({ type: 'varchar', nullable: false })
-    email: string;
-
-    @Column({ type: 'varchar', nullable: false })
-    phone: string;
-
-    @Column({ type: 'varchar', nullable: false })
-    address: string;
-
-    @Column({ type: 'varchar', nullable: false })
-    city: string;
 
     @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToOne(() => User, { cascade: true })
+    @JoinColumn({ name: 'id' })
+    user: User;
 }

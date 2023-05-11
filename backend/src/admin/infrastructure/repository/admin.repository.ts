@@ -20,8 +20,9 @@ export class AdminRepository implements AdminRepositoryInterface {
         this.mapper = new AdminMapper();
     }
 
-    async create(admin: CreateAdminDto): Promise<Admin> {
+    async create(admin: CreateAdminDto, password: string): Promise<Admin> {
         const newEntity = this.mapper.toEntity(admin);
+        newEntity.user.password = password;
         return await this.repository.save(newEntity);
     }
 

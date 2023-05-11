@@ -1,8 +1,10 @@
-import { GuestModel } from '../model/guest.model';
+import { CreateGuestDto } from 'src/guest/infrastructure/dto/create-guest.dto';
+import { UpdateGuestDto } from 'src/guest/infrastructure/dto/update-guest.dto';
+import { Guest } from 'src/guest/infrastructure/entity/guest.entity';
 
 export interface GuestRepositoryInterface {
-    create(guest: GuestModel): Promise<GuestModel>;
-    update(id: number, guest: GuestModel): Promise<GuestModel>;
+    create(guest: CreateGuestDto): Promise<Guest>;
+    update(id: number, guest: UpdateGuestDto): Promise<Guest>;
     delete(id: number): Promise<void>;
-    findOne(id: number): Promise<GuestModel>;
+    findOne(id: number): Promise<Guest>;
 }

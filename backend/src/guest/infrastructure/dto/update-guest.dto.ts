@@ -1,29 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { UpdateUserDto } from 'src/user/infrastructure/dto/user.dto';
 
-export class UpdateGuestDto {
-    @ApiProperty({
-        type: String,
-    })
-    readonly name: string;
-    @ApiProperty({
-        type: Number,
-        minimum: 18,
-    })
-    readonly age: number;
-    @ApiProperty({
-        type: String,
-    })
-    readonly email: string;
-    @ApiProperty({
-        type: String,
-    })
-    readonly phone: string;
-    @ApiProperty({
-        type: String,
-    })
-    readonly city: string;
-    @ApiProperty({
-        type: String,
-    })
-    readonly address: string;
-}
+export class UpdateGuestDto extends UpdateUserDto {}

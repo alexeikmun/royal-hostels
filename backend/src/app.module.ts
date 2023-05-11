@@ -10,7 +10,6 @@ import { BookingController } from './booking/infrastructure/controller/booking.c
 import { BookingStatusController } from './booking/infrastructure/controller/booking-status.controller';
 import { AdminController } from './admin/infrastructure/controller/admin.controller';
 import { CommentController } from './comment/infraestructure/controller/comment.controller';
-import { ProfileController } from './profile/infrastructure/controller/profile.controller';
 
 import { getEnvPath } from './shared/config/helpers';
 
@@ -21,23 +20,42 @@ import { AmenityUsecaseModule } from './amenity/infrastructure/module/amenity.us
 import { RoomUseCaseModule } from './room/infrastructure/module/roomUseCaseModule';
 import { BookingUsecaseModule } from './booking/infrastructure/module/booking.usecase.module';
 import { AdminUsecaseModule } from './admin/infrastructure/module/admin.usecase.module';
+import { UserController } from './user/infrastructure/controller/user.controller';
+import { UserUsecaseModule } from './user/infrastructure/module/user.usecase.module';
+import { ExceptionsModule } from '@shared/infrastructure/module/exceptions.module';
+import { AuthUsecasesModule } from './auth/infrastructure/module/auth.usecase.module';
+import { BcryptModule } from './auth/infrastructure/module/bcrypt.module';
+import { JwtModule } from '@nestjs/jwt';
+import { LocalStrategy } from './auth/infrastructure/strategies/local.strategy';
+import { JwtStrategy } from './auth/infrastructure/strategies/jwt.strategy';
+import { JwtRefreshTokenStrategy } from './auth/infrastructure/strategies/jwtRefresh.strategy';
+import { AuthController } from './auth/infrastructure/controller/auth.controller';
+import { PassportModule } from '@nestjs/passport';
+import { JwtServiceModule } from './auth/infrastructure/module/jwt.module';
 import { CommentUsecaseModule } from './comment/infraestructure/module/comment.usecase.module';
-import { ProfileUsecaseModule } from './profile/infrastructure/module/profile.usecase.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
 @Module({
     imports: [
         ConfigModule.forRoot({ envFilePath, isGlobal: true }),
+        PassportModule,
+        JwtModule.register({
+            secret: process.env.secret,
+        }),
         TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+        ExceptionsModule,
         PropertyUsecaseModule.register(),
         GuestUsecaseModule.register(),
         AmenityUsecaseModule.register(),
         RoomUseCaseModule.register(),
         BookingUsecaseModule.register(),
-        ProfileUsecaseModule.register(),
         AdminUsecaseModule.register(),
+        UserUsecaseModule.register(),
+        AuthUsecasesModule.register(),
         CommentUsecaseModule.register(),
+        JwtServiceModule,
+        BcryptModule,
     ],
     controllers: [
         GuestController,
@@ -48,10 +66,10 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         BookingController,
         BookingStatusController,
         AdminController,
-        ProfileController,
-        AdminController,
+        UserController,
+        AuthController,
         CommentController,
     ],
-    providers: [],
+    providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })
 export class AppModule {}
