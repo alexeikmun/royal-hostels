@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateRoomDto } from 'src/room/infrastructure/dto/create-room.dto';
 import { UpdateRoomDto } from 'src/room/infrastructure/dto/update-room.dto';
 import { RoomRepositoryInterface } from 'src/room/domain/repository/room.repository.interface';
@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { Room } from '../entity/room.entity';
 import { RoomMapper } from '../utils/room.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class RoomRepository implements RoomRepositoryInterface {
     private readonly roomMapper: RoomMapper;
 

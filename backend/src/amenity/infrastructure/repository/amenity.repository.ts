@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -9,7 +9,7 @@ import { AmenityRepositoryInterface } from 'src/amenity/domain/repository/amenit
 import { Amenity } from '../entity/amenity.entity';
 import { AmenityMapper } from '../utils/amenity.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class AmenityRepository implements AmenityRepositoryInterface {
     private readonly mapper: AmenityMapper;
 

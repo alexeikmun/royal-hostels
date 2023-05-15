@@ -66,9 +66,10 @@ export class AuthUsecasesModule {
                         new UseCaseProxy(new IsAuthenticatedUseCases(userRepo)),
                 },
                 {
-                    inject: [],
+                    inject: [UserRepository],
                     provide: AuthUsecasesModule.LOGOUT_USECASES_PROXY,
-                    useFactory: () => new UseCaseProxy(new LogoutUseCases()),
+                    useFactory: (userRepo: UserRepository) =>
+                        new UseCaseProxy(new LogoutUseCases(userRepo)),
                 },
             ],
             exports: [

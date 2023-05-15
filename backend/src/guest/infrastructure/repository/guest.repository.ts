@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateGuestDto } from 'src/guest/infrastructure/dto/create-guest.dto';
 import { UpdateGuestDto } from 'src/guest/infrastructure/dto/update-guest.dto';
 import { GuestRepositoryInterface } from 'src/guest/domain/repository/guest.repository.interface';
@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { Guest } from '../entity/guest.entity';
 import { GuestMapper } from '../utils/guest.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class GuestRepository implements GuestRepositoryInterface {
     private readonly guestMapper: GuestMapper;
 

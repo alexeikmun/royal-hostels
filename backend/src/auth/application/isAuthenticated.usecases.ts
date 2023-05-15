@@ -5,9 +5,18 @@ import { UserRepository } from 'src/user/infrastructure/repository/user.reposito
 export class IsAuthenticatedUseCases {
     constructor(private readonly adminUserRepo: UserRepository) {}
 
-    async execute(id: number): Promise<UserModel> {
-        const user: FullUserModel = await this.adminUserRepo.findOne(id);
-        const { password: _, ...info } = user;
-        return info;
+    async execute(email: string): Promise<UserModel> {
+        const user: FullUserModel = await this.adminUserRepo.findOneByEmail(
+            email,
+        );
+        if (!user) {
+            return null;
+        }
+        return this.removePassword(user);
+    }
+
+    private removePassword(user: FullUserModel): UserModel {
+        delete user.password;
+        return user as UserModel;
     }
 }

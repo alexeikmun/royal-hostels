@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CommentRepositoryInterface } from 'src/comment/domain/repository/comment.repository.interface';
@@ -6,7 +6,7 @@ import { Comment } from '../entity/comment.entity';
 import { CommentMapper } from '../utils/comment.mapper';
 import { CreateCommentDto, UpdateCommentDto } from '../dto/comment.dto';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class CommentRepository implements CommentRepositoryInterface {
     private readonly mapper: CommentMapper;
 

@@ -4,9 +4,12 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
+import { ResponseInterceptor } from '@shared/infrastructure/interceptors/response.interceptor';
 
 async function bootstrap() {
     const app: NestExpressApplication = await NestFactory.create(AppModule);
+
+    app.useGlobalInterceptors(new ResponseInterceptor());
 
     const openApiConfig = new DocumentBuilder()
         .addBearerAuth()

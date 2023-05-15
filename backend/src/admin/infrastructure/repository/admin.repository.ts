@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -9,7 +9,7 @@ import { AdminRepositoryInterface } from 'src/admin/domain/repository/admin.repo
 import { Admin } from '../entity/admin.entity';
 import { AdminMapper } from '../utils/admin.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class AdminRepository implements AdminRepositoryInterface {
     private readonly mapper: AdminMapper;
 

@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
     CreatePropertyDto,
     UpdatePropertyDto,
@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { Property } from '../entity/property.entity';
 import { PropertyMapper } from '../utils/property.mapper';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PropertyRepository implements PropertyRepositoryInterface {
     private readonly propertyMapper: PropertyMapper;
 

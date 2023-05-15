@@ -9,4 +9,5 @@ export interface UserRepositoryInterface {
     find(): Promise<UserModel[]>;
     updateLastLogin(email: string): Promise<void>;
     updateRefreshToken(email: string, refreshToken: string): Promise<void>;
+    deleteRefreshToken(email: string): Promise<void>;
 }
