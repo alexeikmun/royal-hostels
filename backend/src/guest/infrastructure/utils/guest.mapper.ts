@@ -18,6 +18,7 @@ export class GuestMapper {
         guestEntity.user.country = guest.country;
         guestEntity.user.zipcode = guest.zipcode;
         guestEntity.user.role = guest.role;
+        guestEntity.user.password = guest.password;
         return guestEntity;
     }
 
@@ -33,6 +34,7 @@ export class GuestMapper {
         guestEntity.user.country = guestDto.country;
         guestEntity.user.zipcode = guestDto.zipcode;
         guestEntity.user.role = guestDto.role;
+        guestEntity.user.password = guestDto.password;
         return guestEntity;
     }
 
