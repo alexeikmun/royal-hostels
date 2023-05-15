@@ -1,7 +1,8 @@
 import { UserRepository } from 'src/user/infrastructure/repository/user.repository';
 import {
     IJwtService,
-    IJwtServicePayload,
+    IJwtServicePayloadRefreshToken,
+    IJwtServicePayloadToken,
 } from '../domain/adapters/jwt.interface';
 import { IBcryptService } from '../domain/adapters/bcrypt.interface';
 import { ConfigService } from '@nestjs/config';
@@ -22,7 +23,7 @@ export class LoginUseCases {
 
     async createJwtToken(email: string) {
         const user = await this.userRepository.findOneByEmail(email);
-        const payload: IJwtServicePayload = { user };
+        const payload: IJwtServicePayloadToken = { user };
         const secret = this.config.get<string>('JWT_SECRET');
         const expiresIn = this.config.get<number>('JWT_EXPIRATION_TIME') + 's';
         return await this.jwtTokenService.createToken(
@@ -33,7 +34,7 @@ export class LoginUseCases {
     }
 
     async createJwtRefreshToken(email: string): Promise<string> {
-        const payload: IJwtServicePayload = { email };
+        const payload: IJwtServicePayloadRefreshToken = { email };
         const secret = this.config.get<string>('JWT_REFRESH_TOKEN_SECRET');
         const expiresIn =
             this.config.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME') + 's';

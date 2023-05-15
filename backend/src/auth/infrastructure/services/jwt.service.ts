@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
     IJwtService,
-    IJwtServicePayload,
+    IJwtServicePayloadRefreshToken,
+    IJwtServicePayloadToken,
 } from 'src/auth/domain/adapters/jwt.interface';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class JwtTokenService implements IJwtService {
     }
 
     createToken(
-        payload: IJwtServicePayload,
+        payload: IJwtServicePayloadToken | IJwtServicePayloadRefreshToken,
         secret: string,
         expiresIn: string,
     ): string {
