@@ -68,10 +68,14 @@ export class Property implements PropertyModel {
     @ManyToOne(() => PropertyType, (type) => type.properties)
     type: PropertyType;
 
-    @ManyToMany(() => Amenity, (amenity) => amenity.properties)
+    @ManyToMany(() => Amenity, (amenity) => amenity.properties, {
+        cascade: true,
+    })
     @JoinTable()
     amenities: AmenityModel[];
 
-    @OneToMany(() => Room, (room) => room.property)
+    @OneToMany(() => Room, (room) => room.property, {
+        cascade: true,
+    })
     rooms: Room[];
 }
