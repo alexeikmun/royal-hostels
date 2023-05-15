@@ -9,8 +9,14 @@ export class IsAuthenticatedUseCases {
         const user: FullUserModel = await this.adminUserRepo.findOneByEmail(
             email,
         );
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password: _, ...info } = user;
-        return info;
+        if (!user) {
+            return null;
+        }
+        return this.removePassword(user);
+    }
+
+    private removePassword(user: FullUserModel): UserModel {
+        delete user.password;
+        return user as UserModel;
     }
 }

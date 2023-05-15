@@ -27,9 +27,12 @@ import {
 } from 'src/auth/application';
 import { JwtAuthGuard } from '../guard/jwtAuth.guard';
 import JwtRefreshGuard from '../guard/jwtRefresh.guard';
-import { LocalGuard } from '../guard/login.guard';
+import { LocalGuard } from '../guard/local.guard';
 import { AuthUsecasesModule } from '../module/auth.usecase.module';
 import { AuthLoginDto } from '../dto/auth.dto';
+import { IsAuthDto } from '../dto/isAuth.dto';
+import { ExceptionsService } from '@shared/infrastructure/service/exceptions.service';
+import { LogoutDto } from '../dto/logout.dto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -46,6 +49,7 @@ export class AuthController {
         private readonly logoutUsecaseProxy: UseCaseProxy<LogoutUseCases>,
         @Inject(AuthUsecasesModule.IS_AUTHENTICATED_USECASES_PROXY)
         private readonly isAuthUsecaseProxy: UseCaseProxy<IsAuthenticatedUseCases>,
+        private readonly exceptionService: ExceptionsService,
     ) {}
 
     @Post('login')
@@ -54,47 +58,83 @@ export class AuthController {
     @ApiBody({ type: AuthLoginDto })
     @ApiOperation({ description: 'login' })
     async login(@Body() auth: AuthLoginDto, @Request() request: any) {
+        const accessToken = await this.loginUsecaseProxy
+            .getInstance()
+            .createJwtToken(auth.email);
+
         const accessTokenCookie = await this.loginUsecaseProxy
             .getInstance()
-            .getCookieWithJwtToken(auth.email);
-        const refreshTokenCookie = await this.loginUsecaseProxy
+            .getCookieWithJwtToken(accessToken);
+
+        const refreshToken = await this.loginUsecaseProxy
             .getInstance()
-            .getCookieWithJwtRefreshToken(auth.email);
+            .createJwtRefreshToken(auth.email);
+
+        const refreshTokenCookie = this.loginUsecaseProxy
+            .getInstance()
+            .getCookieWithJwtRefreshToken(refreshToken);
+
         request.res.setHeader('Set-Cookie', [
             accessTokenCookie,
             refreshTokenCookie,
         ]);
-        return 'Login successful';
+        return { accessToken, refreshToken };
     }
 
     @Post('logout')
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
+    @ApiBody({ type: LogoutDto })
     @ApiOperation({ description: 'logout' })
-    async logout(@Request() request: any) {
-        const cookie = await this.logoutUsecaseProxy.getInstance().execute();
+    async logout(@Body() auth, @Request() request: any) {
+        const cookie = await this.logoutUsecaseProxy
+            .getInstance()
+            .execute(auth.email);
         request.res.setHeader('Set-Cookie', cookie);
         return 'Logout successful';
     }
 
-    @Get('is-authenticated')
+    @Post('is-authenticated')
     @ApiBearerAuth()
+    @ApiBody({ type: IsAuthDto })
     @UseGuards(JwtAuthGuard)
-    @ApiOperation({ description: 'is_authenticated' })
-    async isAuthenticated(@Headers() headers) {
+    async isAuthenticated(@Body() auth: IsAuthDto) {
         const user = await this.isAuthUsecaseProxy
             .getInstance()
-            .execute(headers.email);
+            .execute(auth.email);
+
+        if (!user) {
+            this.exceptionService.notFoundException({
+                message: 'User not found',
+            });
+        }
         return { user };
     }
 
-    @Get('refresh')
+    @Post('refresh')
     @UseGuards(JwtRefreshGuard)
     @ApiBearerAuth()
-    async refresh(@Req() request: any) {
+    async refresh(@Body() auth, @Request() request: any) {
+        const accessToken = await this.loginUsecaseProxy
+            .getInstance()
+            .createJwtToken(auth.email);
+
         const accessTokenCookie = await this.loginUsecaseProxy
             .getInstance()
-            .getCookieWithJwtToken(request.user.email);
-        request.res.setHeader('Set-Cookie', accessTokenCookie);
-        return 'Refresh successful';
+            .getCookieWithJwtToken(accessToken);
+
+        const refreshToken = await this.loginUsecaseProxy
+            .getInstance()
+            .createJwtRefreshToken(auth.email);
+
+        const refreshTokenCookie = this.loginUsecaseProxy
+            .getInstance()
+            .getCookieWithJwtRefreshToken(refreshToken);
+
+        request.res.setHeader('Set-Cookie', [
+            accessTokenCookie,
+            refreshTokenCookie,
+        ]);
+        return { accessToken, refreshToken };
     }
 }

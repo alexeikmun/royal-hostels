@@ -1,5 +1,8 @@
+import { UserModel } from 'src/user/domain/model/user.model';
+
 export interface IJwtServicePayload {
-    email: string;
+    user?: UserModel;
+    email?: string;
 }
 
 export interface IJwtService {

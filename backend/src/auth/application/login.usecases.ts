@@ -14,21 +14,25 @@ export class LoginUseCases {
         private readonly bcryptService: IBcryptService,
     ) {}
 
-    async getCookieWithJwtToken(email: string) {
-        const payload: IJwtServicePayload = { email };
-        const secret = this.config.get<string>('JWT_SECRET');
-        const expiresIn = this.config.get<number>('JWT_EXPIRATION_TIME') + 's';
-        const token = this.jwtTokenService.createToken(
-            payload,
-            secret,
-            expiresIn,
-        );
+    async getCookieWithJwtToken(token: string) {
         return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.config.get<number>(
             'JWT_EXPIRATION_TIME',
         )}`;
     }
 
-    async getCookieWithJwtRefreshToken(email: string) {
+    async createJwtToken(email: string) {
+        const user = await this.userRepository.findOneByEmail(email);
+        const payload: IJwtServicePayload = { user };
+        const secret = this.config.get<string>('JWT_SECRET');
+        const expiresIn = this.config.get<number>('JWT_EXPIRATION_TIME') + 's';
+        return await this.jwtTokenService.createToken(
+            payload,
+            secret,
+            expiresIn,
+        );
+    }
+
+    async createJwtRefreshToken(email: string): Promise<string> {
         const payload: IJwtServicePayload = { email };
         const secret = this.config.get<string>('JWT_REFRESH_TOKEN_SECRET');
         const expiresIn =
@@ -39,6 +43,10 @@ export class LoginUseCases {
             expiresIn,
         );
         await this.setCurrentRefreshToken(email, token);
+        return token;
+    }
+
+    getCookieWithJwtRefreshToken(token: string): string {
         const cookie = `Refresh=${token}; HttpOnly; Path=/; Max-Age=${this.config.get<string>(
             'JWT_REFRESH_TOKEN_EXPIRATION_TIME',
         )}`;
@@ -81,20 +89,21 @@ export class LoginUseCases {
         );
     }
 
-    async getUserIfRefreshTokenMatches(id: number, refreshToken: string) {
-        const user = await this.userRepository.findOne(id);
+    async getUserIfRefreshTokenMatches(email: string, refreshToken: string) {
+        const user = await this.userRepository.findOneByEmail(email);
         if (!user) {
             return null;
         }
 
-        const isRefreshTokenMatching = await this.bcryptService.compare(
-            refreshToken,
-            user.hashRefreshToken,
-        );
-        if (isRefreshTokenMatching) {
-            return user;
+        if (user.hashRefreshToken) {
+            const isRefreshTokenMatching = await this.bcryptService.compare(
+                refreshToken,
+                user.hashRefreshToken,
+            );
+            if (isRefreshTokenMatching) {
+                return user;
+            }
         }
-
         return null;
     }
 }

@@ -61,10 +61,18 @@ export class UserRepository implements UserRepositoryInterface {
     async updateLastLogin(email: string): Promise<void> {
         const user = await this.repository.findOneBy({ email });
         user.lastLogin = new Date();
+        this.repository.save(user);
     }
 
     async updateRefreshToken(email: string, refreshToken): Promise<void> {
         const user = await this.repository.findOneBy({ email });
         user.hashRefreshToken = refreshToken;
+        this.repository.save(user);
+    }
+
+    async deleteRefreshToken(email: string): Promise<void> {
+        const user = await this.repository.findOneBy({ email });
+        user.hashRefreshToken = null;
+        this.repository.save(user);
     }
 }
