@@ -96,6 +96,11 @@
       >
         Password
       </label>
+      <label
+        v-if="checkPasswordSecurity(password) !== 'This looks secure'"
+        class="block text-red-700 text-xs font-medium mb-2 pt-2"
+        >{{ checkPasswordSecurity(password) }}
+      </label>
       <input
         v-model="password"
         class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -105,7 +110,6 @@
         required
       />
     </div>
-
     <div class="mb-4">
       <label
         class="block text-gray-400 text-xs font-medium mb-2"
@@ -121,10 +125,26 @@
         placeholder="*******"
         required
       />
+      <label
+        v-if="password !== confirmPassword"
+        class="block text-red-700 text-xs font-medium mb-2 pl-2 pt-2"
+      >
+        Oops, those passwords don't look alike.
+      </label>
     </div>
     <button
       type="submit"
-      class="group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-600 hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[45px] transition-all"
+      class="group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-600 enabled:hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[45px] transition-all disabled:opacity-25"
+      :disabled="
+        password === '' ||
+        email === '' ||
+        firstName === '' ||
+        lastName === '' ||
+        address === '' ||
+        phone === '' ||
+        confirmPassword === '' ||
+        checkPasswordSecurity(password) !== 'This looks secure'
+      "
     >
       Sign Up
     </button>
@@ -143,4 +163,28 @@ const phone = ref('');
 const confirmPassword = ref('');
 
 function handleSubmit() {}
+function containsNumber(str: string) {
+  return /\d/.test(str);
+}
+function containsSpecialCharacters(str: string) {
+  return /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?¡¿~]/.test(str);
+}
+function checkPasswordSecurity(str: string) {
+  if (str.length < 8)
+    return 'Keep typing! your password must be at least 8 characters long ';
+  else {
+    const stringContainsNumber = containsNumber(str);
+    const stringContainsSpecialCharacters = containsSpecialCharacters(str);
+    if (!stringContainsNumber && !stringContainsSpecialCharacters) {
+      return 'Type some numbers and some crazy characters!';
+    }
+    if (!stringContainsNumber) {
+      return 'Do not forget to type some numbers too';
+    }
+    if (!stringContainsSpecialCharacters) {
+      return 'Do not forget to type some crazy characters like ¡?=)(/&%$#"!+-';
+    }
+  }
+  return 'This looks secure';
+}
 </script>
