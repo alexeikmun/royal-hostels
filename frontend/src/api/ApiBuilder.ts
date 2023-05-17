@@ -22,8 +22,8 @@ class ApiBuilder<T> {
     const response = await fetch(`${apiUrl}/${this.entity}`);
     const data = await response.json();
 
-    this.dataStore.set(data);
-    return data;
+    this.dataStore.set(data.data);
+    return data.data;
   }
 
   async getById(id: number): Promise<T> {
