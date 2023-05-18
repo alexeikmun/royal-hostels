@@ -33,6 +33,8 @@ import { AuthController } from './auth/infrastructure/controller/auth.controller
 import { PassportModule } from '@nestjs/passport';
 import { JwtServiceModule } from './auth/infrastructure/module/jwt.module';
 import { CommentUsecaseModule } from './comment/infraestructure/module/comment.usecase.module';
+import { SearchUsecaseModule } from './search/infrastructure/module/search.usecase.module';
+import { SearchController } from './search/infrastructure/controller/search.controller';
 
 const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
 
@@ -43,7 +45,9 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         JwtModule.register({
             secret: process.env.secret,
         }),
-        TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+        TypeOrmModule.forRootAsync({
+            useClass: TypeOrmConfigService,
+        }),
         ExceptionsModule,
         PropertyUsecaseModule.register(),
         GuestUsecaseModule.register(),
@@ -54,6 +58,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         UserUsecaseModule.register(),
         AuthUsecasesModule.register(),
         CommentUsecaseModule.register(),
+        SearchUsecaseModule.register(),
         JwtServiceModule,
         BcryptModule,
     ],
@@ -69,6 +74,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/shared/config/envs/`);
         UserController,
         AuthController,
         CommentController,
+        SearchController,
     ],
     providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })

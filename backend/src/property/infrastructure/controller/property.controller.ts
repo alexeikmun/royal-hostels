@@ -1,14 +1,5 @@
-import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Inject,
-    Param,
-    Post,
-    Put,
-} from '@nestjs/common';
-import { CreatePropertyDto, UpdatePropertyDto } from '../dto/property.dto';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { CreatePropertyDto } from '../dto/property.dto';
 import {
     CreatePropertyUseCase,
     UpdatePropertyUseCase,
@@ -51,25 +42,5 @@ export class PropertyController {
     @Get(':id')
     async findOne(@Param('id') id: number) {
         return await this.findOnePropertyUseCase.getInstance().execute(id);
-    }
-
-    @Put(':id')
-    async update(
-        @Param('id') id: number,
-        @Body() updatePropertyDto: UpdatePropertyDto,
-    ) {
-        return await this.updatePropertyUseCase
-            .getInstance()
-            .execute(id, updatePropertyDto);
-    }
-
-    @Delete(':id')
-    async remove(@Param('id') id: number) {
-        return await this.deletePropertyUseCase.getInstance().execute(id);
-    }
-
-    @Get()
-    async find() {
-        return await this.findPropertiesUseCase.getInstance().execute();
     }
 }
