@@ -52,4 +52,21 @@ export class PropertyRepository implements PropertyRepositoryInterface {
             relations: ['type', 'amenities', 'rooms'],
         });
     }
+
+    async findLocations(query: string): Promise<any[]> {
+        const data = await this.propertyRepository
+            .createQueryBuilder('property')
+            .select(['city', 'country'])
+            .distinct();
+
+        if (query) {
+            data.where(
+                'LOWER(country) like :query or LOWER(city) like :query',
+                {
+                    query: `%${query.toLowerCase()}%`,
+                },
+            );
+        }
+        return data.getRawMany();
+    }
 }
