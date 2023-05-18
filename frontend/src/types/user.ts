@@ -1,23 +1,22 @@
-export default interface User {
+export default interface UserModel {
   id: number;
   name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
+  address: string;
+  country: string;
+  city: string;
+  zipcode: string;
+  birthday: Date;
   phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
+  email: string;
+  role: Role;
+  lastLogin?: Date;
+  hashRefreshToken?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export enum Role {
+  ADMIN = 'ADMIN',
+  HOST = 'HOST',
+  GUEST = 'GUEST',
 }

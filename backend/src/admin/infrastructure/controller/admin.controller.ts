@@ -45,7 +45,7 @@ export class AdminController {
         @Inject(AdminUsecaseModule.PUT_ADMIN_USECASES_PROXY)
         private readonly updateAdminUseCase: UseCaseProxy<UpdateAdminUseCase>,
     ) {}
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Post()
     @ApiCreatedResponse({ type: AdminModel })
     async create(@Body() createAdminDto: CreateAdminDto): Promise<AdminModel> {

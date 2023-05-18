@@ -3,12 +3,22 @@
     <div>
       <div class="flex flex-wrap">
         <div class="w-full md:w-1/2 py-2 p-1">
-          <label
-            class="block text-gray-400 text-xs font-medium mb-2"
-            for="name"
-          >
-            First name
-          </label>
+          <div class="flex flex-row">
+            <label
+              class="block text-gray-400 text-xs font-medium mb-2"
+              for="name"
+            >
+              First Name
+            </label>
+
+            <label
+              v-if="firstName.length === 0"
+              class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+            >
+              *
+            </label>
+          </div>
+
           <input
             v-model="firstName"
             class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -19,12 +29,20 @@
           />
         </div>
         <div class="w-full md:w-1/2 py-2 p-1">
-          <label
-            class="block text-gray-400 text-xs font-medium mb-2"
-            for="name"
-          >
-            Last name
-          </label>
+          <div class="flex flex-row">
+            <label
+              class="block text-gray-400 text-xs font-medium mb-2"
+              for="lastName"
+            >
+              Last Name
+            </label>
+            <label
+              v-if="lastName.length === 0"
+              class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+            >
+              *
+            </label>
+          </div>
           <input
             v-model="lastName"
             class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -40,12 +58,20 @@
     <div>
       <div class="flex flex-wrap">
         <div class="w-full md:w-1/2 p-1">
-          <label
-            class="block text-gray-400 text-xs font-medium mb-2"
-            for="address"
-          >
-            Address
-          </label>
+          <div class="flex flex-row">
+            <label
+              class="block text-gray-400 text-xs font-medium mb-2"
+              for="address"
+            >
+              Address
+            </label>
+            <label
+              v-if="address.length === 0"
+              class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+            >
+              *
+            </label>
+          </div>
           <input
             v-model="address"
             class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -56,12 +82,20 @@
           />
         </div>
         <div class="w-full md:w-1/2 p-1">
-          <label
-            class="block text-gray-400 text-xs font-medium mb-2"
-            for="phone"
-          >
-            Phone number
-          </label>
+          <div class="flex flex-row">
+            <label
+              class="block text-gray-400 text-xs font-medium mb-2"
+              for="phone"
+            >
+              Phone number
+            </label>
+            <label
+              v-if="phone.length === 0"
+              class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+            >
+              *
+            </label>
+          </div>
           <input
             v-model="phone"
             class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -77,9 +111,17 @@
     <div class="mb-4"></div>
 
     <div class="mb-4">
-      <label class="block text-gray-400 text-xs font-medium mb-2" for="email">
-        Email
-      </label>
+      <div class="flex flex-row">
+        <label class="block text-gray-400 text-xs font-medium mb-2" for="email">
+          Email
+        </label>
+        <label
+          v-if="email.length === 0"
+          class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+        >
+          *
+        </label>
+      </div>
       <input
         v-model="email"
         class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
@@ -90,14 +132,25 @@
       />
     </div>
     <div class="mb-4">
+      <div class="flex flex-row">
+        <label
+          class="block text-gray-400 text-xs font-medium mb-2"
+          for="password"
+        >
+          Password
+        </label>
+        <label
+          v-if="password.length === 0"
+          class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+        >
+          *
+        </label>
+      </div>
       <label
-        class="block text-gray-400 text-xs font-medium mb-2"
-        for="password"
-      >
-        Password
-      </label>
-      <label
-        v-if="checkPasswordSecurity(password) !== 'This looks secure'"
+        v-if="
+          checkPasswordSecurity(password) !== 'This looks secure' &&
+          password.length > 0
+        "
         class="block text-red-700 text-xs font-medium mb-2 pt-2"
         >{{ checkPasswordSecurity(password) }}
       </label>
@@ -111,12 +164,20 @@
       />
     </div>
     <div class="mb-4">
-      <label
-        class="block text-gray-400 text-xs font-medium mb-2"
-        for="confirmPassword"
-      >
-        Confirm password
-      </label>
+      <div class="flex flex-row">
+        <label
+          class="block text-gray-400 text-xs font-medium mb-2"
+          for="confirmPassword"
+        >
+          Confirm password
+        </label>
+        <label
+          v-if="confirmPassword.length === 0"
+          class="block text-red-700 text-xs font-light mb-2 pl-0.5"
+        >
+          *
+        </label>
+      </div>
       <input
         v-model="confirmPassword"
         class="border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs h-[45px] placeholder:text-gray-300"
