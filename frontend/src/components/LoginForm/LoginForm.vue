@@ -48,6 +48,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { AuthApi } from '../../api/AuthApi';
+import { authStore } from '../../store/authStore';
 
 let error = ref('');
 let isLoading = false;
@@ -67,7 +68,13 @@ async function handleSubmit() {
     });
 
     // Store the response data
-    console.log(response);
+    console.log(authStore.get());
+
+    localStorage.setItem('fetchedTokens', JSON.stringify(authStore.get()));
+
+    if (response) {
+      window.location.href = '/admin';
+    }
   } catch (e) {
     error.value = 'Wrong Username or Password';
     console.error(e);

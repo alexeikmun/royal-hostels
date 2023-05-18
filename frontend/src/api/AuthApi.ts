@@ -1,9 +1,15 @@
-import { atom } from 'nanostores';
+// import { atom } from 'nanostores';
 import type AuthModel from '../types/auth';
 import type UserModel from '../types/user';
+import { authStore } from '../store/authStore';
 
 // Move to global constants
 const apiUrl = 'http://localhost:3001';
+
+// export const authStore = atom({
+//   accessToken: '',
+//   refreshToken: '',
+// });
 
 class ApiBuilder<T> {
   entity: string;
@@ -11,7 +17,12 @@ class ApiBuilder<T> {
 
   constructor(entity: string) {
     this.entity = entity;
-    this.dataStore = atom([]);
+
+    // TODO: Type store properly!
+    // this.dataStore = atom({
+    //   accessToken: '',
+    //   refreshToken: '',
+    // });
   }
 
   private handleResponse(response: Response): Promise<any> {
@@ -44,7 +55,11 @@ class ApiBuilder<T> {
       'POST',
       item,
     );
-    this.dataStore.set([...this.dataStore.get(), data.data]);
+
+    authStore.set({
+      accessToken: data.data.accessToken,
+      refreshToken: data.data.refreshToken,
+    });
     return data.data;
   }
 

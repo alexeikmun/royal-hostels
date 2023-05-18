@@ -1,0 +1,12 @@
+---
+import Footer from '../../components/landing/Footer.jsx';
+import Header from '../../components/landing/Header.vue';
+---
+
+<section>
+  <Header slim={false} isLoggedIn={true} client:load client:only='vue' />
+  <div class='p-10'>
+    <slot />
+  </div>
+  <Footer slim={false} />
+</section>
