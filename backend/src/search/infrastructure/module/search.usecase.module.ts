@@ -6,6 +6,7 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 import { PropertyRepository } from 'src/property/infrastructure/repository/property.repository';
 import { SearchMapperModule } from './search.mapper.module';
 import { PropertyRepositoryModule } from 'src/property/infrastructure/module/property.repository.module';
+import { FindHostelsUseCase } from 'src/search/application/find-hostels.usecase';
 
 @Module({
     imports: [PropertyRepositoryModule, SearchMapperModule],
@@ -22,7 +23,7 @@ export class SearchUsecaseModule {
                     inject: [PropertyRepository],
                     provide: SearchUsecaseModule.FIND_HOSTELS_USECASES_PROXY,
                     useFactory: (repository: PropertyRepository) =>
-                        new UseCaseProxy(new FindLocationsUseCase(repository)),
+                        new UseCaseProxy(new FindHostelsUseCase(repository)),
                 },
                 {
                     inject: [PropertyRepository],
