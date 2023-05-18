@@ -5,7 +5,6 @@ export class FindLocationsUseCase {
     constructor(private readonly repository: PropertyRepository) {}
 
     async execute(query: string): Promise<LocationsModel[]> {
-        console.log('query', query);
         return await this.repository.findLocations(query);
     }
 }
