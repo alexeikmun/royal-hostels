@@ -67,7 +67,9 @@ async function handleSubmit() {
     });
 
     // Store the response data
-    console.log(response);
+    console.log(AuthApi.dataStore.get());
+
+    window.location.href = '/admin';
   } catch (e) {
     error.value = 'Wrong Username or Password';
     console.error(e);
