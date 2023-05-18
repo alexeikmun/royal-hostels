@@ -2,6 +2,20 @@
 import '@fontsource/quicksand';
 import jwt_decode from 'jwt-decode';
 import LandingLayout from '../layouts/admin/Landing.astro';
+import { AuthApi } from '../api/AuthApi';
+import { authStore } from '../store/authStore';
+
+const tokens = localStorage.getItem('fetchedTokens');
+
+const store = authStore.get();
+
+console.log(store);
+
+if (tokens) {
+  console.log(tokens);
+} else {
+  console.log('not found');
+}
 
 const token = () => {
   // This should be set from the API Login/Signup call
