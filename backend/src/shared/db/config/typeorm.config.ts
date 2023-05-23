@@ -30,8 +30,6 @@ const options = {
     seeds: [InitSeeder],
 };
 
-console.log(options);
-
 export const source = new DataSource(
     options as DataSourceOptions & SeederOptions,
 );

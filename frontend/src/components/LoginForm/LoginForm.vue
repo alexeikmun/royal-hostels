@@ -29,6 +29,12 @@
         required
       />
     </div>
+    <label
+      v-if="error"
+      class="block text-red-700 text-xs font-medium mb-2 pl-2 pt-2"
+    >
+      {{ error }}
+    </label>
     <button
       type="submit"
       class="group relative w-full flex justify-center items-center py-2 px-4 border border-none text-sm font-medium rounded-lg text-white bg-orange-600 enabled:hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 h-[45px] transition-all disabled:opacity-25"
@@ -42,19 +48,18 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { AuthApi } from '../../api/AuthApi';
+import { authStore } from '../../store/authStore';
 
-let error = '';
+let error = ref('');
 let isLoading = false;
 const email = ref('');
 const password = ref('');
 const disabled = email.value.length === 0 && password.value.length === 0;
 
 async function handleSubmit() {
-  console.log('click handler');
-  // Do something with the username and password
   try {
     isLoading = true;
-    error = '';
+    error.value = '';
 
     // Make API request with the entered username
     const response = await AuthApi.login({
@@ -63,10 +68,16 @@ async function handleSubmit() {
     });
 
     // Store the response data
-    console.log(response);
-  } catch (error) {
-    error = 'An error occurred while fetching data.';
-    console.error(error);
+    console.log(authStore.get());
+
+    localStorage.setItem('fetchedTokens', JSON.stringify(authStore.get()));
+
+    if (response) {
+      window.location.href = '/admin';
+    }
+  } catch (e) {
+    error.value = 'Wrong Username or Password';
+    console.error(e);
   } finally {
     isLoading = false;
   }
