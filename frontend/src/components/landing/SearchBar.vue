@@ -7,9 +7,9 @@ import {
 } from '@heroicons/vue/24/outline';
 import { PlusIcon, MinusIcon } from '@heroicons/vue/24/solid';
 import ModalSmall from '../../common/ModalSmall.vue';
-import InputSuggestions from './InputSuggestions.vue';
+import LocationCombobox from './LocationCombobox.vue';
 import DatePicker from './DatePicker.vue';
-import DummyData from '../../dummy.data.json';
+import dummyData from '../../data/dummy.data';
 
 interface DatesRange {
   start: string;
@@ -72,10 +72,9 @@ const performSearch = () => {
         class="flex justify-around items-center bg-white p-2 w-[35%] rounded-full mr-3 h-[70%] border-2 border-gray-200"
       >
         <GlobeAsiaAustraliaIcon class="h-8 w-8 text-orange-600" />
-        <InputSuggestions
-          v-model="payload.location"
+        <LocationCombobox
           :modelValue="payload.location"
-          :options="DummyData.places"
+          :options="dummyData.location"
           @update:modelValue="value => (payload.location = value)"
         />
       </div>
