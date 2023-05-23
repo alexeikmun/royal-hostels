@@ -9,6 +9,7 @@ import Modal from '../Modal/Modal.vue';
 import LoginForm from '../LoginForm/LoginForm.vue';
 import SignupForm from '../SignupForm/SignupForm.vue';
 import navData from '../../data/navData';
+
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
