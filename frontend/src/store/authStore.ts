@@ -1,6 +1,11 @@
-import { atom } from 'nanostores';
+import { persistentMap } from '@nanostores/persistent';
 
-export const authStore = atom({
-  accessToken: '',
-  refreshToken: '',
+export type TokensValue = {
+  accessToken: string;
+  refreshToken: string;
+};
+
+export const session = persistentMap<TokensValue>('session:', {
+  accessToken: 'hola',
+  refreshToken: 'adios',
 });

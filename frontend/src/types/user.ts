@@ -11,8 +11,8 @@ export default interface UserModel {
   role: Role;
   lastLogin?: Date;
   hashRefreshToken?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum Role {
@@ -20,3 +20,21 @@ export enum Role {
   HOST = 'HOST',
   GUEST = 'GUEST',
 }
+
+export type TokenUser = {
+  address: 'string';
+  birthday: 'string';
+  city: 'string';
+  country: 'string';
+  createdAt: 'string';
+  email: 'string';
+  hashRefreshToken: 'string';
+  id: number;
+  lastLogin: 'string';
+  name: 'string';
+  password: 'string';
+  phone: 'string';
+  role: 'string';
+  updatedAt: 'string';
+  zipcode: 'string';
+};

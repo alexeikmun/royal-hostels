@@ -48,7 +48,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { AuthApi } from '../../api/AuthApi';
-import { authStore } from '../../store/authStore';
 
 let error = ref('');
 let isLoading = false;
@@ -66,11 +65,6 @@ async function handleSubmit() {
       email: email.value,
       password: password.value,
     });
-
-    // Store the response data
-    console.log(authStore.get());
-
-    localStorage.setItem('fetchedTokens', JSON.stringify(authStore.get()));
 
     if (response) {
       window.location.href = '/admin';
