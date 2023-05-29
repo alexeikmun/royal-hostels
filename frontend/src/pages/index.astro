@@ -2,13 +2,11 @@
 import PropertyCard from '../components/landing/PropertyCard';
 import SearchBar from '../components/landing/SearchBar.vue';
 import LandingLayout from '../layouts/user/Landing.astro';
-import dataDummy from '../dummy.data.json';
 
 import type PropertyModel from '../types/property';
 import { propertyApi } from '../api/ApiBuilder';
 
 const properties = await propertyApi.getAll();
-const { propertiesProp = properties } = Astro.props;
 
 export async function getStaticPaths() {
   // const properties = DummyData.properties
@@ -20,37 +18,15 @@ export async function getStaticPaths() {
 }
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <LandingLayout>
-      <SearchBar client:load client:only='vue' />
-      <div class='flex flex-wrap px-[3%] w-auto justify-center pb-[7%]'>
-        <div class='flex justify-start items-center flex-wrap w-auto'>
-          {
-            properties.map((property: PropertyModel) => (
-              <PropertyCard property={property} />
-            ))
-          }
-        </div>
-      </div>
-    </LandingLayout>
-  </body>
-</html>
-
-<style>
-  .body {
-  }
-</style>
-
-<script>
-  window.onload = event => {
-    console.log('page is fully loaded');
-  };
-</script>
+<LandingLayout>
+  <SearchBar client:load client:only='vue' />
+  <div class='flex flex-wrap px-[3%] w-auto justify-center pb-[7%]'>
+    <div class='flex justify-start items-center flex-wrap w-auto'>
+      {
+        properties.map((property: PropertyModel) => (
+          <PropertyCard property={property} />
+        ))
+      }
+    </div>
+  </div>
+</LandingLayout>
