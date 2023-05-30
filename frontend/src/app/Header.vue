@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, computed } from 'vue';
 import {
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
 } from '@heroicons/vue/24/solid';
-import Dropdown from './UserDropdown.vue';
-import Modal from '../Modal/Modal.vue';
-import LoginForm from '../LoginForm/LoginForm.vue';
-import SignupForm from '../SignupForm/SignupForm.vue';
-import navData from '../../data/navData';
+import Dropdown from '../components/landing/UserDropdown.vue';
+import Modal from '../components/Modal/Modal.vue';
+import LoginForm from '../components/LoginForm/LoginForm.vue';
+import SignupForm from '../components/SignupForm/SignupForm.vue';
+import navData from '../data/navData';
 
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
   isLoggedIn: boolean;
+  isFixed?: boolean;
 }>();
 
 const showDropdown = ref(false);
@@ -28,10 +29,30 @@ const toggle = (shouldOpen: boolean) => {
 };
 const showModal = ref(false);
 const showSignupModal = ref(false);
+
+const styleObject = computed(() => {
+  if (props.isFixed) {
+    return {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      width: '100%',
+    };
+  } else {
+    return {
+      position: 'initial',
+    };
+  }
+});
 </script>
 
 <template>
-  <header aria-label="Site Header" class="shadow-md h-[80px]">
+  <header
+    aria-label="Site Header"
+    class="shadow-md h-[80px] z-20"
+    :style="styleObject"
+  >
     <div
       class="mx-auto flex max-w-screen-xl items-center justify-between px-4 h-full"
     >

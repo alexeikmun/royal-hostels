@@ -1,0 +1,23 @@
+---
+import LayoutCommon from './LayoutCommon.astro';
+import Footer from './Footer.jsx';
+import Header from './Header.vue';
+import Sidebar from './Sidebar.astro';
+import NavBar from './NavBar.astro';
+import HostDashBoard from '../features/HostDashBoard.astro';
+---
+
+<LayoutCommon>
+  <div class='antialiased'>
+    <Header
+      slim={false}
+      isLoggedIn={true}
+      isFixed={true}
+      client:load
+      client:only='vue'
+    />
+    <!-- Sidebar -->
+
+    <HostDashBoard />
+  </div>
+</LayoutCommon>
