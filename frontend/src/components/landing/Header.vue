@@ -13,7 +13,6 @@ import navData from '../../data/navData';
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
-  isLoggedIn: boolean;
 }>();
 
 const showDropdown = ref(false);
@@ -28,6 +27,13 @@ const toggle = (shouldOpen: boolean) => {
 };
 const showModal = ref(false);
 const showSignupModal = ref(false);
+const isLoggedIn = ref('');
+
+const checkLoginStatus = () => {
+  // Retrieve localStorage variable
+  isLoggedIn.value = localStorage.getItem('session') || '';
+};
+checkLoginStatus();
 </script>
 
 <template>
