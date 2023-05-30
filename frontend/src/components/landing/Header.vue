@@ -9,6 +9,9 @@ import Modal from '../Modal/Modal.vue';
 import LoginForm from '../LoginForm/LoginForm.vue';
 import SignupForm from '../SignupForm/SignupForm.vue';
 import navData from '../../data/navData';
+import { useStore } from '@nanostores/vue';
+import { session } from '../../store/authStore';
+import { AuthApi } from '../../api/AuthApi';
 
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
@@ -29,11 +32,31 @@ const showModal = ref(false);
 const showSignupModal = ref(false);
 const isLoggedIn = ref('');
 
+const vueSession = useStore(session);
+
+console.log(session.value);
+
 const checkLoginStatus = () => {
   // Retrieve localStorage variable
-  isLoggedIn.value = localStorage.getItem('session') || '';
+  isLoggedIn.value = localStorage.getItem('session:accessToken') || '';
 };
 checkLoginStatus();
+
+async function handleLogout() {
+  try {
+    // Make API request with the entered username
+    const response = await AuthApi.logout(
+      { email: 'a@a.com' },
+      session?.get().accessToken,
+    );
+
+    if (response) {
+      window.location.href = '/';
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
 </script>
 
 <template>
@@ -90,7 +113,7 @@ checkLoginStatus();
       </nav>
 
       <div class="hidden items-center gap-4 lg:flex">
-        <div class="flex relative" v-if="isLoggedIn">
+        <div class="flex relative">
           <button
             @click="toggleDropdown"
             class="rounded-full bg-gray-100 p-0 text-gray-600"
@@ -121,7 +144,7 @@ checkLoginStatus();
                   View Reservations
                 </a>
 
-                <form method="POST" action="#">
+                <form @submit.prevent="handleLogout">
                   <button
                     type="submit"
                     class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
@@ -136,7 +159,7 @@ checkLoginStatus();
           </Dropdown>
         </div>
 
-        <div class="hidden items-center gap-4 lg:flex" v-else>
+        <div class="hidden items-center gap-4 lg:flex">
           <button
             class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
             @click="showModal = true"
