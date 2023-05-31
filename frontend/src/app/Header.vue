@@ -50,7 +50,7 @@ const styleObject = computed(() => {
 <template>
   <header
     aria-label="Site Header"
-    class="shadow-md h-[80px] z-20"
+    class="shadow-md h-[80px] z-20 bg-white"
     :style="styleObject"
   >
     <div
