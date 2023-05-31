@@ -21,12 +21,18 @@ class ApiBuilder<T> {
     return response.json();
   }
 
-  private async request(url: string, method: string, body?: any): Promise<any> {
+  private async request(
+    url: string,
+    method: string,
+    body?: any,
+    headers?: any,
+  ): Promise<any> {
     const response = await fetch(url, {
       method,
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
+        ...headers,
       },
     });
 
@@ -53,13 +59,19 @@ class ApiBuilder<T> {
     return data.data;
   }
 
-  async logout(item: T): Promise<string> {
+  async logout(item: T, token?: string): Promise<string> {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    console.log('headers', headers);
     const data = await this.request(
       `${apiUrl}/${this.entity}/logout`,
       'POST',
       item,
+      headers,
     );
-    this.dataStore.set([...this.dataStore.get(), data.data]);
+
+    session.setKey('accessToken', '');
+    session.setKey('refreshToken', '');
+
     return data.data;
   }
 

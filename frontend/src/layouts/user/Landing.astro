@@ -6,7 +6,7 @@ import Header from '../../components/landing/Header.vue';
 
 <LayoutCommon>
   <section>
-    <Header slim={false} isLoggedIn={false} client:load client:only='vue' />
+    <Header slim={false} client:load client:only='vue' />
     <slot />
     <Footer slim={false} />
   </section>
