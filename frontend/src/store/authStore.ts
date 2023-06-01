@@ -6,6 +6,6 @@ export type TokensValue = {
 };
 
 export const session = persistentMap<TokensValue>('session:', {
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
+  accessToken: '',
+  refreshToken: '',
 });

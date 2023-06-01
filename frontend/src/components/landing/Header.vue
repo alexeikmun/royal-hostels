@@ -113,7 +113,7 @@ async function handleLogout() {
       </nav>
 
       <div class="hidden items-center gap-4 lg:flex">
-        <div class="flex relative">
+        <div class="flex relative" v-if="isLoggedIn">
           <button
             @click="toggleDropdown"
             class="rounded-full bg-gray-100 p-0 text-gray-600"
@@ -159,7 +159,7 @@ async function handleLogout() {
           </Dropdown>
         </div>
 
-        <div class="hidden items-center gap-4 lg:flex">
+        <div class="hidden items-center gap-4 lg:flex" v-else>
           <button
             class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
             @click="showModal = true"
