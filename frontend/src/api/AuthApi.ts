@@ -1,95 +1,93 @@
 // import { atom } from 'nanostores';
+import jwt_decode from 'jwt-decode';
 import type AuthModel from '../types/auth';
 import type UserModel from '../types/user';
-import { session } from '../store/authStore';
+import type { TokenUser } from '../types/user';
+import { session, loggedUser } from '../store/authStore';
+import { ApiBuilder } from './ApiBuilder';
 
 // Move to global constants
 const apiUrl = 'http://localhost:3001';
 
-class ApiBuilder<T> {
-  entity: string;
-  dataStore: any;
+type DecodedToken = {
+  user: TokenUser;
+  [key: string]: any;
+};
 
+class AuthApi<T> extends ApiBuilder<T> {
   constructor(entity: string) {
+    super(entity);
     this.entity = entity;
   }
 
-  private handleResponse(response: Response): Promise<any> {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  }
-
-  private async request(
-    url: string,
-    method: string,
-    body?: any,
-    headers?: any,
-  ): Promise<any> {
-    const response = await fetch(url, {
-      method,
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-    });
-
-    // TODO: use response from back
-    if (response.status === 401) {
-      throw new Error('Unauthorized');
-    }
-
-    return this.handleResponse(response);
-  }
-
   async login(item: T): Promise<string> {
-    const data = await this.request(
-      `${apiUrl}/${this.entity}/login`,
-      'POST',
-      item,
-    );
+    const data = await this._request(`${apiUrl}/${this.entity}/login`, {
+      method: 'POST',
+      body: item,
+      headers: {},
+    });
 
     session.setKey('accessToken', data.data.accessToken);
     session.setKey('refreshToken', data.data.refreshToken);
 
-    console.log('session:api', session);
+    // Decode and save user credentials
+    const accessToken = data.data.accessToken;
+    if (accessToken) {
+      const decodedToken: DecodedToken = jwt_decode(accessToken as string);
+      loggedUser.set(decodedToken.user);
+    } else {
+      console.log('could not save user information');
+    }
 
     return data.data;
   }
 
-  async logout(item: T, token?: string): Promise<string> {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    console.log('headers', headers);
-    const data = await this.request(
-      `${apiUrl}/${this.entity}/logout`,
-      'POST',
-      item,
-      headers,
-    );
+  async logout(item: T, token: string): Promise<string> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
 
+    const data = await this._request(`${apiUrl}/${this.entity}/logout`, {
+      method: 'POST',
+      body: item,
+      headers,
+    });
+
+    // Clean state and local storage
     session.setKey('accessToken', '');
     session.setKey('refreshToken', '');
+    loggedUser.set({});
 
     return data.data;
   }
 
-  async isAuthenticated(item: T): Promise<UserModel> {
-    const data = await this.request(
+  async isAuthenticated(item: T, token: string): Promise<UserModel> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
+    const data = await this._request(
       `${apiUrl}/${this.entity}/is-authenticated`,
-      'POST',
-      item,
+      {
+        method: 'POST',
+        body: item,
+        headers,
+      },
     );
-    this.dataStore.set([...this.dataStore.get(), data.data]);
-    return data.data;
+    // console.log('user', data.data.user);
+    return data.data.user;
   }
 
-  async refresh(): Promise<string> {
-    const data = await this.request(`${apiUrl}/${this.entity}/refresh`, 'POST');
-    this.dataStore.set([...this.dataStore.get(), data.data]);
+  async refresh(token: string): Promise<string> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
+    const data = await this._request(`${apiUrl}/${this.entity}/refresh`, {
+      method: 'POST',
+      headers,
+    });
+
     return data.data;
   }
 }
 
-export const AuthApi = new ApiBuilder<AuthModel>('auth');
+export const authApi = new AuthApi<AuthModel>('auth');

@@ -3,11 +3,68 @@ import type Property from '../types/property';
 
 const apiUrl = 'http://localhost:3001';
 
-class ApiBuilder<T> {
+export type RequestOptions = {
+  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+  body?: any;
+  headers?: {
+    [key: string]: string;
+  };
+};
+
+// Parent API class with request method and error handling
+export class ApiBuilder<T> {
+  entity: string;
+
+  constructor(entity: string) {
+    this.entity = entity;
+  }
+
+  handleResponse(response: Response): Promise<any> {
+    if (response.status === 401) {
+      throw new Error('Unauthorized');
+    }
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+
+    const result = response.json();
+
+    return result;
+  }
+
+  async _request(url: string, options?: RequestOptions): Promise<any> {
+    // console.log('headers', options.headers);
+    const opts = {
+      method: options?.method,
+      body: JSON.stringify(options?.body),
+      headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers,
+      },
+    };
+    try {
+      const response = await fetch(url, opts);
+
+      return this.handleResponse(response);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log('Error Message: ', error.message);
+        return error.message;
+      } else {
+        console.log('unexpected error: ', error);
+        return 'An unexpected error occurred';
+      }
+    }
+  }
+}
+
+// Class builder for CRUD type endpoints
+class CrudApiBuilder<T> extends ApiBuilder<T> {
   entity: string;
   dataStore: any;
 
   constructor(entity: string) {
+    super(entity);
     this.entity = entity;
     this.dataStore = atom([]);
   }
@@ -19,11 +76,10 @@ class ApiBuilder<T> {
       return cachedData;
     }
 
-    const response = await fetch(`${apiUrl}/${this.entity}`);
-    const data = await response.json();
+    const response = await this._request(`${apiUrl}/${this.entity}`);
 
-    this.dataStore.set(data.data);
-    return data.data;
+    this.dataStore.set(response.data);
+    return response.data;
   }
 
   async getById(id: number): Promise<T> {
@@ -35,10 +91,10 @@ class ApiBuilder<T> {
       return cachedItem;
     }
 
-    const response = await fetch(`${apiUrl}/${this.entity}/${id}`);
-    const data = await response.json();
-    this.dataStore.set([...cachedData, data]);
-    return data;
+    const response = await this._request(`${apiUrl}/${this.entity}/${id}`);
+
+    this.dataStore.set([...cachedData, response]);
+    return response;
   }
 
   async create(item: T): Promise<T> {
@@ -56,30 +112,25 @@ class ApiBuilder<T> {
   }
 
   async update(id: number, item: T): Promise<T> {
-    const response = await fetch(`${apiUrl}/${this.entity}/${id}`, {
+    const response = await this._request(`${apiUrl}/${this.entity}/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(item),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: item,
     });
-
-    const data = await response.json();
 
     const updatedData = this.dataStore.get().map((d: any) => {
       if (d.id === id) {
-        return data;
+        return response;
       } else {
         return d;
       }
     });
 
     this.dataStore.set(updatedData);
-    return data;
+    return response;
   }
 
   async delete(id: number): Promise<void> {
-    await fetch(`${apiUrl}/${this.entity}/${id}`, {
+    const response = await this._request(`${apiUrl}/${this.entity}/${id}`, {
       method: 'DELETE',
     });
 
@@ -89,4 +140,5 @@ class ApiBuilder<T> {
   }
 }
 
-export const propertyApi = new ApiBuilder<Property>('property');
+// List of API services available (move to individual file?)
+export const propertyApi = new CrudApiBuilder<Property>('property');

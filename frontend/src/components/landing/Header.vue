@@ -10,8 +10,8 @@ import LoginForm from '../LoginForm/LoginForm.vue';
 import SignupForm from '../SignupForm/SignupForm.vue';
 import navData from '../../data/navData';
 import { useStore } from '@nanostores/vue';
-import { session } from '../../store/authStore';
-import { AuthApi } from '../../api/AuthApi';
+import { session, loggedUser } from '../../store/authStore';
+import { authApi } from '../../api/AuthApi';
 
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
@@ -31,10 +31,10 @@ const toggle = (shouldOpen: boolean) => {
 const showModal = ref(false);
 const showSignupModal = ref(false);
 const isLoggedIn = ref('');
+const userSession = ref();
 
-const vueSession = useStore(session);
-
-console.log(session.value);
+const vueSession = useStore(loggedUser);
+// console.log('store hook', vueSession.value);
 
 const checkLoginStatus = () => {
   // Retrieve localStorage variable
@@ -43,18 +43,29 @@ const checkLoginStatus = () => {
 checkLoginStatus();
 
 async function handleLogout() {
-  try {
-    // Make API request with the entered username
-    const response = await AuthApi.logout(
-      { email: 'a@a.com' },
+  // TODO: try-catch
+  if (loggedUser.get().email) {
+    const response1 = await authApi.isAuthenticated(
+      { email: loggedUser.get().email },
       session?.get().accessToken,
     );
 
-    if (response) {
-      window.location.href = '/';
+    if (response1) {
+      userSession.value = response1;
+      // console.log('is auth?', userSession.value);
+
+      const response = await authApi.logout(
+        { email: userSession.value.email },
+        session?.get().accessToken,
+      );
+
+      if (response) {
+        window.location.href = '/';
+      }
     }
-  } catch (e) {
-    console.error(e);
+
+    // const response2 = await authApi.refresh(session?.get().refreshToken);
+    // console.log('is refreshed?', response2);
   }
 }
 </script>
