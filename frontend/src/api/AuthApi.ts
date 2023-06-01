@@ -1,93 +1,136 @@
 // import { atom } from 'nanostores';
+import jwt_decode from 'jwt-decode';
 import type AuthModel from '../types/auth';
 import type UserModel from '../types/user';
-import { session } from '../store/authStore';
+import type { TokenUser } from '../types/user';
+import { session, loggedUser } from '../store/authStore';
 
 // Move to global constants
 const apiUrl = 'http://localhost:3001';
 
+type RequestOptions = {
+  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+  body?: any;
+  headers?: {
+    [key: string]: string;
+  };
+};
+
+type DecodedToken = {
+  user: TokenUser;
+  [key: string]: any;
+};
+
 class ApiBuilder<T> {
   entity: string;
-  dataStore: any;
 
   constructor(entity: string) {
     this.entity = entity;
   }
 
-  private handleResponse(response: Response): Promise<any> {
-    if (!response.ok) {
-      throw new Error(response.statusText);
+  private async request(url: string, options: RequestOptions): Promise<any> {
+    // console.log('headers', options.headers);
+    try {
+      const response = await fetch(url, {
+        method: options.method,
+        body: JSON.stringify(options.body),
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+      });
+
+      return this.handleResponse(response);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log('Error Message: ', error.message);
+        return error.message;
+      } else {
+        console.log('unexpected error: ', error);
+        return 'An unexpected error occurred';
+      }
     }
-    return response.json();
   }
 
-  private async request(
-    url: string,
-    method: string,
-    body?: any,
-    headers?: any,
-  ): Promise<any> {
-    const response = await fetch(url, {
-      method,
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-    });
-
-    // TODO: use response from back
+  private handleResponse(response: Response): Promise<any> {
     if (response.status === 401) {
       throw new Error('Unauthorized');
     }
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
 
-    return this.handleResponse(response);
+    const result = response.json();
+
+    return result;
   }
 
   async login(item: T): Promise<string> {
-    const data = await this.request(
-      `${apiUrl}/${this.entity}/login`,
-      'POST',
-      item,
-    );
+    const data = await this.request(`${apiUrl}/${this.entity}/login`, {
+      method: 'POST',
+      body: item,
+      headers: {},
+    });
 
     session.setKey('accessToken', data.data.accessToken);
     session.setKey('refreshToken', data.data.refreshToken);
 
-    console.log('session:api', session);
+    // Decode and save user credentials
+    const accessToken = data.data.accessToken;
+    if (accessToken) {
+      const decodedToken: DecodedToken = jwt_decode(accessToken as string);
+      loggedUser.set(decodedToken.user);
+    } else {
+      console.log('could not save user information');
+    }
 
     return data.data;
   }
 
-  async logout(item: T, token?: string): Promise<string> {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    console.log('headers', headers);
-    const data = await this.request(
-      `${apiUrl}/${this.entity}/logout`,
-      'POST',
-      item,
-      headers,
-    );
+  async logout(item: T, token: string): Promise<string> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
 
+    const data = await this.request(`${apiUrl}/${this.entity}/logout`, {
+      method: 'POST',
+      body: item,
+      headers,
+    });
+
+    // Clean state and local storage
     session.setKey('accessToken', '');
     session.setKey('refreshToken', '');
+    loggedUser.set({});
 
     return data.data;
   }
 
-  async isAuthenticated(item: T): Promise<UserModel> {
+  async isAuthenticated(item: T, token: string): Promise<UserModel> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
     const data = await this.request(
       `${apiUrl}/${this.entity}/is-authenticated`,
-      'POST',
-      item,
+      {
+        method: 'POST',
+        body: item,
+        headers,
+      },
     );
-    this.dataStore.set([...this.dataStore.get(), data.data]);
-    return data.data;
+    // console.log('user', data.data.user);
+    return data.data.user;
   }
 
-  async refresh(): Promise<string> {
-    const data = await this.request(`${apiUrl}/${this.entity}/refresh`, 'POST');
-    this.dataStore.set([...this.dataStore.get(), data.data]);
+  async refresh(token: string): Promise<string> {
+    let headers = {
+      Authorization: 'Bearer ' + token,
+    };
+    const data = await this.request(`${apiUrl}/${this.entity}/refresh`, {
+      method: 'POST',
+      headers,
+    });
+
     return data.data;
   }
 }

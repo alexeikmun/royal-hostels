@@ -22,19 +22,19 @@ export enum Role {
 }
 
 export type TokenUser = {
-  address: 'string';
-  birthday: 'string';
-  city: 'string';
-  country: 'string';
-  createdAt: 'string';
-  email: 'string';
-  hashRefreshToken: 'string';
+  address: string;
+  birthday: string;
+  city: string;
+  country: string;
+  createdAt: string;
+  email: string;
+  hashRefreshToken: string;
   id: number;
-  lastLogin: 'string';
-  name: 'string';
-  password: 'string';
-  phone: 'string';
-  role: 'string';
-  updatedAt: 'string';
-  zipcode: 'string';
+  lastLogin: string;
+  name: string;
+  password: string;
+  phone: string;
+  role: string;
+  updatedAt: string;
+  zipcode: string;
 };

@@ -3,6 +3,11 @@ import type Property from '../types/property';
 
 const apiUrl = 'http://localhost:3001';
 
+// Todos:
+// try-catch blocks
+// shared error handling
+// type responses
+
 class ApiBuilder<T> {
   entity: string;
   dataStore: any;

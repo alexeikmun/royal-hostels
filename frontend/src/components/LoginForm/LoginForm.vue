@@ -67,7 +67,7 @@ async function handleSubmit() {
     });
 
     if (response) {
-      window.location.href = '/admin';
+      window.location.href = '/host/dashboard';
     }
   } catch (e) {
     error.value = 'Wrong Username or Password';
