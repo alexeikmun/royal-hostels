@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { AuthApi } from '../../api/AuthApi';
+import { authApi } from '../../api/AuthApi';
 
 let error = ref('');
 let isLoading = false;
@@ -61,7 +61,7 @@ async function handleSubmit() {
     error.value = '';
 
     // Make API request with the entered username
-    const response = await AuthApi.login({
+    const response = await authApi.login({
       email: email.value,
       password: password.value,
     });

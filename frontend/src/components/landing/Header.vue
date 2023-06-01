@@ -11,7 +11,7 @@ import SignupForm from '../SignupForm/SignupForm.vue';
 import navData from '../../data/navData';
 import { useStore } from '@nanostores/vue';
 import { session, loggedUser } from '../../store/authStore';
-import { AuthApi } from '../../api/AuthApi';
+import { authApi } from '../../api/AuthApi';
 
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
@@ -45,7 +45,7 @@ checkLoginStatus();
 async function handleLogout() {
   // TODO: try-catch
   if (loggedUser.get().email) {
-    const response1 = await AuthApi.isAuthenticated(
+    const response1 = await authApi.isAuthenticated(
       { email: loggedUser.get().email },
       session?.get().accessToken,
     );
@@ -54,7 +54,7 @@ async function handleLogout() {
       userSession.value = response1;
       // console.log('is auth?', userSession.value);
 
-      const response = await AuthApi.logout(
+      const response = await authApi.logout(
         { email: userSession.value.email },
         session?.get().accessToken,
       );
@@ -64,7 +64,7 @@ async function handleLogout() {
       }
     }
 
-    // const response2 = await AuthApi.refresh(session?.get().refreshToken);
+    // const response2 = await authApi.refresh(session?.get().refreshToken);
     // console.log('is refreshed?', response2);
   }
 }
