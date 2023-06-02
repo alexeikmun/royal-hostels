@@ -4,6 +4,7 @@ const dummyData = {
     { city: 'Medellín', country: 'Colombia' },
     { city: 'Cali', country: 'Colombia' },
     { city: 'Barranquilla', country: 'Colombia' },
+    { city: 'Barcelona', country: 'Spain' },
   ],
 };
 

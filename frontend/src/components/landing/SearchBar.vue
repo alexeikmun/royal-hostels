@@ -6,6 +6,8 @@ import {
   GlobeAsiaAustraliaIcon,
 } from '@heroicons/vue/24/outline';
 import { PlusIcon, MinusIcon } from '@heroicons/vue/24/solid';
+import { useStore } from '@nanostores/vue';
+import { $search } from '../../store/searchStore';
 import ModalSmall from '../../common/ModalSmall.vue';
 import LocationCombobox from './LocationCombobox.vue';
 import DatePicker from './DatePicker.vue';
@@ -36,7 +38,7 @@ const payload: Ref<Payload> = ref({
 });
 
 watchEffect(() => {
-  console.log(payload.value);
+  console.log('search:effect', payload.value);
 });
 
 const modalIsOpen = ref(false);
@@ -59,14 +61,15 @@ const handleAddOrSubtractGuest = (operation: string) => {
 };
 
 const performSearch = () => {
-  console.log(payload.value);
+  console.log('search:click', payload.value);
+  $search.set(payload.value);
 };
 </script>
 
 <template>
-  <div class="w-full h-[120px] flex justify-center items-center relative">
+  <div class="h-[120px] flex justify-center items-center relative mx-5">
     <div
-      class="w-[85%] flex justify-center items-center h-[80%] bg-transparent rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl transition-all"
+      class="w-full flex justify-center items-center h-[80%] bg-transparent rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl transition-all"
     >
       <div
         class="flex justify-around items-center bg-white p-2 w-[35%] rounded-full mr-3 h-[70%] border-2 border-gray-200"
