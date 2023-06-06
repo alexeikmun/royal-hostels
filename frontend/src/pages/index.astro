@@ -2,31 +2,27 @@
 import PropertyCard from '../components/landing/PropertyCard';
 import SearchBar from '../components/landing/SearchBar.vue';
 import LandingLayout from '../layouts/user/Landing.astro';
+import FilterBar from '../components/landing/FilterBar.astro';
+import PropertiesList from '../components/landing/PropertiesList';
 
 import type PropertyModel from '../types/property';
 import { propertyApi } from '../api/ApiBuilder';
+import { searchApi } from '../api/searchApi';
 
 const properties = await propertyApi.getAll();
 
-export async function getStaticPaths() {
-  // const properties = DummyData.properties
-  const properties = await propertyApi.getAll();
-
-  return properties.map(el => {
-    return { params: { id: el.id }, props: el };
-  });
-}
 ---
 
 <LandingLayout>
-  <SearchBar client:load client:only='vue' />
-  <div class='flex flex-wrap px-[3%] w-auto justify-center pb-[7%]'>
-    <div class='flex justify-start items-center flex-wrap w-auto'>
-      {
-        properties.map((property: PropertyModel) => (
-          <PropertyCard property={property} />
-        ))
-      }
-    </div>
+  <div class='flex flex-nowrap px-[3%] flex-col w-auto justify-center pb-[7%]'>
+    <SearchBar client:load client:only='vue' />
+    <FilterBar />
+    <PropertiesList properties={properties} client:visible />
   </div>
 </LandingLayout>
+
+<script>
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+  console.log('home:params', params);
+</script>

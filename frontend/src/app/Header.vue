@@ -1,21 +1,24 @@
 <script lang="ts" setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, computed } from 'vue';
 import {
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
 } from '@heroicons/vue/24/solid';
-import Dropdown from './UserDropdown.vue';
-import Modal from '../Modal/Modal.vue';
-import LoginForm from '../LoginForm/LoginForm.vue';
-import SignupForm from '../SignupForm/SignupForm.vue';
-import navData from '../../data/navData';
+
 import { useStore } from '@nanostores/vue';
-import { session, loggedUser } from '../../store/authStore';
-import { authApi } from '../../api/AuthApi';
+import { session, loggedUser } from '../store/authStore';
+import { authApi } from '../api/AuthApi';
+import Dropdown from '../components/landing/UserDropdown.vue';
+import Modal from '../components/Modal/Modal.vue';
+import LoginForm from '../components/LoginForm/LoginForm.vue';
+import SignupForm from '../components/SignupForm/SignupForm.vue';
+import navData from '../data/navData';
 
 // import SideBarDrawer from '../../common/SideBarDrawer.vue';
 const props = defineProps<{
   slim: boolean;
+  isLoggedIn: boolean;
+  isFixed?: boolean;
 }>();
 
 const showDropdown = ref(false);
@@ -52,7 +55,7 @@ async function handleLogout() {
 
     if (response1) {
       userSession.value = response1;
-      // console.log('is auth?', userSession.value);
+      console.log('is auth?', userSession.value);
 
       const response = await authApi.logout(
         { email: userSession.value.email },
@@ -68,10 +71,30 @@ async function handleLogout() {
     // console.log('is refreshed?', response2);
   }
 }
+
+const styleObject = computed(() => {
+  if (props.isFixed) {
+    return {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      width: '100%',
+    };
+  } else {
+    return {
+      position: 'initial',
+    };
+  }
+});
 </script>
 
 <template>
-  <header aria-label="Site Header" class="shadow-md h-[80px]">
+  <header
+    aria-label="Site Header"
+    class="shadow-md h-[80px] z-20 bg-white"
+    :style="styleObject"
+  >
     <div
       class="mx-auto flex max-w-screen-xl items-center justify-between px-4 h-full"
     >

@@ -1,9 +1,41 @@
 const dummyData = {
   location: [
-    { city: 'Bogotá', country: 'Colombia' },
-    { city: 'Medellín', country: 'Colombia' },
-    { city: 'Cali', country: 'Colombia' },
-    { city: 'Barranquilla', country: 'Colombia' },
+    {
+      city: 'London',
+      country: 'UK',
+    },
+    {
+      city: 'New York',
+      country: 'USA',
+    },
+    {
+      city: 'Berlin',
+      country: 'Germany',
+    },
+    {
+      city: 'Sydney',
+      country: 'Australia',
+    },
+    {
+      city: 'Tokyo',
+      country: 'Japan',
+    },
+    {
+      city: 'Rome',
+      country: 'Italy',
+    },
+    {
+      city: 'Paris',
+      country: 'France',
+    },
+    {
+      city: 'Barcelona',
+      country: 'Spain',
+    },
+    {
+      city: 'Amsterdam',
+      country: 'Netherlands',
+    },
   ],
 };
 

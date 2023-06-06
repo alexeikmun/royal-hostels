@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import type AuthModel from '../types/auth';
 import type UserModel from '../types/user';
 import type { TokenUser } from '../types/user';
-import { session, loggedUser } from '../store/authStore';
+import { session, loggedUser, initialState } from '../store/authStore';
 import { ApiBuilder } from './ApiBuilder';
 
 // Move to global constants
@@ -56,7 +56,7 @@ class AuthApi<T> extends ApiBuilder<T> {
     // Clean state and local storage
     session.setKey('accessToken', '');
     session.setKey('refreshToken', '');
-    loggedUser.set({});
+    loggedUser.set(initialState);
 
     return data.data;
   }
@@ -73,8 +73,8 @@ class AuthApi<T> extends ApiBuilder<T> {
         headers,
       },
     );
-    // console.log('user', data.data.user);
-    return data.data.user;
+
+    return data.data;
   }
 
   async refresh(token: string): Promise<string> {

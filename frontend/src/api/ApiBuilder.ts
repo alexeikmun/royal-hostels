@@ -32,8 +32,14 @@ export class ApiBuilder<T> {
     return result;
   }
 
-  async _request(url: string, options?: RequestOptions): Promise<any> {
-    // console.log('headers', options.headers);
+  async _request(
+    url: string,
+    options?: RequestOptions,
+    params?: URLSearchParams,
+  ): Promise<any> {
+    console.log('headers', options?.headers);
+    const requestUrl = params ? `${url}?${params.toString()}` : url;
+    // console.log('requestUrl', requestUrl);
     const opts = {
       method: options?.method,
       body: JSON.stringify(options?.body),
@@ -43,7 +49,7 @@ export class ApiBuilder<T> {
       },
     };
     try {
-      const response = await fetch(url, opts);
+      const response = await fetch(requestUrl, opts);
 
       return this.handleResponse(response);
     } catch (error) {
