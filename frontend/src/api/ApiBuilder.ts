@@ -37,7 +37,7 @@ export class ApiBuilder<T> {
     options?: RequestOptions,
     params?: URLSearchParams,
   ): Promise<any> {
-    // console.log('headers', options.headers);
+    console.log('headers', options?.headers);
     const requestUrl = params ? `${url}?${params.toString()}` : url;
     // console.log('requestUrl', requestUrl);
     const opts = {

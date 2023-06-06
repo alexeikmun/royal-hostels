@@ -1,7 +1,8 @@
 import { useStore } from '@nanostores/react';
-import { $search } from '../../store/searchStore';
+import { propertyApi } from '../../api/ApiBuilder';
 import type PropertyModel from '../../types/property';
 import PropertyCard from './PropertyCard';
+import { useEffect, useState } from 'react';
 
 interface Props {
   properties: PropertyModel[];
@@ -9,13 +10,25 @@ interface Props {
 
 const PropertiesList = (props: Props) => {
   const { properties } = props;
-  const store = useStore($search);
+  const [propertiesList, setPropertiesList] = useState(properties);
+  const [once, setOnce] = useState(true);
+  const store2 = useStore(propertyApi.dataStore);
 
-  console.log('search:list', store);
+  useEffect(() => {
+    setOnce(false);
+  }, []);
+
+  useEffect(() => {
+    if (!once) {
+      setPropertiesList(store2);
+    }
+    console.log('search:list2', store2);
+    setOnce(false);
+  }, [store2]);
 
   return (
     <div className='flex flex-wrap -mx-4'>
-      {properties.map((property: PropertyModel) => (
+      {propertiesList.map((property: PropertyModel) => (
         <div
           key={property.id}
           className='lg:w-1/4 md:w-1/2 sm:w-1/1 px-4 flex mb-4'

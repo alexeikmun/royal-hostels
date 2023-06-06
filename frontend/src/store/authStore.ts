@@ -11,9 +11,27 @@ export const session = persistentMap<TokensValue>('session:', {
   refreshToken: '',
 });
 
-export const loggedUser = persistentAtom<TokenUser | {}>(
+export const initialState = {
+  address: '',
+  birthday: '',
+  city: '',
+  country: '',
+  createdAt: '',
+  email: '',
+  hashRefreshToken: '',
+  id: 0,
+  lastLogin: '',
+  name: '',
+  password: '',
+  phone: '',
+  role: '',
+  updatedAt: '',
+  zipcode: '',
+};
+
+export const loggedUser = persistentAtom<TokenUser>(
   'session:user',
-  {},
+  initialState,
   {
     encode(value) {
       return JSON.stringify(value);

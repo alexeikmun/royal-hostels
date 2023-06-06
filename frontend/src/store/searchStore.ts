@@ -1,16 +1,12 @@
 import { atom } from 'nanostores';
 
 type Search = {
-  dates: {
-    start: Date;
-    end: Date;
-  };
-  guests: number;
   location: string;
 };
 
-export const $search = atom<Search[]>([]);
+export const $search = atom<Search>({ location: '' });
 
-export function addUser(user: Search) {
-  $search.set([...$search.get(), user]);
+export function addSearch(user: Search) {
+  const saved = $search.get();
+  $search.set({ ...saved, location: user.location });
 }

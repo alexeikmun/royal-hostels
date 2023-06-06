@@ -19,6 +19,16 @@ class SearchApi<T> extends ApiBuilder<T> {
     this.entity = entity;
   }
 
+  async searchLocations(params?: URLSearchParams): Promise<T[]> {
+    const data = await this._request(
+      `${apiUrl}/${this.entity}/locations`,
+      { method: 'GET' },
+      params,
+    );
+
+    return data.data;
+  }
+
   async searchHostels(params?: URLSearchParams): Promise<T[]> {
     const data = await this._request(
       `${apiUrl}/${this.entity}/hostels`,

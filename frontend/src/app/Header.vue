@@ -6,8 +6,8 @@ import {
 } from '@heroicons/vue/24/solid';
 
 import { useStore } from '@nanostores/vue';
-import { session, loggedUser } from '../../store/authStore';
-import { authApi } from '../../api/AuthApi';
+import { session, loggedUser } from '../store/authStore';
+import { authApi } from '../api/AuthApi';
 import Dropdown from '../components/landing/UserDropdown.vue';
 import Modal from '../components/Modal/Modal.vue';
 import LoginForm from '../components/LoginForm/LoginForm.vue';
@@ -55,7 +55,7 @@ async function handleLogout() {
 
     if (response1) {
       userSession.value = response1;
-      // console.log('is auth?', userSession.value);
+      console.log('is auth?', userSession.value);
 
       const response = await authApi.logout(
         { email: userSession.value.email },

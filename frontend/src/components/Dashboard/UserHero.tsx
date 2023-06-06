@@ -1,16 +1,15 @@
 import { useStore } from '@nanostores/react';
-import { $user } from '../../store/authStore';
+import { loggedUser } from '../../store/authStore';
 import { useState, useEffect } from 'react';
 import type { TokenUser } from '../../types/user';
 
 export const UserHero = () => {
   const [user, setUser] = useState<TokenUser>();
-  const storedUser = useStore($user);
-  console.log(storedUser);
+  const storedUser = useStore(loggedUser);
 
   useEffect(() => {
-    if (storedUser[0]) {
-      setUser(storedUser[0]);
+    if (loggedUser) {
+      setUser(loggedUser.get());
     }
   }, []);
 
@@ -24,7 +23,7 @@ export const UserHero = () => {
             </h1>
 
             <p className='mt-1.5 text-sm text-gray-500'>
-              Let's write a new blog post! 🎉
+              Welcome to your dashboard! 🎉
             </p>
           </div>
 
