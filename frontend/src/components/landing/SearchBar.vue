@@ -9,7 +9,7 @@ import { PlusIcon, MinusIcon } from '@heroicons/vue/24/solid';
 import { useStore } from '@nanostores/vue';
 import { $search } from '../../store/searchStore';
 import { propertyApi } from '../../api/ApiBuilder';
-import ModalSmall from '../../common/ModalSmall.vue';
+import ModalSmall from '../Modal/ModalSmall.vue';
 import LocationCombobox from './LocationCombobox.vue';
 import DatePicker from './DatePicker.vue';
 import dummyData from '../../data/dummy.data';

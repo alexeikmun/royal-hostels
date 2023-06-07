@@ -1,13 +1,12 @@
 ---
-import Sidebar from '../app/Sidebar.astro';
+
 import { UserHero } from '../components/Dashboard/UserHero';
 import MainChart from '../components/Dashboard/MainChart.astro';
 import Transactions from '../components/Dashboard/Transactions.astro';
+import LayoutSideBar from '../app/LayoutSideBar.astro';
 ---
 
-<div>
-  <Sidebar />
-
+<LayoutSideBar>
   <main class='p-4 md:ml-64 h-auto pt-20 z-10'>
     <UserHero client:load />
     <div class='grid grid-cols-2 gap-4 mb-4'>
@@ -23,4 +22,4 @@ import Transactions from '../components/Dashboard/Transactions.astro';
       </div>
     </div>
   </main>
-</div>
+</LayoutSideBar>
