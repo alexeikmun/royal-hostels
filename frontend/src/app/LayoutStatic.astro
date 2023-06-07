@@ -1,0 +1,23 @@
+---
+import LayoutCommon from './LayoutCommon.astro';
+import Footer from './Footer.tsx';
+import Header from './Header.vue';
+
+interface Props {
+  slim: Boolean;
+}
+
+const { slim } = Astro.props;
+---
+
+<LayoutCommon>
+  <main>
+    <Header slim={false} isLoggedIn={false} client:load client:only='vue' />
+    <div
+      class='mx-auto flex flex-col max-w-screen-xl items-center justify-between px-4 h-full'
+    >
+      <slot />
+    </div>
+    <Footer slim={false} />
+  </main>
+</LayoutCommon>

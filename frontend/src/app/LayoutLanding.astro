@@ -1,0 +1,13 @@
+---
+import LayoutCommon from './LayoutCommon.astro';
+import Footer from './Footer.jsx';
+import Header from './Header.vue';
+---
+
+<LayoutCommon>
+  <section>
+    <Header slim={false} client:load client:only='vue' />
+    <slot />
+    <Footer slim={false} />
+  </section>
+</LayoutCommon>
