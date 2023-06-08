@@ -1,7 +1,7 @@
 ---
 import PropertyCard from '../components/landing/PropertyCard';
 import SearchBar from '../components/landing/SearchBar.vue';
-import LandingLayout from '../layouts/user/Landing.astro';
+import LayoutLanding from '../app/LayoutLanding.astro';
 import FilterBar from '../components/landing/FilterBar.astro';
 import PropertiesList from '../components/landing/PropertiesList';
 
@@ -13,13 +13,13 @@ const properties = await propertyApi.getAll();
 
 ---
 
-<LandingLayout>
+<LayoutLanding>
   <div class='flex flex-nowrap px-[3%] flex-col w-auto justify-center pb-[7%]'>
     <SearchBar client:load client:only='vue' />
     <FilterBar />
     <PropertiesList properties={properties} client:visible />
   </div>
-</LandingLayout>
+</LayoutLanding>
 
 <script>
   const urlSearchParams = new URLSearchParams(window.location.search);
