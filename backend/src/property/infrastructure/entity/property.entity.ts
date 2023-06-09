@@ -61,6 +61,9 @@ export class Property implements PropertyModel {
     @Column({ type: 'decimal' })
     price: number;
 
+    @Column({ type: 'decimal' })
+    adminId: number;
+
     @CreateDateColumn()
     createdAt: Date;
 
