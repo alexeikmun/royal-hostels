@@ -17,6 +17,7 @@ import { AdminMapper } from '../utils/admin.mapper';
 import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-proxy';
 import { BcryptService } from 'src/auth/infrastructure/services/bcrypt.service';
 import { BcryptModule } from 'src/auth/infrastructure/module/bcrypt.module';
+import { GetAdminPropertiesUseCase } from 'src/admin/application/get-admin-properties';
 
 @Module({
     imports: [AdminRepositoryModule, AdminMapperModule, BcryptModule],
@@ -26,6 +27,8 @@ export class AdminUsecaseModule {
     static GET_ADMINS_USECASES_PROXY = 'getAdminsUsecasesProxy';
     static POST_ADMIN_USECASES_PROXY = 'postAdminUsecasesProxy';
     static DELETE_ADMIN_USECASES_PROXY = 'deleteAdminUsecasesProxy';
+    static GET_ADMIN_PROPERTIES_USECASES_PROXY =
+        'getAdminPropertiesUsecasesProxy';
     static PUT_ADMIN_USECASES_PROXY = 'putAdminUsecasesProxy';
 
     static register(): DynamicModule {
@@ -77,6 +80,15 @@ export class AdminUsecaseModule {
                     useFactory: (repository: AdminRepository) =>
                         new UseCaseProxy(new DeleteAdminUseCase(repository)),
                 },
+                {
+                    inject: [AdminRepository],
+                    provide:
+                        AdminUsecaseModule.GET_ADMIN_PROPERTIES_USECASES_PROXY,
+                    useFactory: (repository: AdminRepository) =>
+                        new UseCaseProxy(
+                            new GetAdminPropertiesUseCase(repository),
+                        ),
+                },
             ],
             exports: [
                 AdminUsecaseModule.GET_ADMIN_USECASES_PROXY,
@@ -84,6 +96,7 @@ export class AdminUsecaseModule {
                 AdminUsecaseModule.POST_ADMIN_USECASES_PROXY,
                 AdminUsecaseModule.PUT_ADMIN_USECASES_PROXY,
                 AdminUsecaseModule.DELETE_ADMIN_USECASES_PROXY,
+                AdminUsecaseModule.GET_ADMIN_PROPERTIES_USECASES_PROXY,
             ],
         };
     }

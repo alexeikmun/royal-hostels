@@ -12,22 +12,8 @@ export default class AdminSeeder implements Seeder {
         dataSource: DataSource,
         factoryManager: SeederFactoryManager,
     ): Promise<any> {
-        // const adminRepository = dataSource.getRepository(Admin);
-        // const userRepository = dataSource.getRepository(User);
-
-        // const data = [];
-
-        // for (const prop of adminArray) {
-        //     const temp = await repository.findOneBy({
-        //         name: prop.name,
-        //     });
-
-        //     if (!temp) {
-        //         data.push(prop);
-        //     }
-        // }
-
-        // await repository.insert(data);
+        const adminRepository = dataSource.getRepository(Admin);
+        const userRepository = dataSource.getRepository(User);
 
         const user = new User();
         user.name = 'Admin';
@@ -41,16 +27,12 @@ export default class AdminSeeder implements Seeder {
         user.zipcode = '110111';
         user.password = '1q2w3e4r';
 
-        await dataSource.manager.save(user);
+        await userRepository.save(user);
 
         const admin = new Admin();
         admin.name = 'Admin';
         admin.isSuper = true;
 
-        await dataSource.manager.save(admin);
-
-        // const cache = await adminRepository.find();
-
-        // amenityCache = [...cache];
+        await adminRepository.save(admin);
     }
 }

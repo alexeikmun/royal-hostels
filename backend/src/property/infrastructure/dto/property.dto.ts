@@ -73,6 +73,11 @@ export class CreatePropertyDto {
         type: Number,
     })
     availableRooms: number;
+
+    @ApiProperty({
+        type: Number,
+    })
+    adminId: number;
 }
 
 export class UpdatePropertyDto extends CreatePropertyDto {}

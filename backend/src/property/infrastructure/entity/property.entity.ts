@@ -9,11 +9,13 @@ import {
     ManyToMany,
     JoinTable,
     OneToMany,
+    JoinColumn,
 } from 'typeorm';
 import { PropertyType } from './property-type.entity';
 import { Amenity } from 'src/amenity/infrastructure/entity/amenity.entity';
 import { AmenityModel } from 'src/amenity/domain/model/amenity.model';
 import { Room } from 'src/room/infrastructure/entity/room.entity';
+import { Admin } from 'src/admin/infrastructure/entity/admin.entity';
 
 @Entity()
 export class Property implements PropertyModel {
@@ -78,4 +80,7 @@ export class Property implements PropertyModel {
         cascade: true,
     })
     rooms: Room[];
+
+    @ManyToOne(() => Admin, (admin) => admin.properties)
+    admin: any;
 }

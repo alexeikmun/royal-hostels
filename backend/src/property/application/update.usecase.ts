@@ -13,10 +13,9 @@ export class UpdatePropertyUseCase {
         id: number,
         property: UpdatePropertyDto,
     ): Promise<PropertyModel> {
-        const propertyEntity = this.propertyMapper.toEntity(property);
         const updatedProperty = await this.propertyRepository.update(
             id,
-            propertyEntity,
+            property,
         );
         return this.propertyMapper.toDomain(updatedProperty);
     }

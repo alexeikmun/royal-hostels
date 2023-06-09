@@ -1,4 +1,5 @@
 import { AdminModel } from 'src/admin/domain/model/admin.model';
+import { Property } from 'src/property/infrastructure/entity/property.entity';
 import { User } from 'src/user/infrastructure/entity/user.entity';
 import {
     Entity,
@@ -8,6 +9,7 @@ import {
     UpdateDateColumn,
     OneToOne,
     JoinColumn,
+    OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -27,4 +29,7 @@ export class Admin extends AdminModel {
     @OneToOne(() => User, { cascade: true })
     @JoinColumn({ name: 'id' })
     user: User;
+
+    @OneToMany(() => Property, (property) => property.admin)
+    properties: Property[];
 }

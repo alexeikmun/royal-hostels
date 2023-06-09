@@ -8,6 +8,7 @@ import {
 import { AdminRepositoryInterface } from 'src/admin/domain/repository/admin.repository.interface';
 import { Admin } from '../entity/admin.entity';
 import { AdminMapper } from '../utils/admin.mapper';
+import { Property } from 'src/property/infrastructure/entity/property.entity';
 
 @Injectable()
 export class AdminRepository implements AdminRepositoryInterface {
@@ -49,5 +50,15 @@ export class AdminRepository implements AdminRepositoryInterface {
 
     async find(): Promise<Admin[]> {
         return await this.repository.find();
+    }
+
+    // Getting all properties from admin
+    async getAdminProperties(id: number): Promise<Property[]> {
+        const admin = await this.repository.findOne({
+            relations: ['properties'],
+            where: { id: id },
+        });
+
+        return admin.properties;
     }
 }

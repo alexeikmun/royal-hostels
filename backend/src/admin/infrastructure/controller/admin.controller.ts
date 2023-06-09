@@ -29,6 +29,7 @@ import { UseCaseProxy } from '@shared/infrastructure/usecases-proxy/usecases-pro
 import { JwtAuthGuard } from 'src/auth/infrastructure/guard/jwtAuth.guard';
 import { Roles } from 'src/auth/infrastructure/decorator/roles.decorator';
 import { Role } from 'src/auth/domain/enum/role.enum';
+import { GetAdminPropertiesUseCase } from 'src/admin/application/get-admin-properties';
 
 @Controller('admin')
 @ApiTags('Admin')
@@ -44,6 +45,8 @@ export class AdminController {
         private readonly createAdminUseCase: UseCaseProxy<CreateAdminUseCase>,
         @Inject(AdminUsecaseModule.PUT_ADMIN_USECASES_PROXY)
         private readonly updateAdminUseCase: UseCaseProxy<UpdateAdminUseCase>,
+        @Inject(AdminUsecaseModule.GET_ADMIN_PROPERTIES_USECASES_PROXY)
+        private readonly getdminPropertiesUseCase: UseCaseProxy<GetAdminPropertiesUseCase>,
     ) {}
     // @UseGuards(JwtAuthGuard)
     @Post()
@@ -85,5 +88,10 @@ export class AdminController {
     @Get()
     async find() {
         return await this.findAdminsUseCase.getInstance().execute();
+    }
+
+    @Get(':id/properties')
+    async getAdminProperties(@Param('id') id: number) {
+        return await this.getdminPropertiesUseCase.getInstance().execute(id);
     }
 }
