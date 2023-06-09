@@ -1,10 +1,7 @@
 ---
 import { UserHero } from '../../components/Dashboard/UserHero';
-import MainChart from '../../components/Dashboard/MainChart.astro';
-import Transactions from '../../components/Dashboard/Transactions.astro';
 import LayoutSideBar from '../../app/LayoutSideBar.astro';
-import PropertyCrudTable from '../../components/PropertyCrudTable.vue';
-// import HostPropertyTable from '../../features/HostPropertyTable.astro';
+import PropertyCrudTable from '../../features/PropertyCrudTable.vue';
 import { propertyApi } from '../../api/ApiBuilder';
 import type PropertyModel from '../../types/property';
 
@@ -14,6 +11,10 @@ const properties: PropertyModel[] = await propertyApi.getAll();
 <LayoutSideBar>
     <main class='p-4 md:ml-64 h-auto pt-20 z-10'>
         <UserHero client:load />
-        <PropertyCrudTable properties={properties} />
+        <PropertyCrudTable
+            properties={properties}
+            client:load
+            client:only='vue'
+        />
     </main>
 </LayoutSideBar>

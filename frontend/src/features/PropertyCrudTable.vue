@@ -1,3 +1,52 @@
+<script lang="ts" setup>
+import { ref } from 'vue';
+import Modal from '../components/Modal/Modal.vue';
+import ModalSmall from '../components/Modal/ModalSmall.vue';
+import LoginForm from '../components/LoginForm/LoginForm.vue';
+import type PropertyModel from '../types/property';
+
+const props = defineProps<{
+  properties: PropertyModel[];
+}>();
+
+const showCreateModal = ref(false);
+const showEditModal = ref(false);
+const showDeleteModal = ref(false);
+const currentMenu = ref(0);
+
+const showMenu = (id: number | undefined) => {
+  if (id && id !== currentMenu.value) {
+    currentMenu.value = id;
+  } else {
+    currentMenu.value = 0;
+  }
+
+  console.log('menu', currentMenu.value);
+};
+
+const handleDeleteModal = (show: boolean) => {
+  showDeleteModal.value = show;
+};
+
+const deleteProperty = (id: number | undefined) => {
+  if (id) {
+    showDeleteModal.value = true;
+  } else {
+    showDeleteModal.value = false;
+  }
+  currentMenu.value = 0;
+};
+
+const updateProperty = (id: number | undefined) => {
+  if (id) {
+    showEditModal.value = true;
+  } else {
+    showEditModal.value = false;
+  }
+  currentMenu.value = 0;
+};
+</script>
+
 <template>
   <div>
     <div
@@ -99,7 +148,7 @@
           <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
             <button
               type="button"
-              data-modal-toggle="add-user-modal"
+              @click="showCreateModal = true"
               class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               <svg
@@ -153,10 +202,10 @@
                   </td>
                   <td class="px-4 py-3">{{ property.country }}</td>
                   <td class="px-4 py-3">{{ property.city }}</td>
-                  <td class="px-4 py-3 flex items-center justify-end">
+                  <td class="px-4 py-3 flex items-center justify-end relative">
                     <button
                       id="apple-imac-27-dropdown-button"
-                      data-dropdown-toggle="apple-imac-27-dropdown"
+                      @click="showMenu(property.id)"
                       class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                       type="button"
                     >
@@ -173,8 +222,8 @@
                       </svg>
                     </button>
                     <div
-                      id="apple-imac-27-dropdown"
-                      class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                      v-show="currentMenu == property.id"
+                      class="absolute top-12 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                     >
                       <ul
                         class="py-1 text-sm"
@@ -182,7 +231,7 @@
                       >
                         <li>
                           <button
-                            @click.stop="updateProperty(property.id)"
+                            @click="updateProperty(property.id)"
                             type="button"
                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
                           >
@@ -207,29 +256,7 @@
                         </li>
                         <li>
                           <button
-                            type="button"
-                            class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
-                          >
-                            <svg
-                              class="w-4 h-4 mr-2"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewbox="0 0 20 20"
-                              fill="currentColor"
-                              aria-hidden="true"
-                            >
-                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                              <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                              />
-                            </svg>
-                            Preview
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            @click="event => deleteProperty(event)"
+                            @click="deleteProperty(property.id)"
                             type="button"
                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400"
                           >
@@ -260,57 +287,71 @@
         </div>
       </div>
     </div>
+    <Modal
+      :show="showCreateModal"
+      @close="showCreateModal = false"
+      customClass="w-[27%]"
+    >
+      <template v-slot:header>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Login</h2>
+      </template>
+      <template v-slot:body>
+        <span>Create</span>
+      </template>
+    </Modal>
+    <Modal
+      :show="showEditModal"
+      @close="showEditModal = false"
+      customClass="w-[27%]"
+    >
+      <template v-slot:header>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Login</h2>
+      </template>
+      <template v-slot:body>
+        <span>Edit</span>
+      </template>
+    </Modal>
+    <ModalSmall
+      class="fixed w-full right-1/4 top-1/4"
+      :isOpen="showDeleteModal"
+      title=""
+      @closeModal="handleDeleteModal(false)"
+    >
+      <div class="p-6 pt-0 text-center">
+        <svg
+          class="w-16 h-16 mx-auto text-red-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">
+          Are you sure you want to delete this user?
+        </h3>
+        <a
+          href="#"
+          class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800"
+        >
+          Yes, I'm sure
+        </a>
+        <a
+          href="#"
+          class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+          @click="handleDeleteModal(false)"
+        >
+          No, cancel
+        </a>
+      </div>
+    </ModalSmall>
   </div>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent, onMounted } from 'vue';
-import { propertyApi } from '../api/ApiBuilder';
-
-export default defineComponent({
-  props: {
-    properties: {
-      type: Array,
-      required: true,
-    },
-  },
-  setup(props) {
-    // const properties = ref();
-
-    // const fetchProperties = async () => {
-    //   try {
-    //     const response = await propertyApi.getAll();
-    //     console.log('properties:table', response);
-    //     return response; // Assuming the API response has a 'properties' array
-    //   } catch (error) {
-    //     console.error(error);
-    //     return [];
-    //   }
-    // };
-
-    const deleteProperty = (event: any) => {
-      console.log('hola', event);
-      // Implement your delete logic here, using the 'id' parameter
-    };
-
-    const updateProperty = (id: number) => {
-      console.log(id);
-      // Implement your update logic here, using the 'id' parameter
-    };
-
-    // onMounted(() => {
-    //   console.log('mounted');
-    //   properties.value = fetchProperties();
-    // });
-
-    return {
-      //   properties,
-      deleteProperty,
-      updateProperty,
-    };
-  },
-});
-</script>
 
 <style>
 /* Add your custom styles here */
