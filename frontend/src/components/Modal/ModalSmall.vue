@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { XMarkIcon } from '@heroicons/vue/24/outline';
-import { defineEmits, ref, defineProps } from 'vue';
+import { ref } from 'vue';
 interface ModalProps {
   isOpen: boolean;
   title?: string;

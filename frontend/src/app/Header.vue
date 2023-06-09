@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import {
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
@@ -193,7 +193,7 @@ const styleObject = computed(() => {
           </Dropdown>
         </div>
 
-        <div class="hidden items-center gap-4 lg:flex" v-else>
+        <div class="hidden items-center gap-4 lg:flex">
           <button
             class="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600"
             @click="showModal = true"

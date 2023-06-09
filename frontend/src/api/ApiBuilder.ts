@@ -76,11 +76,11 @@ class CrudApiBuilder<T> extends ApiBuilder<T> {
   }
 
   async getAll(): Promise<T[]> {
-    const cachedData = this.dataStore.get();
+    // const cachedData = this.dataStore.get();
 
-    if (cachedData.length) {
-      return cachedData;
-    }
+    // if (cachedData.length) {
+    //   return cachedData;
+    // }
 
     const response = await this._request(`${apiUrl}/${this.entity}`);
 
@@ -99,8 +99,8 @@ class CrudApiBuilder<T> extends ApiBuilder<T> {
 
     const response = await this._request(`${apiUrl}/${this.entity}/${id}`);
 
-    this.dataStore.set([...cachedData, response]);
-    return response;
+    this.dataStore.set([...cachedData, response.data]);
+    return response.data;
   }
 
   async create(item: T): Promise<T> {
