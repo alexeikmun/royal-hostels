@@ -15,6 +15,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 8,
         price: 30,
+        admin: 1,
         amenities: [],
     },
     {
@@ -33,6 +34,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 6,
         price: 20,
+        admin: 1,
         amenities: [],
     },
     {
@@ -51,6 +53,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 10,
         price: 40,
+        admin: 1,
         amenities: [],
     },
     {
@@ -69,6 +72,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 7,
         price: 25,
+        admin: 1,
         amenities: [],
     },
     {
@@ -87,6 +91,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 7,
         price: 25,
+        admin: 1,
         amenities: [],
     },
     {
@@ -105,6 +110,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 9,
         price: 35,
+        admin: 1,
         amenities: [],
     },
     {
@@ -123,6 +129,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 8,
         price: 30,
+        admin: 1,
         amenities: [],
     },
     {
@@ -141,6 +148,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 6,
         price: 25,
+        admin: 1,
         amenities: [],
     },
     {
@@ -159,6 +167,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 10,
         price: 40,
+        admin: 1,
         amenities: [],
     },
     {
@@ -177,6 +186,7 @@ const propertiesArray = [
         updatedAt: '2023-05-09',
         availableRooms: 10,
         price: 40,
+        admin: 1,
         amenities: [],
     },
 ];
