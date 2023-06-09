@@ -39,6 +39,14 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, defineProps, defineEmits } from 'vue';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
+import { searchApi } from '../../api/searchApi';
+
+// const params = new URLSearchParams();
+// params.append('query', 'barcelona');
+
+// searchApi.searchHostels(params).then(data => {
+//   console.log(data);
+// });
 
 const props = defineProps<{
   modelValue: string;

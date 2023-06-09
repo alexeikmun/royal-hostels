@@ -1,0 +1,24 @@
+---
+import LayoutCommon from './LayoutCommon.astro';
+import Footer from './Footer.jsx';
+import Header from './Header.vue';
+import SideBar from './SideBar.astro';
+import NavBar from './NavBar.astro';
+
+---
+
+<LayoutCommon>
+  <div class='antialiased'>
+    <Header
+      slim={false}
+      isLoggedIn={true}
+      isFixed={true}
+      client:load
+      client:only='vue'
+    />
+    <!-- Sidebar -->
+    <SideBar />
+
+   <slot />
+  </div>
+</LayoutCommon>

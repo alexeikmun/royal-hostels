@@ -67,7 +67,7 @@ export class PropertyMapper {
         propertyDomain.rate = property.rate;
         propertyDomain.availableRooms = property.availableRooms;
         propertyDomain.price = property.price;
-        propertyDomain.adminId = property.admin;
+        propertyDomain.adminId = property.adminId;
         return propertyDomain;
     }
 }

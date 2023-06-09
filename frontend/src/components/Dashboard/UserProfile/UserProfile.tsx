@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import { useStore } from '@nanostores/react';
-import { session } from '../../../store/authStore';
+import { session, loggedUser } from '../../../store/authStore';
 import { useState, useMemo } from 'react';
 import type { TokenUser } from '../../../types/user';
 
@@ -22,6 +22,7 @@ export const UserProfile = () => {
       const decodedToken: DecodedToken = jwt_decode(accessToken as string);
       console.log('🚀 decodedToken:', decodedToken);
       setUser(decodedToken.user);
+      loggedUser.set(decodedToken.user);
       return decodedToken.user;
     } else {
       return 'user not found';

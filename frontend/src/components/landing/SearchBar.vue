@@ -1,15 +1,19 @@
 <script lang="ts" setup>
-import { Ref, ref, watchEffect } from 'vue';
+import { Ref, ref, watchEffect, onBeforeMount, computed } from 'vue';
 import {
   MagnifyingGlassIcon,
   UserPlusIcon,
   GlobeAsiaAustraliaIcon,
 } from '@heroicons/vue/24/outline';
 import { PlusIcon, MinusIcon } from '@heroicons/vue/24/solid';
-import ModalSmall from '../../common/ModalSmall.vue';
+import { useStore } from '@nanostores/vue';
+import { $search } from '../../store/searchStore';
+import { propertyApi } from '../../api/ApiBuilder';
+import ModalSmall from '../Modal/ModalSmall.vue';
 import LocationCombobox from './LocationCombobox.vue';
 import DatePicker from './DatePicker.vue';
 import dummyData from '../../data/dummy.data';
+import { searchApi } from '../../api/searchApi';
 
 interface DatesRange {
   start: string;
@@ -35,8 +39,27 @@ const payload: Ref<Payload> = ref({
   location: '',
 });
 
+const locations = ref([]);
+
+const city = computed(() => {
+  return payload.value.location.split(',')[0].trim();
+});
+
+onBeforeMount(() => {
+  const params = new URLSearchParams();
+  params.append('query', '');
+
+  searchApi.searchLocations(params).then(data => {
+    locations.value = data;
+  });
+});
+
 watchEffect(() => {
-  console.log(payload.value);
+  console.log('search:effect', payload.value.location);
+});
+
+watchEffect(() => {
+  console.log('search:city', city.value);
 });
 
 const modalIsOpen = ref(false);
@@ -59,14 +82,22 @@ const handleAddOrSubtractGuest = (operation: string) => {
 };
 
 const performSearch = () => {
-  console.log(payload.value);
+  console.log('search:click', payload.value);
+  $search.set(payload.value);
+
+  const param = new URLSearchParams();
+  param.append('query', city.value);
+
+  searchApi.searchHostels(param).then(data => {
+    propertyApi.dataStore.set(data);
+  });
 };
 </script>
 
 <template>
-  <div class="w-full h-[120px] flex justify-center items-center relative">
+  <div class="h-[120px] flex justify-center items-center relative mx-5">
     <div
-      class="w-[85%] flex justify-center items-center h-[80%] bg-transparent rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl transition-all"
+      class="w-full flex justify-center items-center h-[80%] bg-transparent rounded-2xl shadow-md border-2 border-gray-100 hover:shadow-xl transition-all"
     >
       <div
         class="flex justify-around items-center bg-white p-2 w-[35%] rounded-full mr-3 h-[70%] border-2 border-gray-200"
@@ -74,7 +105,7 @@ const performSearch = () => {
         <GlobeAsiaAustraliaIcon class="h-8 w-8 text-orange-600" />
         <LocationCombobox
           :modelValue="payload.location"
-          :options="dummyData.location"
+          :options="locations"
           @update:modelValue="value => (payload.location = value)"
         />
       </div>
