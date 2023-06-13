@@ -19,5 +19,5 @@ export class PropertyModel {
     rooms: RoomModel[];
     availableRooms: number;
     price: number;
-    admin: number;
+    adminId: number;
 }
