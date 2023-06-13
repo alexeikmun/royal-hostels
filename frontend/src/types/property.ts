@@ -2,7 +2,7 @@ import type AmenityModel from './amenity';
 import type RoomModel from './room';
 
 export default interface PropertyModel {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   phone: string;
@@ -14,10 +14,10 @@ export default interface PropertyModel {
   image: string;
   description: string;
   rate: number;
-  createdAt: Date;
-  updatedAt: Date;
-  amenities: AmenityModel[];
-  rooms: RoomModel[];
+  createdAt?: Date;
+  updatedAt?: Date;
+  amenities?: AmenityModel[];
+  rooms?: RoomModel[];
   availableRooms: number;
   price: number;
 }

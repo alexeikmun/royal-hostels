@@ -31,23 +31,29 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits } from 'vue';
+// import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps<{
   show: Boolean;
   customClass: string;
 }>();
+
 const emit = defineEmits(['close']);
 const handleKeyDown = (event: any) => {
   if (event.key === 'Escape') {
     emit('close');
   }
 };
-// Add a listener for the Escape key
-window.addEventListener('keydown', handleKeyDown);
+
+if (window) {
+  // Add a listener for the Escape key
+  window.addEventListener('keydown', handleKeyDown);
+}
 
 // Remove the listener when the component is unmounted
 const beforeUnmount = () => {
-  window.removeEventListener('keydown', handleKeyDown);
+  if (window) {
+    window.removeEventListener('keydown', handleKeyDown);
+  }
 };
 </script>

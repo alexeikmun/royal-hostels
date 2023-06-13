@@ -32,8 +32,14 @@ export class ApiBuilder<T> {
     return result;
   }
 
-  async _request(url: string, options?: RequestOptions): Promise<any> {
-    // console.log('headers', options.headers);
+  async _request(
+    url: string,
+    options?: RequestOptions,
+    params?: URLSearchParams,
+  ): Promise<any> {
+    console.log('headers', options?.headers);
+    const requestUrl = params ? `${url}?${params.toString()}` : url;
+    // console.log('requestUrl', requestUrl);
     const opts = {
       method: options?.method,
       body: JSON.stringify(options?.body),
@@ -43,7 +49,7 @@ export class ApiBuilder<T> {
       },
     };
     try {
-      const response = await fetch(url, opts);
+      const response = await fetch(requestUrl, opts);
 
       return this.handleResponse(response);
     } catch (error) {
@@ -70,11 +76,11 @@ class CrudApiBuilder<T> extends ApiBuilder<T> {
   }
 
   async getAll(): Promise<T[]> {
-    const cachedData = this.dataStore.get();
+    // const cachedData = this.dataStore.get();
 
-    if (cachedData.length) {
-      return cachedData;
-    }
+    // if (cachedData.length) {
+    //   return cachedData;
+    // }
 
     const response = await this._request(`${apiUrl}/${this.entity}`);
 
@@ -93,8 +99,8 @@ class CrudApiBuilder<T> extends ApiBuilder<T> {
 
     const response = await this._request(`${apiUrl}/${this.entity}/${id}`);
 
-    this.dataStore.set([...cachedData, response]);
-    return response;
+    this.dataStore.set([...cachedData, response.data]);
+    return response.data;
   }
 
   async create(item: T): Promise<T> {
