@@ -4,6 +4,7 @@ import Modal from '../components/Modal/Modal.vue';
 import ModalSmall from '../components/Modal/ModalSmall.vue';
 import LoginForm from '../components/LoginForm/LoginForm.vue';
 import type PropertyModel from '../types/property';
+import CreatePropertyForm from '../components/Property/Form/CreatePropertyForm.vue';
 
 const props = defineProps<{
   properties: PropertyModel[];
@@ -290,13 +291,13 @@ const updateProperty = (id: number | undefined) => {
     <Modal
       :show="showCreateModal"
       @close="showCreateModal = false"
-      customClass="w-[27%]"
+      customClass="w-[33%]"
     >
       <template v-slot:header>
-        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Login</h2>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Create</h2>
       </template>
       <template v-slot:body>
-        <span>Create</span>
+        <CreatePropertyForm mode="CREATE"></CreatePropertyForm>
       </template>
     </Modal>
     <Modal
@@ -305,7 +306,7 @@ const updateProperty = (id: number | undefined) => {
       customClass="w-[27%]"
     >
       <template v-slot:header>
-        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Login</h2>
+        <h2 class="text-[#502A18] scale-110 transition-all pb-3">Update</h2>
       </template>
       <template v-slot:body>
         <span>Edit</span>

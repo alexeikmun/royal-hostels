@@ -9,15 +9,15 @@ export default interface PropertyModel {
   city: string;
   address: string;
   country: string;
-  zipcode: string;
-  typeId: number;
+  zipcode?: string;
+  typeId?: number;
   image: string;
   description: string;
-  rate: number;
+  rate?: number;
   createdAt?: Date;
   updatedAt?: Date;
   amenities?: AmenityModel[];
   rooms?: RoomModel[];
-  availableRooms: number;
-  price: number;
+  availableRooms?: number;
+  price?: number;
 }
