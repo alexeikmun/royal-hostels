@@ -5,7 +5,11 @@ import PropertyCrudTable from '../../features/PropertyCrudTable.vue';
 import { propertyApi } from '../../api/ApiBuilder';
 import type PropertyModel from '../../types/property';
 
-const properties: PropertyModel[] = await propertyApi.getAll();
+import { adminApi } from '../../api/AdminApi';
+
+const properties: PropertyModel[] = await adminApi.getPropertiesById(1);
+console.log('properties:crud', properties);
+// const properties: PropertyModel[] = await propertyApi.getAll();
 ---
 
 <LayoutSideBar>

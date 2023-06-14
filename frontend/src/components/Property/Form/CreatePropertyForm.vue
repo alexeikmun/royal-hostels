@@ -240,8 +240,6 @@
         name === '' ||
         address === '' ||
         phone === '' ||
-        city === '' ||
-        country === '' ||
         image === '' ||
         zipCode === ''
       "
@@ -252,13 +250,16 @@
 </template>
 
 <script lang="ts" setup>
-interface Country {
-  name: string;
-  alpha2Code: string;
-}
+import type PropertyModel from '../../../types/property';
+import { propertyApi } from '../../../api/ApiBuilder';
+
+const props = defineProps<{
+  property?: PropertyModel;
+  mode: 'CREATE' | 'UPDATE';
+}>();
 
 import { ref } from 'vue';
-import { watchEffect } from 'vue/dist/vue';
+import { watchEffect } from 'vue';
 const description = ref('');
 const image = ref('');
 const zipCode = ref('');
@@ -268,6 +269,13 @@ const email = ref('');
 const name = ref('');
 const address = ref('');
 const phone = ref('');
+
+const response = ref({});
+
+interface Country {
+  name: string;
+  alpha2Code: string;
+}
 
 const selectedCountry = ref('');
 const selectedCity = ref('');
@@ -319,5 +327,30 @@ watchEffect(() => {
 
 fetchCountries();
 
-function handleSubmit() {}
+async function handleSubmit() {
+  const property = {
+    name: name.value,
+    description: description.value,
+    image: image.value,
+    zipcode: zipCode.value,
+    city: selectedCity.value,
+    country: selectedCountry.value.common,
+    email: email.value,
+    address: address.value,
+    phone: phone.value,
+    typeId: 1,
+    rate: 4,
+    availableRooms: 8,
+    price: 30,
+    adminId: 1,
+  };
+
+  if (props.mode === 'CREATE') {
+    response.value = await propertyApi.create(property);
+    console.log('property:created', response.value);
+  }
+  //  else {
+  //   response.value = propertyApi.update(property);
+  // }
+}
 </script>
