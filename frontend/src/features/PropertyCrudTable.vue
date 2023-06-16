@@ -2,44 +2,63 @@
 import { ref } from 'vue';
 import Modal from '../components/Modal/Modal.vue';
 import ModalSmall from '../components/Modal/ModalSmall.vue';
-import LoginForm from '../components/LoginForm/LoginForm.vue';
 import type PropertyModel from '../types/property';
-import CreatePropertyForm from '../components/Property/Form/CreatePropertyForm.vue';
+import { adminApi } from '../api/AdminApi';
 
-const props = defineProps<{
-  properties: PropertyModel[];
-}>();
+import CreatePropertyForm from '../components/Property/Form/CreatePropertyForm.vue';
+import { propertyApi } from '../api/ApiBuilder';
+
+const properties = ref<PropertyModel[]>([]);
+
+const fetchProperties = async () => {
+  try {
+    const response: PropertyModel[] = await adminApi.getPropertiesById(1);
+    const data = response;
+    properties.value = data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+fetchProperties();
 
 const showCreateModal = ref(false);
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
 const currentMenu = ref(0);
-
+const actionProperty = ref<PropertyModel | undefined>(undefined);
 const showMenu = (id: number | undefined) => {
   if (id && id !== currentMenu.value) {
     currentMenu.value = id;
   } else {
     currentMenu.value = 0;
   }
-
-  console.log('menu', currentMenu.value);
 };
 
 const handleDeleteModal = (show: boolean) => {
   showDeleteModal.value = show;
 };
 
-const deleteProperty = (id: number | undefined) => {
-  if (id) {
+const deleteProperty = (property: PropertyModel | undefined) => {
+  if (property) {
+    actionProperty.value = property;
     showDeleteModal.value = true;
   } else {
     showDeleteModal.value = false;
   }
   currentMenu.value = 0;
 };
+async function handleDeleteProperty() {
+  const propertyId: number = actionProperty.value?.id
+    ? actionProperty.value?.id
+    : -1;
+  await propertyApi.delete(propertyId);
+  await fetchProperties();
+  handleDeleteModal(false);
+}
 
-const updateProperty = (id: number | undefined) => {
-  if (id) {
+const updateProperty = (property: PropertyModel | undefined) => {
+  if (property) {
+    actionProperty.value = property;
     showEditModal.value = true;
   } else {
     showEditModal.value = false;
@@ -232,7 +251,7 @@ const updateProperty = (id: number | undefined) => {
                       >
                         <li>
                           <button
-                            @click="updateProperty(property.id)"
+                            @click="updateProperty(property)"
                             type="button"
                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
                           >
@@ -257,7 +276,7 @@ const updateProperty = (id: number | undefined) => {
                         </li>
                         <li>
                           <button
-                            @click="deleteProperty(property.id)"
+                            @click="deleteProperty(property)"
                             type="button"
                             class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400"
                           >
@@ -297,7 +316,11 @@ const updateProperty = (id: number | undefined) => {
         <h2 class="text-[#502A18] scale-110 transition-all pb-3">Create</h2>
       </template>
       <template v-slot:body>
-        <CreatePropertyForm mode="CREATE"></CreatePropertyForm>
+        <CreatePropertyForm
+          mode="CREATE"
+          @close="showCreateModal = false"
+          @fetch="fetchProperties()"
+        ></CreatePropertyForm>
       </template>
     </Modal>
     <Modal
@@ -309,7 +332,12 @@ const updateProperty = (id: number | undefined) => {
         <h2 class="text-[#502A18] scale-110 transition-all pb-3">Update</h2>
       </template>
       <template v-slot:body>
-        <span>Edit</span>
+        <CreatePropertyForm
+          mode="UPDATE"
+          @close="showEditModal = false"
+          @fetch="fetchProperties()"
+          :property="actionProperty"
+        ></CreatePropertyForm>
       </template>
     </Modal>
     <ModalSmall
@@ -336,19 +364,18 @@ const updateProperty = (id: number | undefined) => {
         <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">
           Are you sure you want to delete this user?
         </h3>
-        <a
-          href="#"
+        <button
           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800"
+          @click="handleDeleteProperty()"
         >
           Yes, I'm sure
-        </a>
-        <a
-          href="#"
+        </button>
+        <button
           class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
           @click="handleDeleteModal(false)"
         >
           No, cancel
-        </a>
+        </button>
       </div>
     </ModalSmall>
   </div>

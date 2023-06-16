@@ -7,16 +7,12 @@ import type PropertyModel from '../../types/property';
 
 import { adminApi } from '../../api/AdminApi';
 
-const properties: PropertyModel[] = await adminApi.getPropertiesById(1);
-console.log('properties:crud', properties);
-// const properties: PropertyModel[] = await propertyApi.getAll();
 ---
 
 <LayoutSideBar>
     <main class='p-4 md:ml-64 h-auto pt-20 z-10'>
         <UserHero client:load />
         <PropertyCrudTable
-            properties={properties}
             client:load
             client:only='vue'
         />

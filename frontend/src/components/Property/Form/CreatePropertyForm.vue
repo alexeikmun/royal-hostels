@@ -98,6 +98,10 @@
           class="w-full md:w-1/1 p-1"
         >
           <option value="">Select a country</option>
+          <option v-if="property" :value="property.country">
+            {{ property.country }}
+          </option>
+
           <option
             v-for="country in countries"
             :value="country.name"
@@ -124,6 +128,9 @@
         </div>
         <select id="city" v-model="selectedCity" class="w-full md:w-1/1 p-1">
           <option value="">Select a city</option>
+          <option v-if="property" :value="property.city">
+            {{ property.city }}
+          </option>
           <option v-for="city in cities" :value="city" :key="city">
             {{ city }}
           </option>
@@ -244,7 +251,7 @@
         zipCode === ''
       "
     >
-      Create Property
+      {{ props.mode }} PROPERTY
     </button>
   </form>
 </template>
@@ -256,19 +263,21 @@ import { propertyApi } from '../../../api/ApiBuilder';
 const props = defineProps<{
   property?: PropertyModel;
   mode: 'CREATE' | 'UPDATE';
+  onClose: () => void;
 }>();
+console.log('property', props.property);
 
 import { ref } from 'vue';
 import { watchEffect } from 'vue';
-const description = ref('');
-const image = ref('');
-const zipCode = ref('');
-const city = ref('');
-const country = ref('');
-const email = ref('');
-const name = ref('');
-const address = ref('');
-const phone = ref('');
+const description = ref(props.property ? props.property.description : '');
+const image = ref(props.property ? props.property.image : '');
+const zipCode = ref(props.property ? props.property.zipcode : '');
+const city = ref(props.property ? props.property.city : '');
+const country = ref(props.property ? props.property.country : '');
+const email = ref(props.property ? props.property.email : '');
+const name = ref(props.property ? props.property.name : '');
+const address = ref(props.property ? props.property.address : '');
+const phone = ref(props.property ? props.property.phone : '');
 
 const response = ref({});
 
@@ -277,11 +286,13 @@ interface Country {
   alpha2Code: string;
 }
 
-const selectedCountry = ref('');
-const selectedCity = ref('');
-
 const countries = ref<Country[]>([]);
 const cities = ref<string[]>([]);
+
+const selectedCountry = ref(props.property ? props.property.country : '');
+const selectedCity = ref(props.property ? props.property.city : '');
+
+const emit = defineEmits(['close', 'fetch']);
 
 const fetchCountries = async () => {
   try {
@@ -347,8 +358,18 @@ async function handleSubmit() {
 
   if (props.mode === 'CREATE') {
     response.value = await propertyApi.create(property);
-    console.log('property:created', response.value);
+    console.log('property:created', JSON.stringify(response.value));
+    emit('fetch');
+    emit('close');
   }
+  if (props.mode === 'UPDATE') {
+    const propertyId: number = props.property?.id ? props.property.id : -1;
+    response.value = await propertyApi.update(propertyId, property);
+    console.log('property:updated', JSON.stringify(response.value));
+    emit('fetch');
+    emit('close');
+  }
+
   //  else {
   //   response.value = propertyApi.update(property);
   // }
