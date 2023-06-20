@@ -28,7 +28,7 @@ const PropertiesList = (props: Props) => {
 
   return (
     <div className='flex flex-wrap -mx-4'>
-      {propertiesList.map((property: PropertyModel) => (
+      {propertiesList?.map((property: PropertyModel) => (
         <div
           key={property.id}
           className='lg:w-1/4 md:w-1/2 sm:w-1/1 px-4 flex mb-4'

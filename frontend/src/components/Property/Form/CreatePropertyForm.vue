@@ -259,6 +259,7 @@
 <script lang="ts" setup>
 import type PropertyModel from '../../../types/property';
 import { propertyApi } from '../../../api/ApiBuilder';
+import { openSnack } from '../../../store/snackStore';
 
 const props = defineProps<{
   property?: PropertyModel;
@@ -361,6 +362,8 @@ async function handleSubmit() {
     console.log('property:created', JSON.stringify(response.value));
     emit('fetch');
     emit('close');
+
+    openSnack('Property created successfully', 'success');
   }
   if (props.mode === 'UPDATE') {
     const propertyId: number = props.property?.id ? props.property.id : -1;
@@ -368,6 +371,8 @@ async function handleSubmit() {
     console.log('property:updated', JSON.stringify(response.value));
     emit('fetch');
     emit('close');
+
+    openSnack('Property updated successfully', 'success');
   }
 
   //  else {

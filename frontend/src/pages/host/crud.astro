@@ -6,15 +6,13 @@ import { propertyApi } from '../../api/ApiBuilder';
 import type PropertyModel from '../../types/property';
 
 import { adminApi } from '../../api/AdminApi';
-
+import SnackbarWrapper from '../../components/Snackbar/SnackbarWrapper';
 ---
 
 <LayoutSideBar>
     <main class='p-4 md:ml-64 h-auto pt-20 z-10'>
         <UserHero client:load />
-        <PropertyCrudTable
-            client:load
-            client:only='vue'
-        />
+        <PropertyCrudTable client:load client:only='vue' />
+        <SnackbarWrapper client:load />
     </main>
 </LayoutSideBar>
