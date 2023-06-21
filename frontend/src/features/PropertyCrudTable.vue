@@ -190,9 +190,9 @@ const updateProperty = (property: PropertyModel | undefined) => {
       </div>
     </div>
     <div class="flex flex-col">
-      <div class="overflow-x-auto">
+      <div class="overflow-visible">
         <div class="inline-block min-w-full align-middle">
-          <div class="overflow-hidden shadow">
+          <div class="overflow-visible shadow">
             <table
               class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
             >
@@ -218,7 +218,9 @@ const updateProperty = (property: PropertyModel | undefined) => {
                     scope="row"
                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {{ property.name }}
+                    <a :href="'/admin/property/' + property.id">
+                      {{ property.name }}
+                    </a>
                   </td>
                   <td class="px-4 py-3">{{ property.country }}</td>
                   <td class="px-4 py-3">{{ property.city }}</td>

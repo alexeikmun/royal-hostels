@@ -1,0 +1,25 @@
+---
+import ArrowLongLeftIcon from '../../../../icons/ArrowLongLeftIcon.jsx';
+import TableWithButton from '../../../../components/Table/TableWithButton.jsx';
+import StarFilled from '../../../../icons/StarFilledIcon.vue';
+import StarNotFilled from '../../../../icons/StarNotFilledIcon.vue';
+import LandingLayout from '../../../../app/LayoutLanding.astro';
+import { propertyApi } from '../../../../api/ApiBuilder';
+import PropertyView from '../../../../components/Admin/Property/PropertyView.jsx';
+
+export async function getStaticPaths() {
+  // const properties = DummyData.properties
+  const properties = await propertyApi.getAll();
+
+  return properties.map(el => {
+    return { params: { id: el.id }, props: el };
+  });
+}
+const props = Astro.props;
+---
+
+<LandingLayout>
+  <section class='overflow-y-auto mb-[5%] h-[100vh]'>
+    <PropertyView property={props} />
+  </section>
+</LandingLayout>
